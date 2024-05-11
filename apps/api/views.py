@@ -22,7 +22,7 @@ class UserPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'GET':
             return True
-        return request.user and request.user.is_authenticated
+        return request.user and request.user.is_authenticated and request.user.is_superuser or request.user.is_staff
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
