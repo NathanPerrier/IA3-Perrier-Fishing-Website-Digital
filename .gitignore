@@ -12,9 +12,10 @@ env
 env_linux
 
 #src
-#*.sqlite*
+*.sqlite*
+*.sqlite3
 
-#.env
+.env
 node_modules
 yarn.lock
 
