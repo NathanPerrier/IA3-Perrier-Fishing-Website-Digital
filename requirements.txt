@@ -23,6 +23,9 @@ drf-spectacular==0.26.5
 whitenoise==6.5.0
 gunicorn==21.2.0
 
+# Authentication
+django-allauth
+
 # DB Layer
 # psycopg2-binary==3.1.12
 # mysqlclient==2.2.0
