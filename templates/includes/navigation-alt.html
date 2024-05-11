@@ -1,7 +1,7 @@
 {% load static %}
 
-<nav class="fixed z-30 w-100 shadow bg-gray-50 border-b border-gray-200 sm:py-2 sm:mx-5 dark:bg-gray-800 dark:border-gray-700" style="width:100vw">
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
+<nav class="fixed z-30 w-100 shadow bg-gray-50 border-b border-gray-200 sm:py-2 sm:px-2 dark:bg-gray-800 dark:border-gray-700" style="width:100vw">
+    <div class="container flex flex-wrap justify-between items-center mx-auto px-4">
         <a href="/" class="flex ml-2 md:mr-24">
             <img src="https://www.atc.qld.edu.au/img/atc-logo.svg" class="mr-4 py-3" style="width:70%" alt="ATC Logo">
         </a>
@@ -262,45 +262,24 @@
             </div>
             {% endif %}
         </div>
-        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-            <ul
-                class="flex flex-col p-4 mt-4  rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-                <li>
-                    <a href="/"
-                        class="block active py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                        aria-current="page">Home</a>
-                </li>
-                <li>
-                  <a href="/social/feed/"
-                      class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                      aria-current="page">Feed</a>
-                </li>
-                <li>
-                  <a href="/social/post/"
-                      class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                      aria-current="page">Post</a>
-                </li>
-                {% if request.user.is_authenticated %}
-                <li>
-                    <a href="/users/profile/"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                        aria-current="page">Profile</a>
-                </li>
-                {% endif %}
-                {% if request.user.is_superuser %}
-                <li>
-                    <a href="/admin/"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                        aria-current="page">Admin</a>
-                </li>
-                <li>
-                    <a href="/api/product/"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                        aria-current="page">API</a>
-                </li>
-                {% endif %}
+        <div class="hidden sm:flex sm:ml-6">
+            <ul class="flex space-x-8">
+              <li>
+                <a href="/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Home</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Feed</a>
+              </li>
+              <li>
+                <a href="/pricing/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Pricing</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Contact</a>
+              </li>
             </ul>
+          </div>
         </div>
+        
 
     </div>
 </nav>
