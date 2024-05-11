@@ -251,6 +251,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {
     'product' : "apps.common.models.Product",
+    'user'   : "apps.users.models.User",
 }
 
 REST_FRAMEWORK = {
