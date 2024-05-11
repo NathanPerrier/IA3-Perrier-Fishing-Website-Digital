@@ -32,6 +32,16 @@
                     </div>
                 </div>
                 <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create account</button>
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Or continue with</div>
+                <div class="flex space-x-4">
+                    <a class="btn btn-social btn-github rounded-lg px-5 py-3 text-base font-medium flex-1" href="{% url 'social:begin' 'github' %}">
+                        <span class="fab fa-github mt-2"></span> Sign up with Github
+                    </a>
+
+                    <a class="btn btn-block btn-social btn-google rounded-lg px-5 py-3 text-base font-medium flex-1" href="{% url 'social:begin' 'google-oauth2' %}?next='{{ request.path }}'">
+                        <span class="fab fa-google mt-2"></span> Sign up with Google
+                    </a>
+                </div>
                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Already have an account? <a href="{% url "signin" %}" class="text-primary-700 hover:underline dark:text-primary-500">Login here</a>
                 </div>

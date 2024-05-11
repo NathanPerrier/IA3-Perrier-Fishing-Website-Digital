@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
+    "social_django",
 
     "home",
     "apps.common",
@@ -60,10 +62,10 @@ INSTALLED_APPS = [
     "apps.tables",
     "apps.tasks",
     
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 
     "django_celery_results",
 
@@ -76,6 +78,13 @@ INSTALLED_APPS = [
     "debug_toolbar",
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -83,17 +92,13 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    # "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
 
 ROOT_URLCONF = "core.urls"
 
@@ -110,6 +115,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'social_django.context_processors.backends', 
             ],
         },
     },
@@ -117,6 +123,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
+
+# Social Auth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.environ.get('GOOGLE_OAUTH2_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/google-oauth2/' #auth/google/callback'
+
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_OAUTH2_CLIENT_ID')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_OAUTH2_CLIENT_SECRET')
+SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/github/'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

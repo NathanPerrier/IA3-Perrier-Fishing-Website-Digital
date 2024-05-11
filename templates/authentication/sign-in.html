@@ -1,6 +1,5 @@
 {% extends "layouts/base-auth.html" %}
 {% load static %}
-{% load socialaccount %}
 
 {% block content %}
 
@@ -27,7 +26,8 @@
                     </div>
                 {% endfor %}
             {% endif %}
-            <a href="{% provider_login_url 'google' %}">Sign In with Google</a>
+            <!--href="{% url 'social:begin' 'google-oauth2' %}?next='{{ request.path }}'"-->
+
             <form class="mt-8 space-y-6" method="post">
                 {% csrf_token %}
             
@@ -47,7 +47,19 @@
                     </div>
                     <a href="{% url "password_reset" %}" class="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">Forgot Password?</a>
                 </div>
-                <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login to your account</button>
+                <div class="row d-flex">
+                    <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login to your account</button>
+                </div>
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Or continue with</div>
+                <div class="flex space-x-4">
+                    <a class="btn btn-social btn-github rounded-lg px-5 py-3 text-base font-medium flex-1" href="{% url 'social:begin' 'github' %}">
+                        <span class="fab fa-github mt-2"></span> Sign in with Github
+                    </a>
+
+                    <a class="btn btn-block btn-social btn-google rounded-lg px-5 py-3 text-base font-medium flex-1" href="{% url 'social:begin' 'google-oauth2' %}?next='{{ request.path }}'">
+                        <span class="fab fa-google mt-2"></span> Sign in with Google
+                    </a>
+                </div>
                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Not registered? <a href="{% url "signup" %}" class="text-primary-700 hover:underline dark:text-primary-500">Create account</a>
                 </div>
