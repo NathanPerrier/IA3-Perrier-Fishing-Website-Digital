@@ -3,14 +3,14 @@ from django.shortcuts import render
 
 from .models import *
 
-def index(request):
+def dashboard(request):
 
   context = {
     'segment': 'dashboard',
   }
   return render(request, "dashboard/index.html", context)
 
-def starter(request):
+def index(request):
 
   context = {}
-  return render(request, "pages/starter.html", context)
+  return render(request, "pages/index.html", context)
