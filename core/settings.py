@@ -236,6 +236,7 @@ CELERY_RESULT_SERIALIZER  = 'json'
 
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/users/signin/'
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
