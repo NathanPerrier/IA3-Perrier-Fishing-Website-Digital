@@ -15,16 +15,15 @@
     {% block navigation %}
     {% include 'includes/navigation-alt.html' %}
     {% endblock navigation %}
-
     <section class="bg-white dark:bg-gray-900 pt-20">
-        <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-            <div class="place-self-center mr-auto lg:col-span-7">
+      <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div class="place-self-center mr-auto lg:col-span-7">
               <h1
                   class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                   Ambrose Treacy College
               </h1>
               <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                Welcome to Ambrose Treacy College, an esteemed boys' school nestled in the heart of Indooroopilly. Discover Boundless Learning and Inspiring Growth on the Banks of Brisbane River. Where <strong>Years 4-12 Thrive Amidst Nature's Abundance, Embracing Excellence, and Innovation with State-of-the-Art Facilities and a Close-Knit Community!
+                Welcome to Ambrose Treacy College, an esteemed boys' school nestled in the heart of Indooroopilly. Discover Boundless Learning and Inspiring Growth on the Banks of Brisbane River. Where boys from Years 4 to 12 are encouraged to be the best version of themselves. Enrol now to experience a Edmund Rice Catholic School.
               </p>
               <a href="#about" 
                   class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
@@ -40,44 +39,76 @@
                   class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                   View Feed
               </a>
+          </div>
+          <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+              <img src="https://media.digistormhosting.com.au/atc-au-qld-143-website/content/About-Us-Facilities.jpg?v=1656286165" alt="mockup">
+          </div>
+      </div>
+  </section>
+
+    <section class="bg-white dark:bg-gray-900" id="about">
+        <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="place-self-center mr-auto lg:col-span-5 lg:flex">
+                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" alt="mockup">
+            </div>
+            <div class="place-self-center ml-auto lg:col-span-7">
+                <h2
+                    class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                      Learning Life
+                </h2>
+                <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                  All students are empowered to engage in learning, belong in our community and experience academic success. Teachers work to equip students for the responsibilities and challenges of the 21st century, aspiring to develop empathetic, worldly and highly literate students who know how to learn, problem solve, create, critique and reflect.
+                </p>
+                <a href="#"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 dark:bg-gray-800">
+        <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+            <div class="place-self-center mr-auto lg:col-span-7">
+                <h2
+                    class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                    Student Life
+                </h2>
+                <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                  We empower our students to be the best version of themselves. Our inspiring service program challenges them to make a difference in the world through authentic, meaningful community connections.
+                </p>
+                <a href="#"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    Learn More
+                </a>
             </div>
             <div class="place-self-center mr-auto lg:col-span-5 lg:flex">
-                <img src="{% static 'dist/images/atc/hero-img-2.png' %}" alt="mockup">
+                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC9BVEMtSnVseS0yMDIyLUxSLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" alt="mockup">
             </div>
         </div>
     </section>
 
     <section class="bg-white dark:bg-gray-900" id="about">
-        <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-            <div class="place-self-center mr-auto lg:col-span-5 lg:flex">
-                <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
-            </div>
-            <div class="place-self-center ml-auto lg:col-span-7">
-                <h2
-                    class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-                    Rocket Django
-                </h2>
-                <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    Open-Source starter built with <strong>Django & Tailwind/Flowbite</strong>.
-                </p>
-                <a href="https://docs.appseed.us/products/rocket/django/" target="_blank"
-                    class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                    Docs
-                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </a>
-                <a href="https://appseed.us/support/" target="_blank"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    Support
-                </a>
-            </div>
-        </div>
-    </section>
-
+      <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div class="place-self-center mr-auto lg:col-span-5 lg:flex">
+              <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC9GYWl0aC1MaWZlLU1hc3Nlcy1hbmQtTGl0dXJnaWVzLTEuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJjZW50ZXIiLCJ3aWR0aCI6ODAwLCJoZWlnaHQiOm51bGx9LCJxdWFsaXR5Ijo4Mn19" alt="mockup">
+          </div>
+          <div class="place-self-center ml-auto lg:col-span-7">
+              <h2
+                  class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                    Faith Life
+              </h2>
+              <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                As a Catholic School in the Edmund Rice tradition, we are called to be a community which lives the Gospel values through our actions.
+              </p>
+              <a href="#"
+                  class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                  Learn More
+              </a>
+          </div>
+      </div>
+  </section>
+                
     {% include 'includes/footer-alt.html' %}
 
     <script src="{% static 'dist/main.bundle.js' %}"></script>
