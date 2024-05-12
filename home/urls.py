@@ -8,3 +8,5 @@ urlpatterns = [
     
     path("dashboard/", views.dashboard, name="starter"),
 ]
+
+# core/urls.py

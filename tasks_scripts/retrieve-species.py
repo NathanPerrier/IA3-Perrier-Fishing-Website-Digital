@@ -3,7 +3,7 @@ import os, sys
 def main(argv):
         
     try:
-        
+        print('running')
         print(' EXEC -> ' + os.path.basename(__file__)) 
 
         # Unix ErrCode

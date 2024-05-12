@@ -54,6 +54,7 @@ def execute_script(self, data: dict):
     :param data dict: contains data needed for task execution. Example `input` which is the script to be executed.
     :rtype: None
     """
+    
     script = data.get("script")
     args   = data.get("args")
 

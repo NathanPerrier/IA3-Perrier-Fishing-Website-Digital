@@ -19,3 +19,14 @@ def pricing(request):
 
   context = {}
   return render(request, "pages/pricing.html", context)
+
+
+
+# ERRORS
+
+
+def handler404(request, exception):
+    return render(request, 'pages/errors/404.html', status=404)
+
+def handler500(request):
+    return render(request, 'pages/errors/500.html', status=500)

@@ -10,6 +10,7 @@ from celery import Celery
 if os.environ.get('DJANGO_SETTINGS_MODULE'):
 
     app = Celery('core')
+    print(app)
 
     # Using a string here means the worker doesn't have to serialize
     # the configuration object to child processes.

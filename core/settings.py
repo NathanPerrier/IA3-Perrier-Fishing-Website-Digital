@@ -30,8 +30,7 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = str2bool(os.environ.get('DEBUG'))
-#print(' DEBUG -> ' + str(DEBUG) ) 
+DEBUG = False  #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
@@ -75,7 +74,7 @@ INSTALLED_APPS = [
     'django_api_gen',
     'django_browser_reload',
 
-    "debug_toolbar",
+    "debug_toolbar", # Debug Toolbar
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -96,7 +95,7 @@ MIDDLEWARE = [
     # "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # Debug Toolbar
     'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
@@ -111,7 +110,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.template.context_processors.debug",
+                "django.template.context_processors.debug", # Debug Toolbar
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
