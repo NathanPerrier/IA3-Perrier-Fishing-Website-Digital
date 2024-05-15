@@ -126,8 +126,8 @@ python manage.py runserver       # start the project
 > 👉 Download code
 
 ```bash
-git clone https://github.com/app-generator/rocket-django.git
-cd rocket-django
+git clone https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital
+cd IA3-Perrier-Fishing-Website-Digital
 ```
 
 > 👉 Start with Docker Compose
