@@ -47,8 +47,8 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 > 👉 Download code
 
 ```bash
-git clone https://github.com/app-generator/rocket-django.git
-cd rocket-django
+git clone https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital
+cd IA3-Perrier-Fishing-Website-Digital
 ```
 
 > 👉 Create `.env` from `env.sample`
@@ -112,7 +112,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-> 👉 `Create Superuser` & Start the [Rocket Django](https://appseed.us/product/rocket/django/) Starter
+> 👉 `Create Superuser` & Start the **server**
 
 ```bash
 python manage.py createsuperuser # create the admin
@@ -126,8 +126,8 @@ python manage.py runserver       # start the project
 > 👉 Download code
 
 ```bash
-git clone https://github.com/app-generator/rocket-django.git
-cd rocket-django
+git clone https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital
+cd IA3-Perrier-Fishing-Website-Digital
 ```
 
 > 👉 Start with Docker Compose
