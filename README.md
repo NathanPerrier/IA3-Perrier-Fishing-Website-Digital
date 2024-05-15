@@ -47,8 +47,8 @@ The Django boilerplate has all you need to build your SaaS, Analytics tool, or a
 > 👉 Download code
 
 ```bash
-git clone https://github.com/app-generator/rocket-django.git
-cd rocket-django
+git clone https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital
+cd IA3-Perrier-Fishing-Website-Digital
 ```
 
 > 👉 Create `.env` from `env.sample`
