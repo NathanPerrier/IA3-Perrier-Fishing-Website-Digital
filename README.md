@@ -112,7 +112,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-> 👉 `Create Superuser` & Start the [Rocket Django](https://appseed.us/product/rocket/django/) Starter
+> 👉 `Create Superuser` & Start the **server**
 
 ```bash
 python manage.py createsuperuser # create the admin
