@@ -8,4 +8,5 @@ def setup_periodic_tasks(sender, **_):
 
 @app.task
 def clean_data():
+    # delete all data and replace with api data
     print("Running my task on ", app)
