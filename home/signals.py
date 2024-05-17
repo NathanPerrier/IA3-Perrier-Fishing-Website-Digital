@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from apps.users.models import Profile
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_migrate, post_init
 from django.dispatch import receiver
-from django.db.models.signals import post_migrate
 from django.contrib.auth.models import Group
 from django.conf import settings
 
@@ -20,3 +19,4 @@ def create_custom_groups(sender, **kwargs):
         Group.objects.get_or_create(name=group_name)
 
     print("Custom groups ensured.")
+    

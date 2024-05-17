@@ -6,12 +6,13 @@ Copyright (c) 2019 - present AppSeed.us
 import os
 
 from celery import Celery
+from celery.schedules import crontab
 
 if os.environ.get('DJANGO_SETTINGS_MODULE'):
 
     app = Celery('core')
     print(app)
-
+    
     # Using a string here means the worker doesn't have to serialize
     # the configuration object to child processes.
     # - namespace='CELERY' means all celery-related configuration keys
