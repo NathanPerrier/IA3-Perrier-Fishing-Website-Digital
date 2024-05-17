@@ -1,5 +1,6 @@
 import json
 import urllib.request
+from ala import AlaDataAPI
 
 class WildlifeDataAPI:
     """
@@ -58,11 +59,12 @@ class WildlifeDataAPI:
     ACKNOWLEDGEMENT = 'Data courtesy of the Queensland Government Wildlife Data API'
     
 
-    def __init__(self, kingdom='animals', debug=False, extensive_search=False, **kwargs):
+    def __init__(self, kingdom='animals', debug=False, extensive_search=False, extensive_info=False, **kwargs):
         self.kingdom = kingdom
         
         self.debug = debug
         self.extensive_search = extensive_search
+        self.extensive_info = extensive_info
         
         if kwargs.get('class_'):
             kwargs['class'] = kwargs.pop('class_')
@@ -94,22 +96,32 @@ class WildlifeDataAPI:
         self.debug_url(url)
             
         try:
-            req = urllib.request.Request(url)
+            result = self.search_request(url, result, key)
 
-            json_text = urllib.request.urlopen(req).read().decode('utf-8')
-            
-            if result is None and key is None:
-                result = json.loads(json_text)
-            else: 
-                result[key] = json.loads(json_text)
-
+            if self.extensive_info: result = AlaDataAPI(self).get_extensive_info(result) 
             if self.extensive_search: result = self.get_secondary_results(result)
-                            
+            
             return self.clean_data(result)
         
         except urllib.error.HTTPError as e:
             print(f"Error fetching {url}: {e}")
             return None
+        
+   
+    def search_request(self, url, result=None, key=None):
+        """
+            Fetch the data from the specified url and return the result.
+        """
+        req = urllib.request.Request(url)
+
+        json_text = urllib.request.urlopen(req).read().decode('utf-8')
+        
+        if result is None and key is None:
+            result = json.loads(json_text)
+        else: 
+            result[key] = json.loads(json_text)
+            
+        return result
         
     def get_secondary_results(self, result):
         """ 
@@ -117,17 +129,16 @@ class WildlifeDataAPI:
             
             Only if extensive_search is enabled.
         """
-        
+        result = self.clean_result(result)
         for key in result:
-            if 'Url' in key:  
+            if 'url' in key.lower():  
                 if 'http' in result[key]: 
-                    result = self.search(result[key], result, key)
-                    
+                    result = self.search_request(result[key], key=key, result=result)
             try:
                 for secondary_key in (result[key] if isinstance(result[key], dict) else (result[key][0] if isinstance(result[key], list) else {})):
-                    if 'Url' in secondary_key:
+                    if 'url' in secondary_key.lower():
                         if 'http' in (result[key][secondary_key] if isinstance(result[key], dict) else result[key][0][secondary_key]):
-                            result = (self.search(result[key][secondary_key], result[key], secondary_key) if isinstance(result[key], dict) else self.search(result[key][0][secondary_key], result[key][0], secondary_key))
+                            result = (self.search_request(result[key][secondary_key], key=secondary_key, result=result[key]) if isinstance(result[key], dict) else self.search(result[key][0][secondary_key], key=secondary_key, result=result[key][0]))
             except Exception as e: self.debug_url('ERROR,', e)
             
         return result
@@ -154,7 +165,13 @@ class WildlifeDataAPI:
         else:
             return data  
 
-
-
-
+    def clean_result(self, result):
+        """ 
+            Clean the result by converting keys to snake_case and removing empty values.
+        """
+        print('CLEANING')
+        try:
+            return result['species'][0]
+        except: 
+            return result
 
