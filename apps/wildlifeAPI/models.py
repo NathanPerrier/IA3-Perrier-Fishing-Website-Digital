@@ -31,7 +31,7 @@ class WildlifeFamiles(models.Model):
     common_name = models.CharField(max_length=255, db_index=True)
     familyrank = models.CharField(max_length=255)
     kingdom = models.ForeignKey(WildlifeKingdoms, on_delete=models.CASCADE, related_name='families')
-    class_ = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='families')
+    class_name = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='families')
     
     class Meta:
         verbose_name = "Wildlife Family"
@@ -47,7 +47,7 @@ class WildlifeSpecies(models.Model):
     taxonid = models.CharField(max_length=255)
     endemicity = models.CharField(max_length=255)
     kingdom = models.ForeignKey(WildlifeKingdoms, on_delete=models.CASCADE, related_name='species')
-    class_ = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='species')
+    class_name = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='species')
     family = models.ForeignKey(WildlifeFamiles, on_delete=models.CASCADE, related_name='species')
     
     class Meta:

@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "apps.charts", 
     "apps.tables",
     "apps.tasks",
+    "apps.wildlifeAPI",
     
     # 'allauth',
     # 'allauth.account',
@@ -194,6 +195,11 @@ USE_TZ = True
 
 SITE_ID = 1
 
+
+CUSTOM_GROUPS = ["Admin", "Student", "Teacher", "Parent", "User", "Member", "Staff", "Leader", "Volunteer", "User", 
+                 "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12"]
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -250,8 +256,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {
-    'product' : "apps.common.models.Product",
+    'product' : "apps.common.models.Product", #rm
     'user'   : "apps.users.models.User",
+    'wildlife': "wildlifeAPI.models.*",
 }
 
 REST_FRAMEWORK = {
