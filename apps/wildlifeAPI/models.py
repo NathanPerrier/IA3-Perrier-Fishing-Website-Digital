@@ -116,9 +116,9 @@ class WildlifeSpeciesInfo(models.Model):
         species = WildlifeSpecies.objects.all()
         for specie in species:
             data = Species(debug=debug, kingdom=specie.kingdom, taxonid=specie.taxonid, extensive_search=True, extensive_info=True).get_species_by_id()
+            species_info = WildlifeSpeciesInfo(species=specie) #? change to make it like InfoField module and just have species as a field?
+            species_info.save()
             for info in data['species']:
-                species_info = WildlifeSpeciesInfo(species=specie)
-                species_info.save()
                 if isinstance(info, list):
                     for key, value in info.items():              
                         WildlifeSpeciesInfoField(info=species_info, name=key, value=value).save()

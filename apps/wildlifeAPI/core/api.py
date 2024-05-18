@@ -169,7 +169,6 @@ class WildlifeDataAPI:
         """ 
             Clean the result by converting keys to snake_case and removing empty values.
         """
-        print('CLEANING')
         try:
             return result['species'][0]
         except: 
