@@ -1,6 +1,6 @@
 import json
 import urllib.request
-from ala import AlaDataAPI
+from .ala import AlaDataAPI
 
 class WildlifeDataAPI:
     """

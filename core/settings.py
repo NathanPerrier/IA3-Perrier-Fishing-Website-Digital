@@ -238,6 +238,13 @@ CELERY_RESULT_EXPIRES     = 60*60*24*30 # Results expire after 1 month
 CELERY_ACCEPT_CONTENT     = ["json"]
 CELERY_TASK_SERIALIZER    = 'json'
 CELERY_RESULT_SERIALIZER  = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'clean_data_every_minute': {
+        'task': 'apps.wildlifeAPI.celery.clean_data',
+        'schedule': 60.0,  # Execute every 60 seconds
+    },
+}
 ########################################
 
 

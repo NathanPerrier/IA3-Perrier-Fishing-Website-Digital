@@ -1,1 +1,1 @@
-from core.__init__ import *
+from .core.__init__ import *

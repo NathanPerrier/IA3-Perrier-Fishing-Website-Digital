@@ -1,4 +1,4 @@
-from core.api import WildlifeDataAPI as api
+from ..api import WildlifeDataAPI as api
 
 class Statuses(api):
 

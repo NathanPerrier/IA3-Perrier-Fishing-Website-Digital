@@ -1,4 +1,5 @@
 from django.db import models
+from .__init__ import *
 
 class WildlifeKingdoms(models.Model):
     """Model representing a wildlife kingdom."""
@@ -8,6 +9,12 @@ class WildlifeKingdoms(models.Model):
     class Meta:
         verbose_name = "Wildlife Kingdom"
         verbose_name_plural = "Wildlife Kingdoms"
+        
+    @staticmethod
+    def update():
+        # update all data
+        data = Kingdoms().get_kingdom_names()
+        print(data)
     
     def __str__(self):
         return self.name
