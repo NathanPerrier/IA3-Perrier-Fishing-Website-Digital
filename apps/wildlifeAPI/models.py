@@ -115,16 +115,14 @@ class WildlifeSpeciesInfo(models.Model):
         WildlifeSpeciesInfoField.objects.all().delete()
         species = WildlifeSpecies.objects.all()
         for specie in species:
-            data = Species(debug=debug, taxonid=specie.taxonid, extensive_search=True, extensive_info=True).get_species_by_id()
-            print(data)
+            data = Species(debug=debug, kingdom=specie.kingdom, taxonid=specie.taxonid, extensive_search=True, extensive_info=True).get_species_by_id()
             for info in data['species']:
                 species_info = WildlifeSpeciesInfo(species=specie)
                 species_info.save()
                 if isinstance(info, list):
-                    for key, value in info.items():
-                        
+                    for key, value in info.items():              
                         WildlifeSpeciesInfoField(info=species_info, name=key, value=value).save()
-                else: WildlifeSpeciesInfoField(info=species_info, name=info, value=data[info]).save()
+                else: WildlifeSpeciesInfoField(info=species_info, name=info, value=data['species'][info]).save()
 
     def __str__(self):
         return self.species.name
