@@ -12,6 +12,7 @@ def create_profile(sender, instance, created, **kwargs):
         if instance.is_superuser:
             profile.role = "admin"
             profile.save()
+            
 
 @receiver(post_migrate)
 def create_custom_groups(sender, **kwargs):

@@ -49,12 +49,12 @@ class WildlifeViewSet(viewsets.ViewSet):
         """
         kingdoms = WildlifeKingdoms.objects.all()
         classes = WildlifeClasses.objects.all()
-        families = WildlifeFamiles.objects.all()
+        families = WildlifeFamilies.objects.all()
         species = WildlifeSpecies.objects.all()
 
         kingdoms_serializer = WildlifeKingdomsSerializer(kingdoms, many=True)
         classes_serializer = WildlifeClassesSerializer(classes, many=True)
-        families_serializer = WildlifeFamilesSerializer(families, many=True)
+        families_serializer = WildlifeFamiliesSerializer(families, many=True)
         species_serializer = WildlifeSpeciesSerializer(species, many=True)
 
         return Response({
@@ -130,7 +130,7 @@ class WildlifeClassesViewSet(viewsets.ViewSet):
         serializer = WildlifeClassesSerializer(classes, many=True)
         return Response(serializer.data)
  
-class WildlifeFamilesViewSet(viewsets.ViewSet):
+class WildlifeFamiliesViewSet(viewsets.ViewSet):
     permission_classes = (WildlifePernission, )
     """
     A simple ViewSet for viewing and retrieving wildlife families.
@@ -140,16 +140,16 @@ class WildlifeFamilesViewSet(viewsets.ViewSet):
         """
         List all wildlife families.
         """
-        families = WildlifeFamiles.objects.all()
-        serializer = WildlifeFamilesSerializer(families, many=True)
+        families = WildlifeFamilies.objects.all()
+        serializer = WildlifeFamiliesSerializer(families, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         """
         Retrieve a wildlife family by its id.
         """
-        families = WildlifeFamiles.objects.filter(id=pk)
-        serializer = WildlifeFamilesSerializer(families, many=True)
+        families = WildlifeFamilies.objects.filter(id=pk)
+        serializer = WildlifeFamiliesSerializer(families, many=True)
         return Response(serializer.data)
 
     def search(self, request):
@@ -159,8 +159,8 @@ class WildlifeFamilesViewSet(viewsets.ViewSet):
         use: /wildlife/families/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        families = WildlifeFamiles.objects.filter(name__icontains=query)
-        serializer = WildlifeFamilesSerializer(families, many=True)
+        families = WildlifeFamilies.objects.filter(name__icontains=query)
+        serializer = WildlifeFamiliesSerializer(families, many=True)
         return Response(serializer.data)
     
 class WildlifeSpeciesViewSet(viewsets.ViewSet):

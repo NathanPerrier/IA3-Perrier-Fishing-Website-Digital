@@ -19,9 +19,9 @@ urlpatterns = [
     path('wildlife/classes/<int:pk>/', WildlifeClassesViewSet.as_view({'get': 'retrieve'}), name='wildlife-classes-retrieve'),
     path('wildlife/classes/search/', WildlifeClassesViewSet.as_view({'get': 'search'}), name='wildlife-classes-search'),
     
-    path('wildlife/families', WildlifeFamilesViewSet.as_view({'get': 'list'}), name='wildlife-families'),
-    path('wildlife/families/<int:pk>/', WildlifeFamilesViewSet.as_view({'get': 'retrieve'}), name='wildlife-families-retrieve'),
-    path('wildlife/families/search/', WildlifeFamilesViewSet.as_view({'get': 'search'}), name='wildlife-families-search'),
+    path('wildlife/families', WildlifeFamiliesViewSet.as_view({'get': 'list'}), name='wildlife-families'),
+    path('wildlife/families/<int:pk>/', WildlifeFamiliesViewSet.as_view({'get': 'retrieve'}), name='wildlife-families-retrieve'),
+    path('wildlife/families/search/', WildlifeFamiliesViewSet.as_view({'get': 'search'}), name='wildlife-families-search'),
     
     path('wildlife/species', WildlifeSpeciesViewSet.as_view({'get': 'list'}), name='wildlife-species'),
     path('wildlife/species/<int:pk>/', WildlifeSpeciesViewSet.as_view({'get': 'retrieve'}), name='wildlife-species-retrieve'),

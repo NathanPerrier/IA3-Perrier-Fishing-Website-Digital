@@ -23,9 +23,9 @@ class WildlifeClassesSerializer(serializers.ModelSerializer):
         model = WildlifeClasses
         fields = '__all__'
 
-class WildlifeFamilesSerializer(serializers.ModelSerializer):
+class WildlifeFamiliesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = WildlifeFamiles
+        model = WildlifeFamilies
         fields = '__all__'
         
 class WildlifeSpeciesInfoSerializer(serializers.ModelSerializer):

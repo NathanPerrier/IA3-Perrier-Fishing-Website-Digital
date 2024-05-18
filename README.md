@@ -112,6 +112,12 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+> 👉 Update the database with **wildlife data**
+
+```bash
+python manage.py update_wildlife
+```
+
 > 👉 `Create Superuser` & Start the **server**
 
 ```bash
