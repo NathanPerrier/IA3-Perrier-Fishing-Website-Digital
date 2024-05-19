@@ -91,10 +91,7 @@ class WildlifeDataAPI:
     def search(self, url, result=None, key=None):
         """ 
             Fetch the data from the specified url and return the result. 
-        """
-        
-        self.debug_url(url)
-            
+        """        
         try:
             result = self.search_request(url, result, key)
 
@@ -112,6 +109,8 @@ class WildlifeDataAPI:
         """
             Fetch the data from the specified url and return the result.
         """
+        self.debug_url(url)
+        
         req = urllib.request.Request(url)
 
         json_text = urllib.request.urlopen(req).read().decode('utf-8')
