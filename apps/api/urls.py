@@ -26,4 +26,8 @@ urlpatterns = [
     path('wildlife/species', WildlifeSpeciesViewSet.as_view({'get': 'list'}), name='wildlife-species'),
     path('wildlife/species/<int:pk>/', WildlifeSpeciesViewSet.as_view({'get': 'retrieve'}), name='wildlife-species-retrieve'),
     path('wildlife/species/search/', WildlifeSpeciesViewSet.as_view({'get': 'search'}), name='wildlife-species-search'),
+    
+    path('wildlife/species/info/', WildlifeSpeciesInfoViewSet.as_view({'get': 'list'}), name='wildlife-species-info'),
+    path('wildlife/species/info/<int:pk>/', WildlifeSpeciesInfoViewSet.as_view({'get': 'retrieve'}), name='wildlife-species-info-retrieve'),
+    path('wildlife/species/info/search/', WildlifeSpeciesInfoViewSet.as_view({'get': 'search'}), name='wildlife-species-info-search'),
 ]

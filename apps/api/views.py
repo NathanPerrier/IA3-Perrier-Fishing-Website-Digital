@@ -195,3 +195,36 @@ class WildlifeSpeciesViewSet(viewsets.ViewSet):
         species = WildlifeSpecies.objects.filter(name__icontains=query)
         serializer = WildlifeSpeciesSerializer(species, many=True)
         return Response(serializer.data)
+    
+class WildlifeSpeciesInfoViewSet(viewsets.ViewSet):
+    permission_classes = (WildlifePernission, )
+    """
+    A simple ViewSet for viewing and retrieving wildlife species.
+    """
+
+    def list(self, request):
+        """
+        List all wildlife species.
+        """
+        species = WildlifeSpeciesInfo.objects.all()
+        serializer = WildlifeSpeciesInfoSerializer(species, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """
+        Retrieve a wildlife species by its id.
+        """
+        species = WildlifeSpeciesInfo.objects.filter(id=pk)
+        serializer = WildlifeSpeciesInfoSerializer(species, many=True)
+        return Response(serializer.data)
+
+    def search(self, request):
+        """
+        Search for wildlife species based on a query parameter.
+        
+        use: /wildlife/species/search/?q=keyword
+        """
+        query = request.query_params.get('q', '')
+        species = WildlifeSpeciesInfo.objects.filter(name__icontains=query)
+        serializer = WildlifeSpeciesInfoSerializer(species, many=True)
+        return Response(serializer.data)

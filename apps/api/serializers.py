@@ -28,15 +28,13 @@ class WildlifeFamiliesSerializer(serializers.ModelSerializer):
         model = WildlifeFamilies
         fields = '__all__'
         
-class WildlifeSpeciesInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WildlifeSpeciesInfo
-        fields = '__all__'
-
 class WildlifeSpeciesSerializer(serializers.ModelSerializer):
-    species_info = WildlifeSpeciesInfoSerializer(many=True, read_only=True)
-
     class Meta:
         model = WildlifeSpecies
         fields = '__all__'
         
+
+class WildlifeSpeciesInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WildlifeSpeciesInfo
+        fields = '__all__'
