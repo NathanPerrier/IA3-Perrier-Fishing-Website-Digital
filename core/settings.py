@@ -258,12 +258,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER',)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_TIMEOUT = 60
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {
-    'product' : "apps.common.models.Product", #rm
     'user'   : "apps.users.models.User",
     'wildlife': "wildlifeAPI.models.*",
 }
