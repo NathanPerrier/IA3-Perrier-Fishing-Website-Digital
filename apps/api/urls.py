@@ -3,7 +3,6 @@ from rest_framework.routers import DefaultRouter
 from apps.api.views import *
 
 router = DefaultRouter()
-router.register(r'product', ProductViewSet, basename='product')
 router.register(r'user', UserViewSet, basename='user')
 router.register(r'wildlife', WildlifeViewSet, basename='wildlife')
 
