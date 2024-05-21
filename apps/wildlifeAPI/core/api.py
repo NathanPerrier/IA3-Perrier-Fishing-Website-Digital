@@ -59,7 +59,7 @@ class WildlifeDataAPI:
     ACKNOWLEDGEMENT = 'Data courtesy of the Queensland Government Wildlife Data API'
     
 
-    def __init__(self, kingdom='animals', debug=False, extensive_search=False, extensive_info=False, **kwargs):
+    def __init__(self, kingdom='animals', exclude_kingdom=False, debug=False, extensive_search=False, extensive_info=False, **kwargs):
         self.kingdom = kingdom
         
         self.debug = debug
@@ -69,7 +69,7 @@ class WildlifeDataAPI:
         if kwargs.get('class_'):
             kwargs['class'] = kwargs.pop('class_')
             
-        if not kwargs.get('kingdom'):
+        if not kwargs.get('kingdom') and not exclude_kingdom:
             kwargs['kingdom'] = self.kingdom
             
         self.params = kwargs

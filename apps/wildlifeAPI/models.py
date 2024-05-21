@@ -14,9 +14,9 @@ class WildlifeKingdoms(models.Model):
         
     @staticmethod
     @exception_handler
-    def update(debug=False):
+    def update(debug=False, animals_only=False):
         WildlifeKingdoms.objects.all().delete()
-        data = Kingdoms(debug=debug).get_kingdom_names()
+        data = Kingdoms(debug=debug, exclude_kingdom=animals_only).get_kingdom_names()
         for kingom in data['kingdom']:
             WildlifeKingdoms(name=kingom['kingdomname'], common_name=kingom['kingdomcommonname']).save()
     
@@ -28,6 +28,7 @@ class WildlifeClasses(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     common_name = models.CharField(max_length=255, db_index=True)
     kingdom = models.ForeignKey(WildlifeKingdoms, on_delete=models.CASCADE, related_name='classes')
+    kingdom_name = models.CharField(max_length=255)
     
     class Meta:
         verbose_name = "Wildlife Class"
@@ -35,15 +36,15 @@ class WildlifeClasses(models.Model):
         
     @staticmethod
     @exception_handler
-    def update(debug=False):
+    def update(debug=False, animals_only=False):
         WildlifeClasses.objects.all().delete()
-        data = Classes(debug=debug).get_class_names()
-        for class_ in data['class']:
-            kingdom = WildlifeKingdoms.objects.filter(name=class_['kingdomname']).first()
-            if kingdom is not None:
-                WildlifeClasses(name=class_['classname'], common_name=class_['classcommonname'], kingdom=kingdom).save()
-            else:
-                print(f"No kingdom found with name {class_['kingdomname']}")
+        kingdoms = WildlifeKingdoms.objects.all() if animals_only else WildlifeKingdoms.objects.filter(common_name='animals')
+        for kingdom in kingdoms:
+            data = Classes(debug=debug, kingdom=kingdom.common_name).get_class_names()  # for each kingdom
+            for class_ in data['class']:
+                kingdom = WildlifeKingdoms.objects.filter(name=class_['kingdomname']).first()
+                if kingdom is not None: WildlifeClasses(name=class_['classname'], common_name=class_['classcommonname'], kingdom=kingdom, kingdom_name=kingdom.name).save()
+                else: print(f"No kingdom found with name {class_['kingdomname']}")
                 
     def __str__(self):
         return self.name
@@ -54,7 +55,9 @@ class WildlifeFamilies(models.Model):
     common_name = models.CharField(max_length=255, db_index=True)
     familyrank = models.CharField(max_length=255)
     kingdom = models.ForeignKey(WildlifeKingdoms, on_delete=models.CASCADE, related_name='families')
-    class_name = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='families')
+    kingdom_name = models.CharField(max_length=255)
+    _class = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='families')
+    class_name = models.CharField(max_length=255)
     
     class Meta:
         verbose_name = "Wildlife Family"
@@ -66,9 +69,9 @@ class WildlifeFamilies(models.Model):
         WildlifeFamilies.objects.all().delete()
         classes = WildlifeClasses.objects.all()
         for _class_ in classes:
-            data = Families(debug=debug, class_=_class_.name).get_family_names()
+            data = Families(debug=debug, class_=_class_.name, kingdom=_class_.kingdom.common_name).get_family_names()
             for family in data['family']:
-                WildlifeFamilies(name=family['familyname'], common_name=family['familycommonname'], familyrank=family['familyrank'], class_name=_class_, kingdom=_class_.kingdom).save()
+                WildlifeFamilies(name=family['familyname'], common_name=family['familycommonname'], familyrank=family['familyrank'], _class=_class_, class_name=_class_.name, kingdom=_class_.kingdom, kingdom_name=_class_.kingdom.name).save()
         
     def __str__(self):
         return self.name
@@ -79,8 +82,11 @@ class WildlifeSpecies(models.Model):
     common_name = models.CharField(max_length=255, db_index=True)
     taxonid = models.CharField(max_length=255)
     kingdom = models.ForeignKey(WildlifeKingdoms, on_delete=models.CASCADE, related_name='species')
-    class_name = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='species')
+    kingdom_name = models.CharField(max_length=255)
+    _class = models.ForeignKey(WildlifeClasses, on_delete=models.CASCADE, related_name='species')
+    class_name = models.CharField(max_length=255)
     family = models.ForeignKey(WildlifeFamilies, on_delete=models.CASCADE, related_name='species')
+    family_name = models.CharField(max_length=255)
     
     @staticmethod
     @exception_handler
@@ -88,9 +94,9 @@ class WildlifeSpecies(models.Model):
         WildlifeSpecies.objects.all().delete()
         families = WildlifeFamilies.objects.all()
         for family in families:
-            data = Species(debug=debug, kingdom=family.kingdom.name, class_=family.class_name.name, family=family.name).get_species()
+            data = Species(debug=debug, kingdom=family.kingdom.name, class_=family._class.name, family=family.name).get_species()
             for species in data['species']:
-                WildlifeSpecies(name=species['scientificname'], common_name=species.get('acceptedcommonname', 'scientificname'), taxonid=species['taxonid'], family=family, class_name=family.class_name, kingdom=family.kingdom).save()
+                WildlifeSpecies(name=species['scientificname'], common_name=species.get('acceptedcommonname', species['scientificname']), taxonid=species['taxonid'], family=family, family_name=family.name, _class=family._class, class_name=family._class.name, kingdom=family.kingdom, kingdom_name=family.kingdom.name).save()
     
     class Meta:
         verbose_name = "Wildlife Species"
@@ -101,6 +107,7 @@ class WildlifeSpecies(models.Model):
     
 class WildlifeSpeciesConservationStatus(models.Model):
     species = models.OneToOneField(WildlifeSpecies, on_delete=models.CASCADE, related_name='conservation_status')
+    species_name = models.CharField(max_length=255)
     nca_status = models.CharField(max_length=255, null=True)
     nca_status_code = models.CharField(max_length=1, null=True)
     conservation_significant = models.BooleanField(null=True)
@@ -110,6 +117,7 @@ class WildlifeSpeciesConservationStatus(models.Model):
 
 class WildlifeSpeciesImage(models.Model):
     species = models.ForeignKey(WildlifeSpecies, on_delete=models.CASCADE, related_name='image')
+    species_name = models.CharField(max_length=255)
     type = models.CharField(max_length=255, null=True)
     format = models.CharField(max_length=255, null=True)
     url = models.URLField(null=True)
@@ -120,10 +128,10 @@ class WildlifeSpeciesImage(models.Model):
     def add_images(specie, data):
         if 'image' in data:
             if isinstance(data['image'], dict):     
-                WildlifeSpeciesImage(species=specie, type=data['image']['type'], format=data['image']['format'], url=data['image']['url'], reference=data['image']['reference'], title=data['image']['title']).save()
+                WildlifeSpeciesImage(species=specie, species_name=specie.name, type=data['image']['type'], format=data['image']['format'], url=data['image']['url'], reference=data['image']['reference'], title=data['image']['title']).save()
             else:
                 for image in data['image']:
-                    WildlifeSpeciesImage(species=specie, type=image['type'], format=image['format'], url=image['url'], reference=image['reference'], title=image['title']).save()
+                    WildlifeSpeciesImage(species=specie, species_name=specie.name, type=image['type'], format=image['format'], url=image['url'], reference=image['reference'], title=image['title']).save()
         
     
     def __str__(self):
@@ -133,6 +141,7 @@ class WildlifeSpeciesImage(models.Model):
 class WildlifeSpeciesInfo(models.Model):
     """Model representing a wildlife species information."""
     species = models.ForeignKey(WildlifeSpecies, on_delete=models.CASCADE, related_name='info')
+    species_name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     endemicity = models.CharField(max_length=255)
     wetland_status = models.CharField(max_length=255, null=True, blank=True)
@@ -156,7 +165,7 @@ class WildlifeSpeciesInfo(models.Model):
         species = WildlifeSpecies.objects.all()
         
         for specie in species:
-            data = Species(debug=debug, kingdom=specie.kingdom, taxonid=specie.taxonid, extensive_search=True).get_species_by_id()
+            data = Species(debug=debug, kingdom=specie.kingdom.name, taxonid=specie.taxonid).get_species_by_id() # i removed extensive_search
             WildlifeSpeciesInfo.add_info(specie, data['species'])
         
     @staticmethod
@@ -166,10 +175,11 @@ class WildlifeSpeciesInfo(models.Model):
         WildlifeSpeciesImage.add_images(specie, data)
         
         if 'conservationstatus' in data:
-            conservation = WildlifeSpeciesConservationStatus(species=specie, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False)).save()
+            conservation = WildlifeSpeciesConservationStatus(species=specie, species_name=specie.name, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False)).save()
             
         WildlifeSpeciesInfo(
             species=specie,
+            species_name=specie.name,
             description=data['profile'].get('description', None),
             endemicity=data.get('endemicity', 'Not Evaluated'),
             wetland_status=data.get('wetlandstatus', 'N/A'),
@@ -184,16 +194,3 @@ class WildlifeSpeciesInfo(models.Model):
         return self.species.name
 
 
-
-# class WildlifeSpeciesInfoField(models.Model):
-#     """Model representing a dynamic field for a wildlife species information."""
-#     info = models.ForeignKey(WildlifeSpeciesInfo, on_delete=models.CASCADE, related_name='fields')
-#     name = models.CharField(max_length=255)
-#     value = models.TextField()
-
-#     class Meta:
-#         verbose_name = "Wildlife Species Information Field"
-#         verbose_name_plural = "Wildlife Species Information Fields"
-
-#     def __str__(self):
-#         return f"{self.name}: {self.value}"

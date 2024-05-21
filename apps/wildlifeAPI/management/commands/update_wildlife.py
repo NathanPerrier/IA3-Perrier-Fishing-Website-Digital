@@ -6,16 +6,18 @@ class Command(BaseCommand):
     
     def add_arguments(self, parser):
         parser.add_argument('--debug', action='store_true', help='Run in debug mode')
+        parser.add_argument('--animals-only', action='store_true', help='Only add animals')
 
 
     def handle(self, *args, **options):
         debug = options['debug']
-        
+        animals_only = not options['animals_only']
+        print(animals_only)
         try:
             self.stdout.write(self.style.WARNING('Updating wildlife data...\nPlease Do Not Interrupt the Process!'))
             
-            WildlifeKingdoms.update(debug=debug)
-            WildlifeClasses.update(debug=debug)
+            WildlifeKingdoms.update(debug=debug, animals_only=animals_only)
+            WildlifeClasses.update(debug=debug, animals_only=animals_only)
             WildlifeFamilies.update(debug=debug)
             WildlifeSpecies.update(debug=debug)
             WildlifeSpeciesInfo.update(debug=debug)

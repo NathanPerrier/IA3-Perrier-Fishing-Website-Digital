@@ -16,9 +16,7 @@ class AlaDataAPI:
         self.extensive_search = self.parent.extensive_search
         self.extensive_info = self.parent.extensive_info
             
-        self.params = self.parent.params
-
-        
+        self.params = self.parent.params        
     
     def search(self, url, result=None, key=None):
         """ 

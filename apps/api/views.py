@@ -222,7 +222,7 @@ class WildlifeSpeciesInfoViewSet(viewsets.ViewSet):
         """
         Search for wildlife species based on a query parameter.
         
-        use: /wildlife/species/search/?q=keyword
+        use: /wildlife/species/info/search/?q=keyword
         """
         query = request.query_params.get('q', '')
         species = WildlifeSpeciesInfo.objects.filter(name__icontains=query)

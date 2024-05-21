@@ -90,7 +90,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
 
 ```bash
 virtualenv env
-source env/bin/activate
+.\venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
