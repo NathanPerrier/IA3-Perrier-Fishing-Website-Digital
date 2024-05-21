@@ -70,7 +70,7 @@ def profile(request):
         'form': form,
         'segment': 'profile',
     }
-    return render(request, 'dashboard/profile.html', context)
+    return render(request, 'pages/profile.html', context)
 
 
 def upload_avatar(request):

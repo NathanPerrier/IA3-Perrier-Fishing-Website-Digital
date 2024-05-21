@@ -1,21 +1,6 @@
+{% extends 'layouts/base-alt.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    {% include 'includes/head-alt.html' %}
-    {% block extrastyle %}{% endblock extrastyle %}
-</head>
-
-<body>
-
-    {% block messages %}{% endblock messages %}
-
-    {% block navigation %}
-    {% include 'includes/navigation-alt.html' %}
-    {% endblock navigation %}
-
+{% block content %}
     <section class="bg-white dark:bg-gray-900 pt-20">
       <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div class="place-self-center mr-auto lg:col-span-7">
@@ -181,9 +166,4 @@
           </div>
       </div>
   </section>
-                
-    {% include 'includes/footer-alt.html' %}
-
-    <script src="{% static 'dist/main.bundle.js' %}"></script>
-</body>
-</html>
+{% endblock %}
