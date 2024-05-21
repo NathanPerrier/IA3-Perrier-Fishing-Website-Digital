@@ -250,7 +250,7 @@ CELERY_BEAT_SCHEDULE = {
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/users/signin/'
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 
@@ -260,6 +260,7 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_TIMEOUT = 60
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {
