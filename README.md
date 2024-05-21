@@ -118,6 +118,12 @@ python manage.py migrate
 python manage.py update_wildlife
 ```
 
+> 👉 Run **celery** worker
+
+```bash
+celery -A core worker --loglevel=info -E
+```
+
 > 👉 `Create Superuser` & Start the **server**
 
 ```bash
