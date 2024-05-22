@@ -8,7 +8,7 @@
         </a>
     </h1>
     <p>
-        <strong>Rocket Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Flowbite</strong> &bull; <strong>OpenAI</strong> &bull; <strong>API (DRF)</strong> &bull; <strong>Celery Beat</strong> &bull; <strong>DataTables</strong> &bull; <strong>Charts</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong>
+        <strong>Rocket Django</strong> &bull; <strong>TailwindCSS</strong> &bull; <strong>Flowbite</strong> &bull; <strong>OpenAI</strong> &bull; <strong>API (DRF)</strong> &bull; <strong>Celery</strong> &bull; <strong>Redis</strong> &bull; <strong>DataTables</strong> &bull; <strong>Charts</strong> &bull; <strong>Docker</strong> &bull; <strong>CI/CD</strong>
     </p>     
 </div>
 
