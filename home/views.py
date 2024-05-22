@@ -38,6 +38,7 @@ def contact(request):
               [form.cleaned_data.get('email')],
               fail_silently=False,
         )
+        form=ContactForm()
         messages.success(request, 'Contact Message Sent!')
       except Exception as e: messages.error(request, 'There was an error sending your message. Please try again later.')
     else: messages.error(request, form.errors.as_text()) 
