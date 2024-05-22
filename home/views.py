@@ -3,13 +3,14 @@ from django.contrib.auth.decorators import login_required
 
 from .models import *
 
-@login_required
+@login_required(login_url="/users/signin")
 def dashboard(request):
-
-  context = {
-    'segment': 'dashboard',
-  }
-  return render(request, "dashboard/index.html", context)
+  if request.user.is_superuser:
+    context = {
+      'segment': 'dashboard',
+    }
+    return render(request, "dashboard/index.html", context)
+  return render(request, "pages/errors/404.html")
 
 def index(request):
 
@@ -21,7 +22,10 @@ def pricing(request):
   context = {}
   return render(request, "pages/pricing.html", context)
 
+def contact(request):
 
+  context = {}
+  return render(request, "pages/contact.html", context)
 
 # ERRORS
 

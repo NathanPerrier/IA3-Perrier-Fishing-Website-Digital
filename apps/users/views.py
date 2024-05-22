@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView, PasswordResetConfirmView
 from django.views.generic import CreateView
-from apps.common.models import Product
-from apps.users.models import Profile
+from apps.common.models import Product #! rm
+from apps.social.models import Post
+from apps.users.models import Profile, Followers
 from apps.users.forms import SigninForm, SignupForm, UserPasswordChangeForm, UserSetPasswordForm, UserPasswordResetForm, ProfileForm
 from django.contrib.auth import logout
 from django.urls import reverse
@@ -14,7 +15,6 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from apps.users.utils import user_filter
 
-# Create your views here.
 
 def index(request):
 
@@ -53,9 +53,42 @@ def signout_view(request):
     logout(request)
     return redirect(reverse('signin'))
 
+def profile_page(request, username=None):
+    if username:
+        user = get_object_or_404(User, username=username)
+    else:
+        if not request.user.is_authenticated: 
+            return redirect(reverse('signin'))
+        user = request.user 
+
+    profile = get_object_or_404(Profile, user=user)
+    
+    context = {
+        'user': user,
+        'profile': profile,
+        'posts':  Post.objects.filter(user_profile=profile),  
+        'followers' : Followers.objects.filter(following=profile).all(),
+        'following' : Followers.objects.filter(follower=profile).all(),
+        'is_following': Followers.objects.filter(follower=request.user.profile, following=profile).exists()
+    }
+    return render(request, 'pages/profile.html', context)
 
 @login_required(login_url='/users/signin/')
-def profile(request):
+def follow_user(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    Followers.objects.update_or_create(follower=request.user.profile, following=profile)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url='/users/signin/')
+def unfollow_user(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    Followers.objects.filter(follower=request.user.profile, following=profile).delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url='/users/signin/')
+def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
@@ -70,7 +103,9 @@ def profile(request):
         'form': form,
         'segment': 'profile',
     }
-    return render(request, 'pages/profile.html', context)
+    return render(request, 'pages/edit_profile.html', context)
+
+
 
 def update_bio(request):
     profile = get_object_or_404(Profile, user=request.user)

@@ -12,9 +12,6 @@ class Post(models.Model):
     image = models.ImageField(upload_to='post', null=True, blank=True)
     species = models.ForeignKey(WildlifeSpecies, on_delete=models.PROTECT, null=True, blank=True)
     
-    def __str__(self):
-        return self.content
-    
     def get_user_posts(self, user):
         return self.objects.filter(user_profile=user)
     
@@ -29,30 +26,12 @@ class Post(models.Model):
     
     def get_posts_by_rating(self):
         return self.objects.order_by('-rating')
-    
-class Followers(models.Model):
-    """ followers and following """
-    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_from_profile')
-    following = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_to_profile')
-    
-    def __str__(self):
-        return f'{self.follower} follows {self.following}'
-    
-        
-    def get_followers_by_profile(self, user_profile):
-        return self.objects.filter(following=user_profile)
-
-    def get_following_by_profile(self, user_profile):
-        return self.objects.filter(follower=user_profile)
 
 class Rating(models.Model):
     """ likes or dislikes on a post """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     rating = models.IntegerField()
-    
-    def __str__(self):
-        return f'{self.user_profile} rated {self.post}'
     
     def get_likes(self, post):
         return self.objects.filter(post=post, rating=-1)
@@ -70,9 +49,6 @@ class Comment(models.Model):
     
     relates_to = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     
-    def __str__(self):
-        return self.content
-    
     def get_post_comments(self, post):
         return self.objects.filter(post=post)
     
@@ -84,9 +60,6 @@ class CommentRating(models.Model):
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     rating = models.IntegerField()
-    
-    def __str__(self):
-        return f'{self.user_profile} rated {self.comment}'
     
     def get_comment_likes(self, comment):
         return self.objects.filter(comment=comment, rating=-1)

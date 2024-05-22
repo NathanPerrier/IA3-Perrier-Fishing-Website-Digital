@@ -103,16 +103,7 @@
             </svg>
             <div class="text-sm font-medium text-gray-900 dark:text-white">API</div>
           </a>
-          <a href="/users/profile/" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
-            <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
-              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                clip-rule="evenodd"></path>
-            </svg>
-            <div class="text-sm font-medium text-gray-900 dark:text-white">Profile</div>
-          </a>
-          <a href="#" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
+          <a href="/users/profile/edit" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
             <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -121,7 +112,7 @@
             </svg>
             <div class="text-sm font-medium text-gray-900 dark:text-white">Settings</div>
           </a>
-          <a href="#" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
+          <a href="/users/profile/" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
             <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
@@ -129,7 +120,7 @@
                 d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
                 clip-rule="evenodd"></path>
             </svg>
-            <div class="text-sm font-medium text-gray-900 dark:text-white">Products</div>
+            <div class="text-sm font-medium text-gray-900 dark:text-white">Profile</div>
           </a>
           <a href="/pricing/" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
             <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
@@ -219,9 +210,9 @@
                 role="menuitem">Create a Post</a>
             </li>
             <li>
-              <a href="/users/profile/"
+              <a href="/users/profile/edit"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                role="menuitem">Profile</a>
+                role="menuitem">Settings</a>
             </li>
             {% if request.user.is_superuser %}
               <li>
@@ -278,13 +269,13 @@
                 <a href="/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Home</a>
               </li>
               <li>
-                <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Feed</a>
+                <a href="/social/feed/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Feed</a>
               </li>
               <li>
                 <a href="/pricing/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Pricing</a>
               </li>
               <li>
-                <a href="#" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Contact</a>
+                <a href="/contact/" class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500" aria-current="page">Contact</a>
               </li>
             </ul>
           </div>

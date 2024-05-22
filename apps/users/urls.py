@@ -23,7 +23,11 @@ urlpatterns = [
         template_name='authentication/password-reset-complete.html'
     ), name='password_reset_complete'),
 
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.profile_page, name='profile'),
+    path('profile/edit', views.edit_profile, name='profile'),
+    path('profile/<str:username>/', views.profile_page, name='profile_page'),
+    path('profile/<str:username>/follow/', views.follow_user, name='follow_user'),
+    path('profile/<str:username>/unfollow/', views.unfollow_user, name='unfollow_user'),
     path('update-bio/', views.update_bio, name='update_bio'),
     path('upload-avatar/', views.upload_avatar, name='upload_avatar'),
     path('delete-avatar/', views.delete_avatar, name='delete_avatar'),

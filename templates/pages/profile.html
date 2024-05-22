@@ -8,209 +8,112 @@
 
 {% block content %}
 
-<div class="grid grid-cols-1 px-4 pt-20 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-    <div class="mb-4 col-span-full xl:mb-2 pt-6">
-        {% if messages %}
-        {% for message in messages %}
-            <div class="flex items-center p-4 mb-3 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>{{ message }}</div>
-            </div>
-        {% endfor %}
-        {% endif %}
-        <nav class="flex mb-5" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-              <li class="inline-flex items-center">
-                <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
-                  <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                  Home
-                </a>
-              </li>
-              <li>
-                <div class="flex items-center">
-                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                  <a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Users</a>
-                </div>
-              </li>
-              <li>
-                <div class="flex items-center">
-                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                  <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Settings</span>
-                </div>
-              </li>
-            </ol>
-        </nav>
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">User settings</h1>
-    </div>
-
-    <div class="col-span-full xl:col-auto flex flex-col">
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
-                {% if request.user.profile.avatar %}
-                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="{{ request.user.profile.avatar.url }}" alt="Profile picture">
+<div class=" w-screen mt-10 pt-20">
+    <div class="bg-white dark:bg-gray-900 shadow p-6 pt-10">
+        <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start">
+            <div class="flex flex-col items-center">
+                {% if profile.avatar %}
+                    <img class="w-32 h-32 rounded-lg object-cover" src="{{ profile.avatar.url }}" alt="Profile Picture">
                 {% else %}
-                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="{% static "dist/img/default-user.png" %}" alt="Profile picture">
+                    <img class="w-32 h-32 rounded-lg object-cover" src="{% static "dist/img/default-user.png" %}" alt="Profile Picture">
                 {% endif %}
-                <div>
-                    {% if request.user.profile.full_name %}
-                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">{{ request.user.profile.full_name }}</h3>
-                    {% else %}
-                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">{{ request.user.username }}</h3>
-                    {% endif %}
-                    <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
-                        JPG, GIF or PNG. Max size of 800K
-                    </div>
-                    <form method="post" action="{% url "upload_avatar" %}" enctype="multipart/form-data" class="flex items-center space-x-4">
-                        {% csrf_token %}
-                        <label for="avatar">
-                            <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"></path><path d="M9 13h2v5a1 1 0 11-2 0v-5z"></path></svg>
-                                Upload picture
-                            </div>
-                        </label>
-                        <input onchange="this.form.submit()" type="file" class="hidden" name="avatar" id="avatar">
-                        <a type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" href="{% url "delete_avatar" %}">
-                            Delete
-                        </a>
-                    </form>
+                <h2 class="mt-4 text-2xl font-semibold text-gray-800 dark:text-gray-200">@{{user.username}}</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">{{user.email}}</p>
+            </div>
+            <div class="flex mt-6 lg:mt-0 space-x-4">
+           
+                <div class="flex flex-col items-center">
+                    <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{following|length}}</span>
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Following</span>
                 </div>
+                <div class="flex flex-col items-center mx-8">
+                    <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{followers|length}}</span>
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Followers</span>
+                </div>
+             
+                {% if request.user == user %}
+                    <a href="/users/profile/edit" class="px-4 py-2 bg-blue-600 border text-white rounded-lg">Edit Profile</a>
+                {% else %}
+                    {% if is_following %}
+                        <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg">Unfollow</a>
+                    {% else %}
+                        <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Follow</a>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
-        <!-- bio section -->
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800 flex flex-col">
-            <h3 class="mb-4 text-xl font-semibold dark:text-white">Profile Description</h3>
-            <form method="post" action="{% url "update_bio" %}" class="flex flex-col flex-grow">
-                {% csrf_token %}
-                <div class="grid grid-cols-6 gap-6 flex flex-col flex-grow">
-                    <div class="col-span-6 sm:col-full flex flex-col flex-grow">
-                        <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bio</label>
-                        <textarea name="bio" style="height: 10.8rem" id="bio" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 flex-grow" placeholder="Tell us a little bit about yourself" required>{% if request.user.profile.bio != none %}{{ request.user.profile.bio }}{% endif %}</textarea>
-                    </div>
-                    <div class="col-span-6 sm:col-full">
-                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-span-2">
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <h3 class="mb-4 text-xl font-semibold dark:text-white">General information</h3>
-            <form method="post">
-                {% csrf_token %}
 
-                <div class="grid grid-cols-6 gap-6">
-                    {% for field in form %}
-                        {% if field.label != 'Bio' %}
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
+        <!-- horizontal line -->
+        <div class="mt-8 border-b border-gray-200 dark:border-gray-700"></div>
+
+        {% if user.profile.bio %}
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">About</h3>
+            <p class="mt-4 text-gray-600 dark:text-gray-400">{{profile.bio}}</p>
+        </div>
+        {% endif %}
+        
+        <div class="mt-8 p-5 rounded-lg bg-gray-50 dark:bg-gray-800 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Posts</h3>
+            {% if posts|length == 0 %}
+                    <div class="text-center">   
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
+                        {% if request.user == user %}
+                            <p class="mt-6 mb-8 text-gray-600 dark:text-gray-400">You currently Have No Posts! You can create one here:</p>
+                            <a href="/social/posts/create" class="mb-8 mt-4 px-4 py-2 bg-blue-600 border text-white rounded-lg">Create Post</a>
+                        {% else %}
+                            <p class="mt-6 mb-8 text-gray-600 dark:text-gray-400">This user currently has no posts! You can signup to be notfied when they do:</p>
+                            <a href="/social/posts/create" class="mb-8 px-4 py-2 bg-blue-600 border text-white rounded-lg">Get Notified</a>
                         {% endif %}
+                    </div>
+            {% else %}
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-3">
+                    {% for post in posts %}
+                        <div class="bg-white dark:bg-gray-700 shadow rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{post.title}}</h4>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">{{post.content}}</p>
+                        </div>
                     {% endfor %}
-                    <div class="col-span-6 sm:col-full">
-                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
-                    </div>
                 </div>
-                
-            </form>
+            {% endif %}
         </div>
-        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <h3 class="mb-4 text-xl font-semibold dark:text-white">Password information</h3>
-            <form method="post" action="{% url "change_password" %}">
-                {% csrf_token %}
 
-                <div class="grid grid-cols-6 gap-6">
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="current_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current password</label>
-                        <div class="relative w-full">
-                            <input type="password" id="current_password" name="current_password" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Current password" required>
-                            <button type="button" id="show_current_password" class="absolute top-0 right-0 p-2.5 h-full text-sm font-thin text-white rounded-r-lg">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                      <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                                      <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"/>
-                                    </g>
-                                </svg>
-                            </button>
+        {% if followers|length > 0 %}
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Followers</h3>
+                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {% for follower in followers %}
+                        <div class="flex flex-col items-center">
+                            {% if follower.avatar %}
+                                <img class="w-16 h-16 rounded-full object-cover" src="{{ follower.avatar.url }}" alt="Follower">
+                            {% else %}
+                                <img class="w-16 h-16 rounded-full object-cover" src="{% static "dist/img/default-user.png" %}" alt="Follower">
+                            {% endif %}
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">@{{follower.follower}}</p>
                         </div>
-                    </div>
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="new_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current password</label>
-                        <div class="relative w-full">
-                            <input type="password" id="new_password" name="new_password" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="New password" required>
-                            <button type="button" id="show_new_password" class="absolute top-0 right-0 p-2.5 h-full text-sm font-thin text-white rounded-r-lg">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                      <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                                      <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"/>
-                                    </g>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-span-6 sm:col-full">
-                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
-                    </div>
+                    {% endfor %}
                 </div>
-            </form>
-        </div>
+            </div>
+        {% endif %}
+
+        {% if following|length > 0 %}
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Following</h3>
+                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {% for follow in following %}
+                        <div class="flex flex-col items-center">
+                            {% if follow.avatar %}
+                                <img class="w-16 h-16 rounded-full object-cover" src="{{ follow.avatar.url }}" alt="Follower">
+                            {% else %}
+                                <img class="w-16 h-16 rounded-full object-cover" src="{% static "dist/img/default-user.png" %}" alt="Follower">
+                            {% endif %}
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">@{{follow.follower}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </div>
-    
 </div>
 
 {% endblock content %}
-
-
-{% block extra_js %}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const currentPasswordInput = document.getElementById('current_password');
-        const newPasswordInput = document.getElementById('new_password');
-        const showCurrentPasswordButton = document.getElementById('show_current_password');
-        const showNewPasswordButton = document.getElementById('show_new_password');
-
-        showCurrentPasswordButton.addEventListener('click', function () {
-            togglePasswordVisibility(currentPasswordInput, showCurrentPasswordButton);
-        });
-
-        showNewPasswordButton.addEventListener('click', function () {
-            togglePasswordVisibility(newPasswordInput, showNewPasswordButton);
-        });
-
-        function togglePasswordVisibility(input, button) {
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-
-            toggleEyeIcon(button, type);
-        }
-
-        function toggleEyeIcon(button, type) {
-            const eyeIcon = button.querySelector('svg');
-
-            if (type === 'password') {
-                eyeIcon.innerHTML = `
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                      <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                      <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"/>
-                    </g>
-                </svg>
-                `;
-            } else {
-                eyeIcon.innerHTML = `
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.933 10.909A4.357 4.357 0 0 1 1 9c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 19 9c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M2 17 18 1m-5 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                </svg>
-                `;
-            }
-        }
-    });
-</script>
-
-
-{% endblock extra_js %}
