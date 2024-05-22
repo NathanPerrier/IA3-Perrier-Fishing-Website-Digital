@@ -262,7 +262,7 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_TIMEOUT = 60
+EMAIL_TIMEOUT = 90
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {
