@@ -24,7 +24,9 @@ urlpatterns = [
     ), name='password_reset_complete'),
 
     path('profile/', views.profile, name='profile'),
+    path('update-bio/', views.update_bio, name='update_bio'),
     path('upload-avatar/', views.upload_avatar, name='upload_avatar'),
+    path('delete-avatar/', views.delete_avatar, name='delete_avatar'),
     path('change-password/', views.change_password, name='change_password'),
 
     path('user-list/', views.user_list, name='user_list'),

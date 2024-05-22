@@ -37,6 +37,13 @@ class Followers(models.Model):
     
     def __str__(self):
         return f'{self.follower} follows {self.following}'
+    
+        
+    def get_followers_by_profile(self, user_profile):
+        return self.objects.filter(following=user_profile)
+
+    def get_following_by_profile(self, user_profile):
+        return self.objects.filter(follower=user_profile)
 
 class Rating(models.Model):
     """ likes or dislikes on a post """
@@ -53,7 +60,7 @@ class Rating(models.Model):
     def get_post_dislikes(self, post):
         return self.objects.filter(post=post, rating=-1)
     
-class Comments(models.Model):
+class Comment(models.Model):
     """ nested comments """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -75,7 +82,7 @@ class Comments(models.Model):
 class CommentRating(models.Model):
     """ likes or dislikes on a comment """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comments, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     rating = models.IntegerField()
     
     def __str__(self):

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "apps.tables",
     "apps.tasks",
     "apps.wildlifeAPI",
+    "apps.social",
     
     # 'allauth',
     # 'allauth.account',

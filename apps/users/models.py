@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from apps.social.models import Followers
 
 # Create your models here.
 
@@ -19,12 +18,7 @@ class Profile(models.Model):
     address   = models.CharField(max_length=255, null=True, blank=True)
     phone     = models.CharField(max_length=255, null=True, blank=True)
     avatar    = models.ImageField(upload_to='avatar', null=True, blank=True)
+    bio      = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-    
-    def get_followers(self):
-        return Followers.objects.filter(following=self)
-
-    def get_following(self):
-        return Followers.objects.filter(follower=self)

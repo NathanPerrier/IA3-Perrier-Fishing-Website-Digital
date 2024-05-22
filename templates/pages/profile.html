@@ -45,8 +45,8 @@
         </nav>
         <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">User settings</h1>
     </div>
-    <!-- Right Content -->
-    <div class="col-span-full xl:col-auto">
+
+    <div class="col-span-full xl:col-auto flex flex-col">
         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
                 {% if request.user.profile.avatar %}
@@ -72,12 +72,28 @@
                             </div>
                         </label>
                         <input onchange="this.form.submit()" type="file" class="hidden" name="avatar" id="avatar">
-                        <button type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        <a type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" href="{% url "delete_avatar" %}">
                             Delete
-                        </button>
+                        </a>
                     </form>
                 </div>
             </div>
+        </div>
+        <!-- bio section -->
+        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800 flex flex-col">
+            <h3 class="mb-4 text-xl font-semibold dark:text-white">Profile Description</h3>
+            <form method="post" action="{% url "update_bio" %}" class="flex flex-col flex-grow">
+                {% csrf_token %}
+                <div class="grid grid-cols-6 gap-6 flex flex-col flex-grow">
+                    <div class="col-span-6 sm:col-full flex flex-col flex-grow">
+                        <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bio</label>
+                        <textarea name="bio" style="height: 10.8rem" id="bio" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 flex-grow" placeholder="Tell us a little bit about yourself" required>{% if request.user.profile.bio != none %}{{ request.user.profile.bio }}{% endif %}</textarea>
+                    </div>
+                    <div class="col-span-6 sm:col-full">
+                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="col-span-2">
@@ -88,10 +104,12 @@
 
                 <div class="grid grid-cols-6 gap-6">
                     {% for field in form %}
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                        {{ field }}
-                    </div>
+                        {% if field.label != 'Bio' %}
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endif %}
                     {% endfor %}
                     <div class="col-span-6 sm:col-full">
                         <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>

@@ -72,6 +72,12 @@ def profile(request):
     }
     return render(request, 'pages/profile.html', context)
 
+def update_bio(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    profile.bio = request.POST.get('bio')
+    profile.save()
+    messages.success(request, 'Bio updated successfully')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def upload_avatar(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -81,6 +87,12 @@ def upload_avatar(request):
         messages.success(request, 'Avatar uploaded successfully')
     return redirect(request.META.get('HTTP_REFERER'))
 
+def delete_avatar(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    profile.avatar = None
+    profile.save()
+    messages.success(request, 'Avatar deleted successfully')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def change_password(request):
     user = request.user
