@@ -18,7 +18,7 @@ class Command(BaseCommand):
             WildlifeSpecies.update(debug=debug)
 
             self.stdout.write(self.style.SUCCESS('Successfully updated wildlife species data'))
-            self.stdout.write(self.style.WARNING('Please run the following commands to update the rest of the wildlife data\n- python manage.py update_species_info'))
+            #self.stdout.write(self.style.WARNING('Please run the following commands to update the rest of the wildlife data\n- python manage.py update_species_info'))
         except Exception as e:
             self.stdout.write(self.style.ERROR('Failed to update wildlife species data'))
             self.stdout.write(self.style.ERROR(e))

@@ -12,7 +12,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         debug = options['debug']
         animals_only = not options['animals_only']
-        print(animals_only)
+        
+        if not animals_only:
+            self.stdout.write(self.style.WARNING('Only adding animals...'))
+            WildlifeKingdoms.objects.all().delete()
+            WildlifeClasses.objects.all().delete()
+            WildlifeFamilies.objects.all().delete()
+            WildlifeSpecies.objects.all().delete()
+            WildlifeSpeciesInfo.objects.all().delete()
+        
         try:
             self.stdout.write(self.style.WARNING('Updating wildlife data...\nPlease Do Not Interrupt the Process!'))
             

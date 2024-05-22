@@ -15,10 +15,9 @@ class WildlifeKingdoms(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False, animals_only=False):
-        WildlifeKingdoms.objects.all().delete()
         data = Kingdoms(debug=debug, exclude_kingdom=animals_only).get_kingdom_names()
         for kingom in data['kingdom']:
-            WildlifeKingdoms(name=kingom['kingdomname'], common_name=kingom['kingdomcommonname']).save()
+            WildlifeKingdoms.objects.update_or_create(name=kingom['kingdomname'], common_name=kingom['kingdomcommonname'])
     
     def __str__(self):
         return self.name
@@ -37,13 +36,12 @@ class WildlifeClasses(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False, animals_only=False):
-        WildlifeClasses.objects.all().delete()
         kingdoms = WildlifeKingdoms.objects.all() if animals_only else WildlifeKingdoms.objects.filter(common_name='animals')
         for kingdom in kingdoms:
             data = Classes(debug=debug, kingdom=kingdom.common_name).get_class_names()  # for each kingdom
             for class_ in data['class']:
                 kingdom = WildlifeKingdoms.objects.filter(name=class_['kingdomname']).first()
-                if kingdom is not None: WildlifeClasses(name=class_['classname'], common_name=class_['classcommonname'], kingdom=kingdom, kingdom_name=kingdom.name).save()
+                if kingdom is not None: WildlifeClasses.objects.update_or_create(name=class_['classname'], common_name=class_['classcommonname'], kingdom=kingdom, kingdom_name=kingdom.name)
                 else: print(f"No kingdom found with name {class_['kingdomname']}")
                 
     def __str__(self):
@@ -66,12 +64,11 @@ class WildlifeFamilies(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False):
-        WildlifeFamilies.objects.all().delete()
         classes = WildlifeClasses.objects.all()
         for _class_ in classes:
             data = Families(debug=debug, class_=_class_.name, kingdom=_class_.kingdom.common_name).get_family_names()
             for family in data['family']:
-                WildlifeFamilies(name=family['familyname'], common_name=family['familycommonname'], familyrank=family['familyrank'], _class=_class_, class_name=_class_.name, kingdom=_class_.kingdom, kingdom_name=_class_.kingdom.name).save()
+                WildlifeFamilies.objects.update_or_create(name=family['familyname'], common_name=family['familycommonname'], familyrank=family['familyrank'], _class=_class_, class_name=_class_.name, kingdom=_class_.kingdom, kingdom_name=_class_.kingdom.name)
         
     def __str__(self):
         return self.name
@@ -91,12 +88,11 @@ class WildlifeSpecies(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False):
-        WildlifeSpecies.objects.all().delete()
         families = WildlifeFamilies.objects.all()
         for family in families:
             data = Species(debug=debug, kingdom=family.kingdom.name, class_=family._class.name, family=family.name).get_species()
             for species in data['species']:
-                WildlifeSpecies(name=species['scientificname'], common_name=species.get('acceptedcommonname', species['scientificname']), taxonid=species['taxonid'], family=family, family_name=family.name, _class=family._class, class_name=family._class.name, kingdom=family.kingdom, kingdom_name=family.kingdom.name).save()
+                WildlifeSpecies.objects.update_or_create(name=species['scientificname'], common_name=species.get('acceptedcommonname', species['scientificname']), taxonid=species['taxonid'], family=family, family_name=family.name, _class=family._class, class_name=family._class.name, kingdom=family.kingdom, kingdom_name=family.kingdom.name)
     
     class Meta:
         verbose_name = "Wildlife Species"
@@ -128,10 +124,10 @@ class WildlifeSpeciesImage(models.Model):
     def add_images(specie, data):
         if 'image' in data:
             if isinstance(data['image'], dict):     
-                WildlifeSpeciesImage(species=specie, species_name=specie.name, type=data['image']['type'], format=data['image']['format'], url=data['image']['url'], reference=data['image']['reference'], title=data['image']['title']).save()
+                WildlifeSpeciesImage.objects.update_or_create(species=specie, species_name=specie.name, type=data['image']['type'], format=data['image']['format'], url=data['image']['url'], reference=data['image']['reference'], title=data['image']['title'])
             else:
                 for image in data['image']:
-                    WildlifeSpeciesImage(species=specie, species_name=specie.name, type=image['type'], format=image['format'], url=image['url'], reference=image['reference'], title=image['title']).save()
+                    WildlifeSpeciesImage.objects.update_or_create(species=specie, species_name=specie.name, type=image['type'], format=image['format'], url=image['url'], reference=image['reference'], title=image['title'])
         
     
     def __str__(self):
@@ -158,10 +154,6 @@ class WildlifeSpeciesInfo(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False):
-        WildlifeSpeciesInfo.objects.all().delete()
-        WildlifeSpeciesConservationStatus.objects.all().delete()
-        WildlifeSpeciesImage.objects.all().delete()
-        
         species = WildlifeSpecies.objects.all()
         
         for specie in species:
@@ -175,9 +167,9 @@ class WildlifeSpeciesInfo(models.Model):
         WildlifeSpeciesImage.add_images(specie, data)
         
         if 'conservationstatus' in data:
-            conservation = WildlifeSpeciesConservationStatus(species=specie, species_name=specie.name, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False)).save()
+            conservation = WildlifeSpeciesConservationStatus.objects.update_or_create(species=specie, species_name=specie.name, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False))
             
-        WildlifeSpeciesInfo(
+        WildlifeSpeciesInfo.objects.update_or_create(
             species=specie,
             species_name=specie.name,
             description=data['profile'].get('description', None),
@@ -188,7 +180,7 @@ class WildlifeSpeciesInfo(models.Model):
             environment=data.get('speciesenvironment', None),
             isSuperseded=data.get('isSuperseded', False),
             conservation_status=conservation,
-        ).save()
+        )
 
     def __str__(self):
         return self.species.name

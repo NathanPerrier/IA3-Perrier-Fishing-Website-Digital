@@ -15,6 +15,7 @@ from pathlib        import Path
 from dotenv         import load_dotenv
 from str2bool       import str2bool
 from django.contrib import messages
+from datetime       import timedelta
 
 load_dotenv()  # take environment variables from .env.
 
@@ -30,7 +31,7 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = False  #str2bool(os.environ.get('DEBUG'))
+DEBUG = False #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
@@ -242,7 +243,7 @@ CELERY_RESULT_SERIALIZER  = 'json'
 CELERY_BEAT_SCHEDULE = {
     'clean_data_every_minute': {
         'task': 'apps.wildlifeAPI.celery.clean_data',
-        'schedule': 60.0,  # Execute every 60 seconds
+        'schedule': timedelta(days=2),  
     },
 }
 ########################################
