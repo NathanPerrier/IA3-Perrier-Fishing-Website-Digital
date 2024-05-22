@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from ..wildlifeAPI.models import *
     
 class UserPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.method == 'GET':
-            return True
-        return request.user and request.user.is_authenticated and request.user.is_superuser or request.user.is_staff
+    def has_permission(self, request, _):
+        # if request.method == 'GET':
+        #     return True
+        return request.user and request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff)
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
