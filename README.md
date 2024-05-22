@@ -20,25 +20,9 @@
 
 <br />
 
-## About [Fishing App Name](https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital)
+## About [Fishing App](https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital)
 
-#### ***Supercharge your app instantly, launch faster, make $***
-
-Login users, process payments and send emails at lightspeed. Spend your time building your startup, not integrating APIs. **Rocket Django** provides you with the boilerplate code you need to launch, FAST. 
-
-#### ***Rocket your startup in days, not weeks*** 
-
-The Django boilerplate has all you need to build your SaaS, Analytics tool, or any other type of Web App. From idea to production in 5 minutes.
-
-#### **48+ hours of headaches**
-
- - 1 hrs to setup the project 
- - 2 hrs integrate tooling
- - 2 hrs to handle Stripe
- - 1 hrs for Docker
- - 1 hr Google Oauth
- - ∞ hrs overthinking...
- - Free [Support](https://appseed.us/support/) via `Email` & [Discord](https://discord.gg/fZC6hup) 
+This website brings an innovative solution to the Ambrose Treacy College fishing club. This website utilizes government APIs to allow members to easily identify what they caught. Furthermore, social features introduce a new way for club members to interact.
 
 <br />
 
