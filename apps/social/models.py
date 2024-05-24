@@ -37,11 +37,11 @@ class PostImages(models.Model):
     def get_post_image(self, post, image_id):
         return self.objects.get(post=post, id=image_id)
 
-class Rating(models.Model):
-    """ likes or dislikes on a post """
+class PostLikes(models.Model):
+    """ likes on a post """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    rating = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
     
     def get_likes(self, post):
         return self.objects.filter(post=post, rating=-1)
@@ -49,6 +49,12 @@ class Rating(models.Model):
     def get_post_dislikes(self, post):
         return self.objects.filter(post=post, rating=-1)
     
+class PostSaved(models.Model):
+    """ saved posts """
+    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+        
 class Comment(models.Model):
     """ nested comments """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
