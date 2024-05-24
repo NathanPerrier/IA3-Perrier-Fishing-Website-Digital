@@ -96,7 +96,8 @@ class WildlifeDataAPI:
             result = self.search_request(url, result, key)
 
             if self.extensive_info: result = AlaDataAPI(self).get_extensive_info(result) 
-            if self.extensive_search: result = self.get_secondary_results(result)
+            if self.extensive_search: 
+                result = self.search_nested_results(result)
             
             return self.clean_data(result)
         
@@ -122,25 +123,29 @@ class WildlifeDataAPI:
             
         return result
         
-    def get_secondary_results(self, result):
+    def search_nested_results(self, result):
         """ 
             Recursively search for nested urls in the result and fetch the data. 
             
             Only if extensive_search is enabled.
         """
         result = self.clean_result(result)
-        for key in result:
-            if 'url' in key.lower():  
-                if 'http' in result[key]: 
-                    result = self.search_request(result[key], key=key, result=result)
-            try:
-                for secondary_key in (result[key] if isinstance(result[key], dict) else (result[key][0] if isinstance(result[key], list) else {})):
-                    if 'url' in secondary_key.lower():
-                        if 'http' in (result[key][secondary_key] if isinstance(result[key], dict) else result[key][0][secondary_key]):
-                            result = (self.search_request(result[key][secondary_key], key=secondary_key, result=result[key]) if isinstance(result[key], dict) else self.search(result[key][0][secondary_key], key=secondary_key, result=result[key][0]))
-            except Exception as e: self.debug_url('ERROR,', e)
+
+        try:
+            if isinstance(result, dict):
+                for key, value in result.items():
+                    if isinstance(value, str) and 'http' in value and 'url' in key.lower():
+                        result[key] = self.search_request(value)
+                    else:
+                        result[key] = self.search_nested_results(value)
+            elif isinstance(result, list):
+                for i in range(len(result)):
+                    result[i] = self.search_nested_results(result[i])
+                    
+        except Exception as e:
+            print(f"Error fetching nested data: {e}")
             
-        return result
+        return self.clean_result(result)
     
     def debug_url(self, *args):
         if self.debug:
@@ -169,7 +174,9 @@ class WildlifeDataAPI:
             Clean the result by converting keys to snake_case and removing empty values.
         """
         try:
-            return result['species'][0]
-        except: 
+            if result['species']:
+                return result['species'][0]
+            return result['Species'][0]
+        except:
             return result
 

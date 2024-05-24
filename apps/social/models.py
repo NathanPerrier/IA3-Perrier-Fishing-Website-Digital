@@ -43,11 +43,9 @@ class PostLikes(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     
-    def get_likes(self, post):
-        return self.objects.filter(post=post, rating=-1)
+    def get_post_likes(self, post):
+        return self.objects.filter(post=post)
     
-    def get_post_dislikes(self, post):
-        return self.objects.filter(post=post, rating=-1)
     
 class PostSaved(models.Model):
     """ saved posts """
@@ -71,15 +69,12 @@ class Comment(models.Model):
     def get_comment_replies(self, comment):
         return self.objects.filter(relates_to=comment)
     
-class CommentRating(models.Model):
+class CommentLikes(models.Model):
     """ likes or dislikes on a comment """
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    rating = models.IntegerField()
     
     def get_comment_likes(self, comment):
-        return self.objects.filter(comment=comment, rating=-1)
+        return self.objects.filter(comment=comment)
     
-    def get_comment_dislikes(self, comment):
-        return self.objects.filter(comment=comment, rating=-1)
     

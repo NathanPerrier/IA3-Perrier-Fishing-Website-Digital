@@ -13,13 +13,13 @@ def dashboard(request):
     context = {
       'segment': 'dashboard',
     }
-    return render(request, "dashboard/index-2.html", context)
+    return render(request, "dashboard/index.html", context)
   return render(request, "pages/errors/404.html")
 
 def index(request):
 
   context = {}
-  return render(request, "pages/index-2.html", context)
+  return render(request, "pages/index.html", context)
 
 def pricing(request):
 
