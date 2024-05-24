@@ -9,7 +9,6 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='post', null=True, blank=True)
     species = models.ForeignKey(WildlifeSpecies, on_delete=models.PROTECT, null=True, blank=True)
     
     def get_user_posts(self, user):
@@ -26,6 +25,17 @@ class Post(models.Model):
     
     def get_posts_by_rating(self):
         return self.objects.order_by('-rating')
+    
+class PostImages(models.Model):
+    """ post images """
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='posts/images/')
+    
+    def get_post_images(self, post):
+        return self.objects.filter(post=post)
+    
+    def get_post_image(self, post, image_id):
+        return self.objects.get(post=post, id=image_id)
 
 class Rating(models.Model):
     """ likes or dislikes on a post """

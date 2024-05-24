@@ -167,7 +167,7 @@ class WildlifeSpeciesInfo(models.Model):
         WildlifeSpeciesImage.add_images(specie, data)
         
         if 'conservationstatus' in data:
-            conservation = WildlifeSpeciesConservationStatus.objects.update_or_create(species=specie, species_name=specie.name, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False))
+            conservation, created = WildlifeSpeciesConservationStatus.objects.update_or_create(species=specie, species_name=specie.name, nca_status=data['conservationstatus'].get('ncastatus', 'Not Evaluated'), nca_status_code=data['conservationstatus'].get('ncastatuscode', 'Not Evaluated'), conservation_significant=data['conservationstatus'].get('conservationsignificant', False))
             
         WildlifeSpeciesInfo.objects.update_or_create(
             species=specie,
