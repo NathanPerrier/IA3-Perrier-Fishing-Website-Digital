@@ -21,7 +21,7 @@ class Command(BaseCommand):
                 WildlifeSpeciesConservationStatus.objects.all().delete()
                 WildlifeSpeciesInfo.objects.all().delete()
                 
-            WildlifeSpeciesInfo.update(debug=debug)
+            WildlifeSpeciesInfo.update(debug=debug, fish_only=fish_only)
 
             self.stdout.write(self.style.SUCCESS('Successfully updated wildlife info data'))
         except Exception as e:

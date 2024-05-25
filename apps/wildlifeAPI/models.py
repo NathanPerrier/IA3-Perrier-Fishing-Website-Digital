@@ -36,7 +36,7 @@ class WildlifeClasses(models.Model):
     @staticmethod
     @exception_handler
     def update(debug=False, animals_only=False):
-        kingdoms = WildlifeKingdoms.objects.all() if animals_only else WildlifeKingdoms.objects.filter(common_name='animals')
+        kingdoms = WildlifeKingdoms.objects.all() if not animals_only else WildlifeKingdoms.objects.filter(common_name='animals')
         for kingdom in kingdoms:
             data = Classes(debug=debug, kingdom=kingdom.common_name).get_class_names()  # for each kingdom
             for class_ in data['class']:
@@ -87,13 +87,19 @@ class WildlifeSpecies(models.Model):
     
     @staticmethod
     @exception_handler
-    def update(debug=False):
-        families = WildlifeFamilies.objects.all()
-        for family in families:
-            data = Species(debug=debug, kingdom=family.kingdom.name, class_=family._class.name, family=family.name).get_species()
+    def update(debug=False, fish_only=False):
+        if not fish_only:
+            families = WildlifeFamilies.objects.all()
+            for family in families:
+                data = Species(debug=debug, kingdom=family.kingdom.name, class_=family._class.name, family=family.name).get_species()
+                for species in data['species']:
+                    WildlifeSpecies.objects.update_or_create(name=species['scientificname'], common_name=species.get('acceptedcommonname', species['scientificname']), taxonid=species['taxonid'], family=family, family_name=family.name, _class=family._class, class_name=family._class.name, kingdom=family.kingdom, kingdom_name=family.kingdom.name)
+        else:
+            data = Species(debug=debug, species="fish").species_search()
             for species in data['species']:
+                family = WildlifeFamilies.objects.filter(name=species['familyname']).first()
                 WildlifeSpecies.objects.update_or_create(name=species['scientificname'], common_name=species.get('acceptedcommonname', species['scientificname']), taxonid=species['taxonid'], family=family, family_name=family.name, _class=family._class, class_name=family._class.name, kingdom=family.kingdom, kingdom_name=family.kingdom.name)
-    
+                
     class Meta:
         verbose_name = "Wildlife Species"
         verbose_name_plural = "Wildlife Species"

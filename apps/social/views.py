@@ -14,6 +14,7 @@ def feed(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     
-    fish = Species(species="fish").species_search()
+    #fish = Species(species="fish").species_search()
+    fish = WildlifeSpecies.objects.filter(species="fish")
     
     return render(request, 'pages/social/feed.html', {'posts': posts, 'fishes': fish})
