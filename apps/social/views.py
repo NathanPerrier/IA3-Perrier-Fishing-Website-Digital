@@ -18,3 +18,17 @@ def feed(request):
     fish = WildlifeSpecies.objects.all()
     
     return render(request, 'pages/social/feed.html', {'posts': posts, 'fishes': fish})
+
+
+def create_post(request):
+    if request.method == 'POST':
+        user = request.user
+        content = request.POST.get('content')
+        images = request.FILES.getlist('images')
+        species = request.POST.get('species')
+        post = Post.objects.create(user=user, content=content)
+        for image in images:
+            PostImages.objects.create(post=post, image=image)
+        messages.success(request, 'Post created successfully')
+        return redirect('feed')
+    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})

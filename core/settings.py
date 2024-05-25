@@ -84,6 +84,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.apple.AppleIdOAuth2',
     # 'allauth.account.auth_backends.AuthenticationBackend',
 )
 
@@ -134,6 +135,11 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_OAUTH2_CLIENT_SECRET')
 SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/github/'
+
+SOCIAL_AUTH_APPLE_ID_CLIENT = os.environ.get('APPLE_CLIENT_ID')
+SOCIAL_AUTH_APPLE_ID_TEAM = os.environ.get('APPLE_TEAM_ID')
+SOCIAL_AUTH_APPLE_ID_KEY = os.environ.get('APPLE_KEY_ID')
+SOCIAL_AUTH_APPLE_ID_SECRET = os.environ.get('APPLE_SECRET_KEY')
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

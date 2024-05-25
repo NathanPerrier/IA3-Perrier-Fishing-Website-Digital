@@ -28,7 +28,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script>
         
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -39,9 +39,9 @@
     </script>
 
 </head>
-  <body class="bg-gray-50 dark:bg-gray-900">
+  <body class="bg-gray-50 dark:bg-gray-900 h-full">
 
-    <main class="bg-gray-50 dark:bg-gray-900">
+    <main class="bg-gray-50 dark:bg-gray-900 h-full">
       {% block content %}{% endblock content %}
     </main>
     <script src="https://kit.fontawesome.com/02870e7611.js" crossorigin="anonymous"></script>

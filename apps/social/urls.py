@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('feed/', views.feed, name='social_feed'),
+    path('post/', views.create_post, name='social_create_post'),
 ]
