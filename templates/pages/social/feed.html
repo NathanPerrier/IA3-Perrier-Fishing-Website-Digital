@@ -29,7 +29,7 @@
                         {% for fish in fishes.species %}
                             <!-- Item 1 -->
                             <div class="hidden duration-2000 ease-in-out h-full -z-40" data-carousel-item>
-                                <!--https://source.unsplash.com/?fish={{fish.acceptedcommonname}}-->
+                                <!--https://source.unsplash.com/?fish=-->
                                 {{fish.acceptedcommonname|title}}
                                 <span class="ms-6">{{ fishes.species|get_item:forloop.counter|default:"" }}</span>
                                 {% with counter=forloop.counter|add:1 %}
@@ -54,142 +54,344 @@
             <div class="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-1 lg:px-12 w-screen">
 
                 <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#" class="h-20 w-full">
-                        <img class="rounded-t-lg w-full" style="object-fit: cover; max-height: 26rem;" src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" alt="" />
-                    </a>
+                    <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+                        <!-- Carousel wrapper -->
+                        <div class="relative overflow-hidden rounded-t-lg h-56 md:h-96">
+                                <!-- Item 1 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="https://media.digistormhosting.com.au/atc-au-qld-143-website/content/About-Us-Facilities.jpg?v=1656286165" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            </div>
+                        </div>
+                        <!-- Slider indicators -->
+                        <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+
+                            <!-- forloop here aswell!!!!!!!!!! -->
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                        </div>
+                        <!-- Slider controls -->
+                        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                </svg>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                </svg>
+                                <span class="sr-only">Next</span>
+                            </span>
+                        </button>
+                    </div>
+
                     <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
+                        <!-- like, comment save icons -->
+                        <div class="flex items mb-3">
+                            <div class="flex items-center">
+                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                </button>
+                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                <small class="text-sm font-medium text-gray-900 dark:text-white">73 likes</small>
+                            </div>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
+                                <i class="fa-regular fa-comment"></i>
+                            </button>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                            <div class="ms-3">
+                                <a href="#" class="font-semibold text-gray-900 dark:text-white">John Doe</a>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
+                            </div>
+                            {% if is_following %}
+                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
+                            {% else %}
+                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                            {% endif %}
+                        </div>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
+                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                            <div class="p-2 flex items">
+                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                <div class="ms-3">
+                                    <p class="font-semibold text-gray-900 dark:text-white bold">Species name</p>
+                                    <small class="text-sm text-gray-500 dark:text-gray-400">Scientific name</small>
+                                </div>
+                                <div class="ms-auto right-0">
+                                    <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#" class="h-20 w-full">
-                        <img class="rounded-t-lg w-full" style="object-fit: cover; max-height: 26rem;" src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" alt="" />
-                    </a>
                     <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
+                        <div class="flex items-center mb-3">
+                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                            <div class="ms-3">
+                                <a href="#" class="font-semibold text-gray-900 dark:text-white">John Doe</a>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
+                            </div>
+                            {% if is_following %}
+                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
+                            {% else %}
+                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                            {% endif %}
+                        </div>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
+                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                            <div class="p-2 flex items">
+                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                <div class="ms-3">
+                                    <p class="font-semibold text-gray-900 dark:text-white bold">Species name</p>
+                                    <small class="text-sm text-gray-500 dark:text-gray-400">Scientific name</small>
+                                </div>
+                                <div class="ms-auto right-0">
+                                    <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items my-2">
+                            <div class="flex items-center">
+                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                </button>
+                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                <small class="text-sm font-medium text-gray-900 dark:text-white">73 likes</small>
+                            </div>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
+                                <i class="fa-regular fa-comment"></i>
+                            </button>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="pt-1">
+                            <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#" class="h-20 w-full">
-                        <img class="rounded-t-lg w-full" style="object-fit: cover; max-height: 26rem;" src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" alt="" />
-                    </a>
                     <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
+                        <div class="flex items-center mb-3">
+                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                            <div class="ms-3">
+                                <a href="#" class="font-semibold text-gray-900 dark:text-white">John Doe</a>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
+                            </div>
+                            {% if is_following %}
+                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
+                            {% else %}
+                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                            {% endif %}
+                        </div>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
+                        <div class="flex items my-2">
+                            <div class="flex items-center">
+                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                </button>
+                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                <small class="text-sm font-medium text-gray-900 dark:text-white">73 likes</small>
+                            </div>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
+                                <i class="fa-regular fa-comment"></i>
+                            </button>
+                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="pt-1">
+                            <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="col-span-1 hidden sm:block">
+        <div class="col-span-1 hidden sm:block h-full">
             <aside id="cta-button-sidebar" class="sticky top-0 right-0 z-40 rounded-lg shadow h-fit max-h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar" style="top:8rem">
                 <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg shadow">
-                   <ul class="space-y-2 font-medium">
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                               <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
-                               <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
-                            </svg>
-                            <span class="ms-3">Dashboard</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                               <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
-                            <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                               <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
-                            <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                               <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                               <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                               <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
-                               <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
-                               <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"/>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-                         </a>
-                      </li>
-                   </ul>
-                   <div id="dropdown-cta" class="p-4 mt-6 bg-blue-50 dark:bg-blue-900" role="alert">
-                      <div class="flex items-center mb-3">
-                         <span class="bg-orange-100 text-orange-800 text-sm font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Beta</span>
-                         <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 inline-flex justify-center items-center w-6 h-6 text-blue-900 rounded-lg focus:ring-2 focus:ring-blue-400 p-1 hover:bg-blue-200 h-6 w-6 dark:bg-blue-900 dark:text-blue-400 dark:hover:bg-blue-800" data-dismiss-target="#dropdown-cta" aria-label="Close">
-                            <span class="sr-only">Close</span>
-                            <svg class="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                         </button>
-                      </div>
-                      <p class="mb-3 text-sm text-blue-800 dark:text-blue-400">
-                         Preview the new Flowbite dashboard navigation! You can turn the new navigation off for a limited time in your profile.
-                      </p>
-                      <a class="text-sm text-blue-800 underline font-medium hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" href="#">Turn new navigation off</a>
-                   </div>
+                   <form action="#" method="get" class="z-40 h-full">
+                        <h5 id="drawer-label"
+                            class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
+                            Apply filters
+                        </h5>
+                        
+                    
+                        <div class="flex flex-col justify-between flex-1">
+                            <div class="space-y-6">
+                                <!-- Categories -->
+                                <div class="space-y-2">
+                                    <h6 class="text-base font-medium text-black dark:text-white">
+                                        Categories
+                                    </h6>
+                    
+                                    <div class="flex items-center">
+                                        <input id="tv" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="tv" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            TV, Audio-Video
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="desktop" type="checkbox" value="" checked
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="dektop" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Desktop PC
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="gaming" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="gaming" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Gaming
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="monitors" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="monitors" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Monitors
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="laptops" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="laptops" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Laptops
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="console" type="checkbox" value="" checked
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="console" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Console
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="tablet" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="tablet" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Tablets
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="foto" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="foto" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Foto
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="fashion" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="fashion" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Fashion
+                                        </label>
+                                    </div>
+                    
+                                    <div class="flex items-center">
+                                        <input id="books" type="checkbox" value=""
+                                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    
+                                        <label for="books" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Books
+                                        </label>
+                                    </div>
+                    
+                                    <a href="#"
+                                        class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                                        View all
+                                    </a>
+                                </div>
+                    
+                                <!-- Prices -->
+                                <div class="space-y-2">
+                                    <h6 class="text-base font-medium text-black dark:text-white">
+                                        Prices
+                                    </h6>
+                                    <div class="flex items-center justify-between col-span-2 space-x-3">
+                                        <div class="w-full">
+                                            <label for="min-experience-input"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                From
+                                            </label>
+                    
+                                            <input type="number" id="price-from" value="300" min="1" max="10000"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="" required>
+                                        </div>
+                    
+                                        <div class="w-full">
+                                            <label for="price-to"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                To
+                                            </label>
+                    
+                                            <input type="number" id="max-experience-input" value="3500" min="1" max="10000"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                    
+                            <div class="bottom-0 left-0 flex justify-center w-full pb-4 mt-6 space-x-4 md:px-4">
+                                <button type="submit"
+                                    class="w-full px-5 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    Apply filters
+                                </button>
+                                <button type="reset"
+                                    class="w-full px-5 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    Clear all
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </aside>
              
