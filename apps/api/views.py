@@ -77,7 +77,7 @@ class WildlifeKingdomsViewSet(viewsets.ViewSet):
         use: /wildlife/kingdoms/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        kingdoms = WildlifeKingdoms.objects.filter(name__icontains=query)
+        kingdoms = WildlifeKingdoms.objects.filter(common_name__icontains=query)
         serializer = WildlifeKingdomsSerializer(kingdoms, many=True)
         return Response(serializer.data)
 
@@ -110,7 +110,7 @@ class WildlifeClassesViewSet(viewsets.ViewSet):
         use: /wildlife/classes/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        classes = WildlifeClasses.objects.filter(name__icontains=query)
+        classes = WildlifeClasses.objects.filter(common_name__icontains=query)
         serializer = WildlifeClassesSerializer(classes, many=True)
         return Response(serializer.data)
  
@@ -143,7 +143,7 @@ class WildlifeFamiliesViewSet(viewsets.ViewSet):
         use: /wildlife/families/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        families = WildlifeFamilies.objects.filter(name__icontains=query)
+        families = WildlifeFamilies.objects.filter(common_name__icontains=query)
         serializer = WildlifeFamiliesSerializer(families, many=True)
         return Response(serializer.data)
     
@@ -176,7 +176,7 @@ class WildlifeSpeciesViewSet(viewsets.ViewSet):
         use: /wildlife/species/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        species = WildlifeSpecies.objects.filter(name__icontains=query)
+        species = WildlifeSpecies.objects.filter(common_name__icontains=query)
         serializer = WildlifeSpeciesSerializer(species, many=True)
         return Response(serializer.data)
     
@@ -209,6 +209,6 @@ class WildlifeSpeciesInfoViewSet(viewsets.ViewSet):
         use: /wildlife/species/info/search/?q=keyword
         """
         query = request.query_params.get('q', '')
-        species = WildlifeSpeciesInfo.objects.filter(name__icontains=query)
+        species = WildlifeSpeciesInfo.objects.filter(species__common_name__icontains=query)
         serializer = WildlifeSpeciesInfoSerializer(species, many=True)
         return Response(serializer.data)

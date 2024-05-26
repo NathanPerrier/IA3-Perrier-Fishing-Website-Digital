@@ -26,6 +26,7 @@ def create_post(request):
         content = request.POST.get('content')
         images = request.FILES.getlist('images')
         species = request.POST.get('species')
+        print(user, content, images, species)
         post = Post.objects.create(user=user, content=content)
         for image in images:
             PostImages.objects.create(post=post, image=image)
