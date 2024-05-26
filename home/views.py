@@ -45,6 +45,16 @@ def contact(request):
   else: form = ContactForm(initial={'email': request.user.email}) if request.user.is_authenticated else ContactForm()
   return render(request, "pages/contact.html", {'success': False, 'form': form})
 
+def terms_and_conditions(request):
+
+  context = {}
+  return render(request, "pages/policies/terms_and_conditions.html", context)
+
+
+def privacy_policy(request):
+  
+    context = {}
+    return render(request, "pages/policies/privacy_policy.html", context)
 
 def handler404(request, exception):
     return render(request, 'pages/errors/404.html', status=404)
