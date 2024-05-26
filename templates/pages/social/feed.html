@@ -1,5 +1,11 @@
 {% extends 'layouts/base-alt.html' %}
 {% load static %}
+
+{% block extrastyle %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+{% endblock extrastyle %}
+
+
 {% block content %}
 {% load list_filters %}
 <section class="bg-white dark:bg-gray-900 pt-32">
@@ -488,7 +494,7 @@
 
             </div>
         </div>
-        <div class="col-span-1 hidden sm:block h-full">
+        <div class="col-span-1 hidden lg:block h-full">
             <aside id="cta-button-sidebar" class="sticky top-0 right-0 z-40 rounded-lg shadow h-fit max-h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar" style="top:8rem">
                 <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 rounded-lg shadow">
                    <form action="#" method="get" class="z-40 h-full">
