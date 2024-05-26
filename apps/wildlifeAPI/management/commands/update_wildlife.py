@@ -27,9 +27,9 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('Updating wildlife data...\nPlease Do Not Interrupt the Process!'))
             
             WildlifeKingdoms.update(debug=debug, animals_only=animals_only)
-            WildlifeClasses.update(debug=debug, animals_only=animals_only)
+            WildlifeClasses.update(debug=debug, animals_only=animals_only, fish_only=fish_only)
             WildlifeFamilies.update(debug=debug)
-            WildlifeSpecies.update(debug=debug, fish_only=fish_only)
+            WildlifeSpecies.update(debug=debug)
             WildlifeSpeciesInfo.update(debug=debug)
 
             self.stdout.write(self.style.SUCCESS('Successfully updated wildlife data'))

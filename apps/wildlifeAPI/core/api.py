@@ -56,6 +56,8 @@ class WildlifeDataAPI:
     
     FORMAT = 'json'
     
+    FISH_CLASSES = {'class': [{"classname": "Actinopterygii","classcommonname": "ray-finned fishes"}, {"classname": "Branchiopoda", "classcommonname": "branchiopods"}, {"classname": "Chondrichthyes", "classcommonname": "cartilaginous fishes"}, {"classname": "Malacostraca", "classcommonname": "malacostracans"}, {"classname": "Maxillopoda", "classcommonname": "maxillopods"}, {"classname": "Petromyzonti", "classcommonname": "lampreys"}, {"classname": "Sarcopterygii", "classcommonname": "lobe-finned fishes"}]}
+    
     ACKNOWLEDGEMENT = 'Data courtesy of the Queensland Government Wildlife Data API'
     
 
