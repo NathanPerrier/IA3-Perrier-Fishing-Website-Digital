@@ -16,7 +16,7 @@ def feed(request):
     
     #fish = Species(species="fish").species_search()
     fish = WildlifeSpecies.objects.all()
-    
+
     return render(request, 'pages/social/feed.html', {'posts': posts, 'fishes': fish})
 
 
