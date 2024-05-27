@@ -19,7 +19,7 @@ def feed(request):
 
     return render(request, 'pages/social/feed.html', {'posts': posts, 'fishes': fish})
 
-
+@login_required(login_url='/users/signin')
 def create_post(request):
     if request.method == 'POST':
         user = request.user
