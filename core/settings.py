@@ -31,7 +31,7 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = True #str2bool(os.environ.get('DEBUG'))
+DEBUG = False  #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
@@ -138,6 +138,7 @@ SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/
 
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_OAUTH2_APP_ID')  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_OAUTH2_APP_SECRET')  # App Secret
+SOCIAL_AUTH_FACEBOOK_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/facebook/'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
