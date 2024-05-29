@@ -77,7 +77,7 @@ def upload_file(request):
 
         for file_name, file in request.FILES.items():
             filename = fs.save(f'post/{file.name}', file)
-            file_url = fs.url(filename)
+            file_url = fs.url(filename).replace('media/', '', 1)
             file_urls.append(file_url)
             
         # Save file_urls back to the session

@@ -61,495 +61,579 @@
     <div class="grid grid-cols gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-3 px-2 lg:px-8 w-screen">
         <div class="col-span-2">
             <div class="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-1 lg:px-12 w-screen">
-
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-                        <!-- Carousel wrapper -->
-                        <div class="relative overflow-hidden rounded-t-lg h-56 md:h-96">
-                                <!-- Item 1 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                            </div>
-                            <!-- Item 2 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="https://media.digistormhosting.com.au/atc-au-qld-143-website/content/About-Us-Facilities.jpg?v=1656286165" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                            </div>
-                            <!-- Item 3 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="https://images.digistormhosting.com.au/eyJidWNrZXQiOiJkaWdpc3Rvcm0td2Vic2l0ZXMiLCJrZXkiOiJhdGMtYXUtcWxkLTE0My13ZWJzaXRlXC9jb250ZW50XC90ZWFjaGVyLXRlYWNoaW5nLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsInBvc2l0aW9uIjoiY2VudGVyIiwid2lkdGgiOjgwMCwiaGVpZ2h0IjpudWxsfSwicXVhbGl0eSI6ODJ9fQ==" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                            </div>
-                        </div>
-                        <!-- Slider indicators -->
-                        <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
-
-                            <!-- forloop here aswell!!!!!!!!!! -->
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                        </div>
-                        <!-- Slider controls -->
-                        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                                </svg>
-                                <span class="sr-only">Previous</span>
-                            </span>
-                        </button>
-                        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                </svg>
-                                <span class="sr-only">Next</span>
-                            </span>
-                        </button>
-                    </div>
-
-                    <div class="p-5">
-                        <!-- like, comment save icons -->
-                        <div class="flex items mb-3">
-                            <div class="flex items-center">
-                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                </button>
-                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                            </div>
-                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
-                                <i class="fa-regular fa-comment"></i>
-                            </button>
-                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                <i class="fa-regular fa-bookmark"></i>
-                            </button>
-                        </div>
-                        <div class="flex items-center mb-3">
-                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
-                            <div class="ms-3">
-                                <a href="/users/profile/{{post.user_profile}}" class="font-semibold text-gray-900 dark:text-white">NathanPerrier</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
-                            </div>
-                            {% if is_following %}
-                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
-                            {% else %}
-                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
-                            {% endif %}
-                        </div>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
-                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                            <div class="p-2 flex items">
-                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                <div class="ms-3">
-                                    <p class="font-semibold text-gray-900 dark:text-white bold">Species name</p>
-                                    <small class="text-sm text-gray-500 dark:text-gray-400">Scientific name</small>
-                                </div>
-                                <div class="ms-auto right-0">
-                                    <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-4">
-                            <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
-                        </div>
-                    </div>
-                </div>
-
                 {% for post in posts %}
-                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <div class="p-5">
-                            <div class="flex items-center mb-3">
-                                <a href="/users/profile/{{post.user_profile.user.username}}">
-                                    {% if post.user_profile.avatar %}
-                                        <img class="w-10 h-10 rounded-full" src="{{ post.user_profile.avatar.url }}" alt="User" />
+                    {% if post.images %}
+                        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+                                <!-- Carousel wrapper -->
+                                <div class="relative overflow-hidden rounded-t-lg h-56 md:h-96">
+                                        <!-- Item 1 -->
+                                    {% for image in post.images %}
+                                        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                                            <img src="{{image.image.url}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-fill h-full" alt="...">
+                                        </div>
+                                    {% endfor %}
+                                   
+                                </div>
+                                <!-- Slider indicators -->
+                                <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+                                    
+                                    {% for image in post.images %}
+                                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{forloop.counter|add:1}}" data-carousel-slide-to="{{forloop.counter}}"></button>
+                                    {% endfor %}
+                
+                                </div>
+                                <!-- Slider controls -->
+                                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                        </svg>
+                                        <span class="sr-only">Previous</span>
+                                    </span>
+                                </button>
+                                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                        </svg>
+                                        <span class="sr-only">Next</span>
+                                    </span>
+                                </button>
+                            </div>
+        
+                            <div class="p-5">
+                                <!-- like, comment save icons -->
+                                <div class="flex items mb-3">
+                                    <div class="flex items-center">
+                                        <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                            <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                            <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                        </button>
+                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                        <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{post.likes|length}} likes</small>
+                                    </div>
+                                    <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
+                                        <i class="fa-regular fa-comment"></i>
+                                    </button>
+                                    <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </a>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <a href="/users/profile/{{post.user_profile.user.username}}">
+                                        {% if post.user_profile.avatar %}
+                                            <img class="w-10 h-10 rounded-full" src="{{ post.user_profile.avatar.url }}" alt="User" />
+                                        {% else %}
+                                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                                        {% endif %}
+                                    </a>
+                                    <div class="ms-3">
+                                        <a href="/users/profile/{{post.user_profile.user.username}}" class="font-semibold text-gray-900 dark:text-white">{{post.user_profile.user.username}}</a>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ post.created_at|naturaltime }}</p>
+                                    </div>
+                                    {% if request.user.profile == post.user_profile %}
+                                        <a href="/social/feed/{{post.id}}/edit" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border dark:text-white text-gray-800 rounded-lg ms-auto right-0">Edit</a>
                                     {% else %}
-                                        <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                                        {% if is_following %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-white rounded-lg ms-auto right-0">Unfollow</a>
+                                        {% else %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                                        {% endif %}
                                     {% endif %}
-                                </a>
-                                <div class="ms-3">
-                                    <a href="/users/profile/{{post.user_profile.user.username}}" class="font-semibold text-gray-900 dark:text-white">{{post.user_profile.user.username}}</a>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ post.created_at|naturaltime }}</p>
                                 </div>
-                                {% if is_following %}
-                                    <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
-                                {% else %}
-                                    <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                                <div class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postText-{{post.id}}"></div>
+                                <script>
+                                    var quill{{post.id}} = new Quill('#postText-{{post.id}}', {
+                                        theme: 'bubble',
+                                        readOnly: true  // Add this if you want the editor to be read-only
+                                    });
+                                    var delta = {{ post.content|safe}};
+                                    quill{{post.id}}.setContents(delta);
+                                </script>
+                                {% if post.species %}
+                                    <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                        <div class="p-2 flex items">
+                                            <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                            <div class="ms-3">
+                                                <p class="font-semibold text-gray-900 dark:text-white bold">{{ species.common_name }}</p>
+                                                <small class="text-sm text-gray-500 dark:text-gray-400">{{ species.name }}</small>
+                                            </div>
+                                            <div class="ms-auto right-0">
+                                                <a href="/species/{{species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endif %}
-                            </div>
-                            <div class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postText-{{post.id}}"></div>
-                            <script>
-                                var quill{{post.id}} = new Quill('#postText-{{post.id}}', {
-                                    theme: 'bubble',
-                                    readOnly: true  // Add this if you want the editor to be read-only
-                                });
-                                var delta = {{ post.content|safe}};
-                                quill{{post.id}}.setContents(delta);
-                            </script>
-                            <div class="flex items my-2">
-                                <div class="flex items-center">
-                                    <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                        <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                        <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                    </button>
-                                    <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                    <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
+                                {% if post.comments %}
+                                    <div class="pt-4">
+                                        <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
+                                    </div>
+                                {% endif %}
+                                <form class="mb-2 mt-4 hidden" action="/social/feed/{{post.id}}/comment/" method="POST" id="comments-form-{{post.id}}"> <!-- comment-form-{post.id}-->
+                                    {% csrf_token %}
+                                    <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <label for="comment" class="sr-only">Your comment</label>
+                                        <textarea id="comment" name="content" rows="3"
+                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..." required></textarea>
+                                    </div>
+                                    <div class="flex items">
+                                        <button type="submit"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                            Post comment
+                                        </button>
+                                        <button type="button" onclick="document.getElementById('comments-form-{{post.id}}').classList.add('hidden')"
+                                            class="text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 flex ms-auto right-0">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="space-y-4 hidden" id="comments-{{post.id}}"> <!-- comments-{post.id} -->   
+                                    <div class="flex items-center mx-auto justify-center">
+                                        <button type="button" onclick="document.getElementById('comments-{{post.id}}').classList.add('hidden')">
+                                            <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
+                                        </button>
+                                    </div>
+                                    {% for comment in post.comments %}
+                                        <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <footer class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                        {% if comment.user_profile.avatar%}
+                                                            <img
+                                                            class="mr-2 w-6 h-6 rounded-full"
+                                                            src="{{ comment.user_profile.avatar.url }}"
+                                                            alt="Michael Gough">
+                                                        {% else %}
+                                                            <img
+                                                                class="mr-2 w-6 h-6 rounded-full"
+                                                                src="{% static "dist/img/default-user.png" %}"
+                                                                alt="Michael Gough">
+                                                        {% endif %}
+                                                        {{comment.user_profile.user.username}}
+                                                    </p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{comment.created_at|naturaltime}}</p>
+                                                </div>
+                                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                    type="button">
+                                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Comment settings</span>
+                                                </button>
+                                                <!-- Dropdown menu -->
+                                                <div id="dropdownComment1"
+                                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                        {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                        </li>
+                                                        {% endif %}
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </footer>
+                                            <p class="text-gray-500 dark:text-gray-400">{{comment.content}}</p>
+                                            <div class="flex items-center mt-4 space-x-4">
+                                                <div class="flex items-center">
+                                                    <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                        <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                                        <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                                    </button>
+                                                    <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{comment.likes|length}} likes</small>
+                                                </div>
+                                                <a onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-form').classList.remove('hidden')"
+                                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 text-sm text-gray-500 hover:underline dark:text-gray-400">
+                                                    <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                                                    </svg>
+                                                    Reply
+                                                </a>
+                                            </div>
+                                            {% if comment.comments %}
+                                                <div class="mt-2">
+                                                    <a onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-nested').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 1 comments</a>
+                                                </div>
+                                            {% endif %}
+                                            <form class="mt-4 hidden" action="/social/feed/{{post.id}}/comment/{{comment.id}}/comment/" method="POST" id="comments-{{post.id}}-comment-{{comment.id}}-form"> <!-- comment-form-{post.id}-->
+                                                {% csrf_token %}
+                                                <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                                    <label for="comment" class="sr-only">Your Relpy</label>
+                                                    <textarea id="comment" name="content" rows="3"
+                                                        class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                                        placeholder="Write a comment..." required></textarea>
+                                                </div>
+                                                <div class="flex items">
+                                                    <button type="submit"
+                                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                        Post Reply
+                                                    </button>
+                                                    <button type="button" onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-form').classList.add('hidden')"
+                                                        class="text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 flex ms-auto right-0">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </article>
+                                        {% if comment.comments %}
+                                            <div class="hidden" id="comments-{{post.id}}-comment-{{comment.id}}-nested">  <!-- nested -->
+                                                <div class="flex items-center mx-auto justify-center mb-2">
+                                                    <button type="button" onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-nested').classList.add('hidden')">
+                                                        <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
+                                                    </button>
+                                                </div>
+                                            {% for nested_comment in comment.comments %}
+                                                
+                                                <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <footer class="flex justify-between items-center mb-2">
+                                                        <div class="flex items-center">
+                                                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                                {% if nested_comment.user_profile.avatar%}
+                                                                    <img
+                                                                    class="mr-2 w-6 h-6 rounded-full"
+                                                                    src="{{ nested_comment.user_profile.avatar.url }}"
+                                                                    alt="Michael Gough">
+                                                                {% else %}
+                                                                    <img
+                                                                        class="mr-2 w-6 h-6 rounded-full"
+                                                                        src="{% static "dist/img/default-user.png" %}"
+                                                                        alt="Michael Gough">
+                                                                {% endif %}
+                                                                {{nested_comment.user_profile.user.username}}
+                                                            </p>
+                                                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                                                                    title="February 12th, 2022">{{nested_comment.created_at|naturaltime}}</time></p>
+                                                        </div>
+                                                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
+                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                            type="button">
+                                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                            </svg>
+                                                            <span class="sr-only">Comment settings</span>
+                                                        </button>
+                                                        <!-- Dropdown menu -->
+                                                        <div id="dropdownComment2"
+                                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                                {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                                </li>
+                                                                {% endif %}
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </footer>
+                                                    <p class="text-gray-500 dark:text-gray-400">{{ nested_comment.content}}</p>
+                                                    <div class="flex items-center mt-4 space-x-4">
+                                                        <div class="flex items-center">
+                                                            <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                                <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                                                <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                                            </button>
+                                                            <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                                            <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{nested_comment.likes|length}} likes</small>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
-                                <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
-                                    <i class="fa-regular fa-comment"></i>
-                                </button>
-                                <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                    <i class="fa-regular fa-bookmark"></i>
-                                </button>
-                            </div>
-                            <div class="pt-1">
-                                <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <div class="p-5">
+                                <div class="flex items-center mb-3">
+                                    <a href="/users/profile/{{post.user_profile.user.username}}">
+                                        {% if post.user_profile.avatar %}
+                                            <img class="w-10 h-10 rounded-full" src="{{ post.user_profile.avatar.url }}" alt="User" />
+                                        {% else %}
+                                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                                        {% endif %}
+                                    </a>
+                                    <div class="ms-3">
+                                        <a href="/users/profile/{{post.user_profile.user.username}}" class="font-semibold text-gray-900 dark:text-white">{{post.user_profile.user.username}}</a>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ post.created_at|naturaltime }}</p>
+                                    </div>
+                                    {% if request.user.profile == post.user_profile %}
+                                        <a href="/social/feed/{{post.id}}/edit" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border dark:text-white text-gray-800 rounded-lg ms-auto right-0">Edit</a>
+                                    {% else %}
+                                        {% if is_following %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-white rounded-lg ms-auto right-0">Unfollow</a>
+                                        {% else %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postText-{{post.id}}"></div>
+                                <script>
+                                    var quill{{post.id}} = new Quill('#postText-{{post.id}}', {
+                                        theme: 'bubble',
+                                        readOnly: true  // Add this if you want the editor to be read-only
+                                    });
+                                    var delta = {{ post.content|safe}};
+                                    quill{{post.id}}.setContents(delta);
+                                </script>
+                                <div class="flex items my-2">
+                                    <div class="flex items-center">
+                                        <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                            <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                            <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                        </button>
+                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                        <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{post.likes|length}} likes</small>
+                                    </div>
+                                    <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
+                                        <i class="fa-regular fa-comment"></i>
+                                    </button>
+                                    <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </a>
+                                </div>
+                                {% if post.species %}
+                                    <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                        <div class="p-2 flex items">
+                                            <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                            <div class="ms-3">
+                                                <p class="font-semibold text-gray-900 dark:text-white bold">{{ species.common_name }}</p>
+                                                <small class="text-sm text-gray-500 dark:text-gray-400">{{ species.name }}</small>
+                                            </div>
+                                            <div class="ms-auto right-0">
+                                                <a href="/species/{{species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if post.comments %}
+                                    <div class="">
+                                        <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
+                                    </div>
+                                {% endif %}
+                                <form class="mb-2 mt-4 hidden" action="/social/feed/{{post.id}}/comment/" method="POST" id="comments-form-{{post.id}}"> <!-- comment-form-{post.id}-->
+                                    {% csrf_token %}
+                                    <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <label for="comment" class="sr-only">Your comment</label>
+                                        <textarea id="comment" name="content" rows="3"
+                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..." required></textarea>
+                                    </div>
+                                    <div class="flex items">
+                                        <button type="submit"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                            Post comment
+                                        </button>
+                                        <button type="button" onclick="document.getElementById('comments-form-{{post.id}}').classList.add('hidden')"
+                                            class="text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 flex ms-auto right-0">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="space-y-4 hidden" id="comments-{{post.id}}"> <!-- comments-{post.id} -->   
+                                    <div class="flex items-center mx-auto justify-center">
+                                        <button type="button" onclick="document.getElementById('comments-{{post.id}}').classList.add('hidden')">
+                                            <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
+                                        </button>
+                                    </div>
+                                    {% for comment in post.comments %}
+                                        <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <footer class="flex justify-between items-center mb-2">
+                                                <div class="flex items-center">
+                                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                        {% if comment.user_profile.avatar%}
+                                                            <img
+                                                            class="mr-2 w-6 h-6 rounded-full"
+                                                            src="{{ comment.user_profile.avatar.url }}"
+                                                            alt="Michael Gough">
+                                                        {% else %}
+                                                            <img
+                                                                class="mr-2 w-6 h-6 rounded-full"
+                                                                src="{% static "dist/img/default-user.png" %}"
+                                                                alt="Michael Gough">
+                                                        {% endif %}
+                                                        {{ comment.user_profile.user.username }}
+                                                    </p>
+                                                    <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                                            title="February 8th, 2022">{{comment.created_at|naturaltime}}</time></p>
+                                                </div>
+                                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                    type="button">
+                                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Comment settings</span>
+                                                </button>
+                                                <!-- Dropdown menu -->
+                                                <div id="dropdownComment1"
+                                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                        {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                        </li>
+                                                        {% endif %}
+                                                        <li>
+                                                            <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </footer>
+                                            <p class="text-gray-500 dark:text-gray-400">{{comment.content}}</p>
+                                            <div class="flex items-center mt-4 space-x-4">
+                                                <div class="flex items-center">
+                                                    <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                        <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                                        <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                                    </button>
+                                                    <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{comment.likes|length}} likes</small>
+                                                </div>
+                                                <a onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-form').classList.remove('hidden')"
+                                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 text-sm text-gray-500 hover:underline dark:text-gray-400">
+                                                    <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                                                    </svg>
+                                                    Reply
+                                                </a>
+                                            </div>
+                                            {% if comment.comments %}
+                                                <div class="mt-2">
+                                                    <a onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-nested').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 1 comments</a>
+                                                </div>
+                                            {% endif %}
+                                            <form class="mt-4 hidden" action="/social/feed/{{post.id}}/comment/{{comment.id}}/comment/" method="POST" id="comments-{{post.id}}-comment-{{comment.id}}-form"> <!-- comment-form-{post.id}-->
+                                                {% csrf_token %}
+                                                <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                                    <label for="comment" class="sr-only">Your Relpy</label>
+                                                    <textarea id="comment" name="content" rows="3"
+                                                        class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                                        placeholder="Write a comment..." required></textarea>
+                                                </div>
+                                                <div class="flex items">
+                                                    <button type="submit"
+                                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                        Post Reply
+                                                    </button>
+                                                    <button type="button" onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-form').classList.add('hidden')"
+                                                        class="text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 flex ms-auto right-0">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </article>
+                                        {% if comment.comments %}
+                                            <div class="hidden" id="comments-{{post.id}}-comment-{{comment.id}}-nested">  <!-- nested -->
+                                                <div class="flex items-center mx-auto justify-center mb-2">
+                                                    <button type="button" onclick="document.getElementById('comments-{{post.id}}-comment-{{comment.id}}-nested').classList.add('hidden')">
+                                                        <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
+                                                    </button>
+                                                </div>
+                                            {% for nested_comment in comment.comments %}
+                                                
+                                                <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <footer class="flex justify-between items-center mb-2">
+                                                        <div class="flex items-center">
+                                                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                                {% if nested_comment.user_profile.avatar%}
+                                                                    <img
+                                                                    class="mr-2 w-6 h-6 rounded-full"
+                                                                    src="{{ nested_comment.user_profile.avatar.url }}"
+                                                                    alt="Michael Gough">
+                                                                {% else %}
+                                                                    <img
+                                                                        class="mr-2 w-6 h-6 rounded-full"
+                                                                        src="{% static "dist/img/default-user.png" %}"
+                                                                        alt="Michael Gough">
+                                                                {% endif %}
+                                                                {{nested_comment.user_profile.user.username}}
+                                                            </p>
+                                                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                                                                    title="February 12th, 2022">{{nested_comment.created_at|naturaltime}}</time></p>
+                                                        </div>
+                                                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
+                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                            type="button">
+                                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                            </svg>
+                                                            <span class="sr-only">Comment settings</span>
+                                                        </button>
+                                                        <!-- Dropdown menu -->
+                                                        <div id="dropdownComment2"
+                                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                                {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                                </li>
+                                                                {% endif %}
+                                                                <li>
+                                                                    <a href="#"
+                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </footer>
+                                                    <p class="text-gray-500 dark:text-gray-400">{{ nested_comment.content}}</p>
+                                                    <div class="flex items-center mt-4 space-x-4">
+                                                        <div class="flex items-center">
+                                                            <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                                <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
+                                                                <i class="fa-regular fa-heart"></i> <!--not liked-->
+                                                            </button>
+                                                            <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                                            <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">{{nested_comment.likes|length}} likes</small>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
-
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-5">
-                        <div class="flex items-center mb-3">
-                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
-                            <div class="ms-3">
-                                <a href="/users/profile/{{post.user_profile}}" class="font-semibold text-gray-900 dark:text-white">NathanPerrier</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
-                            </div>
-                            {% if is_following %}
-                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
-                            {% else %}
-                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
-                            {% endif %}
-                        </div>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
-                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                            <div class="p-2 flex items">
-                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                <div class="ms-3">
-                                    <p class="font-semibold text-gray-900 dark:text-white bold">Species name</p>
-                                    <small class="text-sm text-gray-500 dark:text-gray-400">Scientific name</small>
-                                </div>
-                                <div class="ms-auto right-0">
-                                    <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items my-2">
-                            <div class="flex items-center">
-                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                </button>
-                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                            </div>
-                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
-                                <i class="fa-regular fa-comment"></i>
-                            </button>
-                            <button class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                <i class="fa-regular fa-bookmark"></i>
-                            </button>
-                        </div>
-                        <div class="pt-1">
-                            <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-5">
-                        <div class="flex items-center mb-3">
-                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
-                            <div class="ms-3">
-                                <a href="/users/profile/{{post.user_profile}}" class="font-semibold text-gray-900 dark:text-white">NathanPerrier</a>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">2 hours ago</p>
-                            </div>
-                            {% if is_following %}
-                                <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-blue-600 border text-white rounded-lg ms-auto right-0">Unfollow</a>
-                            {% else %}
-                                <a href="/users/profile/{{user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
-                            {% endif %}
-                        </div>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This will be the descriptions for the post. if the description has a lot of works a "read more" butoon will appear that will cut of the text to ensure the height of the post is not too long... <span><a class="blod underline" href="#">Read More</a></p>
-                        <div class="flex items my-2">
-                            <div class="flex items-center">
-                                <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                    <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                    <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                </button>
-                                <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                            </div>
-                            <button onclick="document.getElementById('comments-form-21').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
-                                <i class="fa-regular fa-comment"></i>
-                            </button>
-                            <button type="button" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                <i class="fa-regular fa-bookmark"></i>
-                            </button>
-                        </div>
-                        <div class="pt-1">
-                            <a onclick="document.getElementById('comments-21').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 13 comments</a>
-                        </div>
-                        <form class="mb-6 mt-4 hidden" id="comments-form-21"> <!-- comment-form-{post.id}-->
-                            <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                                <label for="comment" class="sr-only">Your comment</label>
-                                <textarea id="comment" rows="3"
-                                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                                    placeholder="Write a comment..." required></textarea>
-                            </div>
-                            <div class="flex items">
-                                <button type="submit"
-                                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                    Post comment
-                                </button>
-                                <button type="button" onclick="document.getElementById('comments-form-21').classList.add('hidden')"
-                                    class="text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 flex ms-auto right-0">
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                        <div class="space-y-4 hidden" id="comments-21"> <!-- comments-{post.id} -->   
-                            <div class="flex items-center mx-auto justify-center">
-                                <button type="button" onclick="document.getElementById('comments-21').classList.add('hidden')">
-                                    <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
-                                </button>
-                            </div>
-                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-21-comment-1"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
-                                <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
-                                                class="mr-2 w-6 h-6 rounded-full"
-                                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                                alt="Michael Gough">Michael Gough</p>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                                                title="February 8th, 2022">Feb. 8, 2022</time></p>
-                                    </div>
-                                    <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                        type="button">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                        </svg>
-                                        <span class="sr-only">Comment settings</span>
-                                    </button>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdownComment1"
-                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownMenuIconHorizontalButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </footer>
-                                <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-                                    instruments for the UX designers. The knowledge of the design tools are as important as the
-                                    creation of the design strategy.</p>
-                                <div class="flex items-center mt-4 space-x-4">
-                                    <div class="flex items-center">
-                                        <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                            <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                            <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                        </button>
-                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                        <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                                    </div>
-                                    <button type="button"
-                                        class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 text-sm text-gray-500 hover:underline dark:text-gray-400">
-                                        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                                        </svg>
-                                        Reply
-                                    </button>
-                                </div>
-                                <div class="mt-2">
-                                    <a onclick="document.getElementById('comments-21-comment-1-nested').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all 1 comments</a>
-                                </div>
-                            </article>
-                            <div class="hidden" id="comments-21-comment-1-nested">  <!-- nested -->
-                                <div class="flex items-center mx-auto justify-center mb-2">
-                                    <button type="button" onclick="document.getElementById('comments-21-comment-1-nested').classList.add('hidden')">
-                                        <i class="fa-regular fa-arrow-alt-circle-up fa-2x text-primary-800 dark:text-white"></i>
-                                    </button>
-                                </div>
-                                <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
-                                    <footer class="flex justify-between items-center mb-2">
-                                        <div class="flex items-center">
-                                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
-                                                    class="mr-2 w-6 h-6 rounded-full"
-                                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                                    alt="Jese Leos">Jese Leos</p>
-                                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
-                                                    title="February 12th, 2022">Feb. 12, 2022</time></p>
-                                        </div>
-                                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
-                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                            type="button">
-                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                            </svg>
-                                            <span class="sr-only">Comment settings</span>
-                                        </button>
-                                        <!-- Dropdown menu -->
-                                        <div id="dropdownComment2"
-                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </footer>
-                                    <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
-                                    <div class="flex items-center mt-4 space-x-4">
-                                        <div class="flex items-center">
-                                            <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                                <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                                <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                            </button>
-                                            <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                            <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <article class="p-6 mb-3 text-base bg-white rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
-                                                class="mr-2 w-6 h-6 rounded-full"
-                                                src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                                                alt="Bonnie Green">Bonnie Green</p>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
-                                                title="March 12th, 2022">Mar. 12, 2022</time></p>
-                                    </div>
-                                    <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3"
-                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                        type="button">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                        </svg>
-                                        <span class="sr-only">Comment settings</span>
-                                    </button>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdownComment3"
-                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownMenuIconHorizontalButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </footer>
-                                <p class="text-gray-500 dark:text-gray-400">The article covers the essentials, challenges, myths and stages the UX designer should consider while creating the design strategy.</p>
-                                <div class="flex items-center mt-4 space-x-4">
-                                    <div class="flex items-center">
-                                        <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                            <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                            <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                        </button>
-                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                        <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                                    </div>
-                                    <button type="button"
-                                        class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                                        </svg>
-                                        Reply
-                                    </button>
-                                </div>
-                            </article>
-                            <article class="p-6 text-base bg-white rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <footer class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center">
-                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
-                                                class="mr-2 w-6 h-6 rounded-full"
-                                                src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
-                                                alt="Helene Engels">Helene Engels</p>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-06-23"
-                                                title="June 23rd, 2022">Jun. 23, 2022</time></p>
-                                    </div>
-                                    <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
-                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                        type="button">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                        </svg>
-                                    </button>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdownComment4"
-                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownMenuIconHorizontalButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </footer>
-                                <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
-                                <div class="flex items-center mt-4 space-x-4">
-                                    <div class="flex items-center">
-                                        <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-                                            <!--<i class="fa fa-heart"></i>--> <!--liked > rm regular -->
-                                            <i class="fa-regular fa-heart"></i> <!--not liked-->
-                                        </button>
-                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-                                        <small class="text-sm text-gray-500 dark:text-gray-400 text-medium">73 likes</small>
-                                    </div>
-                                    <button type="button"
-                                        class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                        <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                                        </svg>
-                                        Reply
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
