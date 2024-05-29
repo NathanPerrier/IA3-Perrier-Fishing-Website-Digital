@@ -9,7 +9,7 @@ import json
 
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
-from .forms import CreatePostForm
+from .utils import get_image_urls
 
 def feed(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -25,23 +25,21 @@ def feed(request):
 @login_required(login_url='/users/signin')
 def create_post(request):
     if request.method == 'POST':
-
+        
+        file_urls = get_image_urls(request)
         content = json.loads(request.POST['content'])
-
-        species = WildlifeSpecies.objects.get(common_name=request.POST['species'])
+        
+        try:
+            species = WildlifeSpecies.objects.get(common_name=request.POST['species'])
+        except:
+            species = None
+            
         print(species)
         
-        if not species and request.POST['species'][0]:
+        if not species and request.POST['species']:
             species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
         
         print(content)
-        file_urls = request.session.get('file_urls')
-        request.session['file_urls'] = None
-        
         print(file_urls)
 
-        
-    else:
-        form = CreatePostForm()
-
-    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all(), 'form':form})
+    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})

@@ -79,9 +79,11 @@ def upload_file(request):
             filename = fs.save(f'post/{file.name}', file)
             file_url = fs.url(filename)
             file_urls.append(file_url)
-        print(file_urls)
+            
         # Save file_urls back to the session
         request.session['file_urls'] = file_urls
+        request.session.modified = True
+        request.session.save()
 
         return JsonResponse({'message': 'File uploaded successfully.'})
     else:

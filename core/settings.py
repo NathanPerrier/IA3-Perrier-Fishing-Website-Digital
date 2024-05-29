@@ -31,7 +31,7 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = False  #str2bool(os.environ.get('DEBUG'))
+DEBUG = True  #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     
     "social_django",
+    "user_visit",
 
     "home",
     "apps.common",
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     "apps.tasks",
     "apps.wildlifeAPI",
     "apps.social",
+    "apps.tracking",
     
     # 'allauth',
     # 'allauth.account',
@@ -101,7 +103,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # Debug Toolbar
-    'social_django.middleware.SocialAuthExceptionMiddleware'
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    'user_visit.middleware.UserVisitMiddleware',
+    'apps.tracking.routes.main.TrackURLChangeMiddleware',
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -203,6 +207,8 @@ USE_TZ = True
 
 SITE_ID = 1
 
+
+AUTH_USER_MODEL = 'auth.User'
 
 CUSTOM_GROUPS = ["Admin", "Student", "Teacher", "Parent", "User", "Member", "Staff", "Leader", "Volunteer", "User", 
                  "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12"]
