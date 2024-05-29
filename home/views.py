@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
+
 
 from .forms import ContactForm
 from .models import *
@@ -61,3 +65,24 @@ def handler404(request, exception):
 
 def handler500(request):
     return render(request, 'pages/errors/500.html', status=500)
+  
+
+@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST':
+        fs = FileSystemStorage()
+        
+        # Get the existing file_urls from the session, or an empty list if it doesn't exist
+        file_urls = request.session.get('file_urls', [])
+
+        for file_name, file in request.FILES.items():
+            filename = fs.save(f'post/{file.name}', file)
+            file_url = fs.url(filename)
+            file_urls.append(file_url)
+        print(file_urls)
+        # Save file_urls back to the session
+        request.session['file_urls'] = file_urls
+
+        return JsonResponse({'message': 'File uploaded successfully.'})
+    else:
+        return JsonResponse({'error': 'Invalid request.'}, status=400)

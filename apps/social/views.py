@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from apps.users.models import Profile
+import json
 
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
+from .forms import CreatePostForm
 
 def feed(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -23,14 +25,23 @@ def feed(request):
 @login_required(login_url='/users/signin')
 def create_post(request):
     if request.method == 'POST':
-        user = Profile.objects.get(user=request.user)
-        content = request.POST.get('content')
-        images = request.FILES.getlist('images')
-        species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST.get('species'))
-        print(user, content, images, species)
-        post = Post.objects.create(user_profile=user, content=content, species=species)
-        for image in images:
-            PostImages.objects.create(post=post, image=image)
-        messages.success(request, 'Post created successfully')
-        return redirect('feed')
-    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})
+
+        content = json.loads(request.POST['content'])
+
+        species = WildlifeSpecies.objects.get(common_name=request.POST['species'])
+        print(species)
+        
+        if not species and request.POST['species'][0]:
+            species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
+        
+        print(content)
+        file_urls = request.session.get('file_urls')
+        request.session['file_urls'] = None
+        
+        print(file_urls)
+
+        
+    else:
+        form = CreatePostForm()
+
+    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all(), 'form':form})

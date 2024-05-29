@@ -47,7 +47,8 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <form class="w-full" id="multiStepForm">
+        <form class="w-full" method="POST" id="multiStepForm" enctype="multipart/form-data">
+            {% csrf_token %}
             <div id="step-1" class="step-content">
                 <h3 class="mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white">Post Image (optional)</h3>
                 <div class="mb-4 w-full">
@@ -78,7 +79,7 @@
                 <h3 class="mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white">Post Species (optional)</h3>
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Search for a Species</label>
                 <div class="relative w-full rounded my-2">
-                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="speciesSearch" oninput="searchSpecies(this.value)" list="speciesList" placeholder="Search Species..." name="speciesList">
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="speciesSearch" name="species" oninput="searchSpecies(this.value)" list="speciesList" placeholder="Search Species..." name="speciesList">
                     <datalist id="speciesList">
                     </datalist>
                 </div>
@@ -166,7 +167,7 @@
                 }
             } else {
                 step3.classList = 'flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0';
-                document.getElementById("multiStepForm").submit();
+                submitForm(event);
             }
         });
 
@@ -197,6 +198,42 @@
             }
         });
     });
+
+    
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function submitForm(event) {
+        var formData = new FormData(); // 'this' refers to the form
+        formData.append('content', JSON.stringify(quill.getContents()));
+        formData.append('species', document.getElementById('speciesSearch').value);
+
+        fetch('/social/post/', {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-CSRFToken': getCookie('csrftoken') },
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+
+
 
     async function searchSpecies(query) {
         if (query.length < 3) {
