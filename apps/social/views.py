@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from apps.users.models import Profile
 
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
@@ -22,12 +23,12 @@ def feed(request):
 @login_required(login_url='/users/signin')
 def create_post(request):
     if request.method == 'POST':
-        user = request.user
+        user = Profile.objects.get(user=request.user)
         content = request.POST.get('content')
         images = request.FILES.getlist('images')
-        species = request.POST.get('species')
+        species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST.get('species'))
         print(user, content, images, species)
-        post = Post.objects.create(user=user, content=content)
+        post = Post.objects.create(user_profile=user, content=content, species=species)
         for image in images:
             PostImages.objects.create(post=post, image=image)
         messages.success(request, 'Post created successfully')
