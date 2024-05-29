@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
 from apps.users.models import Profile
 
@@ -22,11 +22,15 @@ def feed(request):
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
         post.comments = Comment.objects.filter(post=post)
+        post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
+        post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
         for comment in post.comments:
             comment.likes = CommentLikes.objects.filter(comment=comment)
             comment.comments = Comment.objects.filter(relates_to=comment)
+            comment.liked = CommentLikes.objects.filter(comment=comment, user_profile=request.user.profile).exists()
             for sub_comment in comment.comments:
                 sub_comment.likes = CommentLikes.objects.filter(comment=sub_comment)
+                sub_comment.liked = CommentLikes.objects.filter(comment=sub_comment, user_profile=request.user.profile).exists()
 
     fish = WildlifeSpecies.objects.all()
 
@@ -93,6 +97,7 @@ def edit_post(request, post_id):
 
 
  #? should non club memebers be able to comment?
+@login_required(login_url='/users/signin/')
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     
@@ -113,6 +118,7 @@ def create_comment(request, post_id):
             print(e)
     return redirect('/social/feed/')
 
+@login_required(login_url='/users/signin/')
 def create_nested_comment(request, post_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     
@@ -131,4 +137,48 @@ def create_nested_comment(request, post_id, comment_id):
             messages.error(request, 'There was an error creating your comment. Please try again later.')
             print(e)
     return redirect('/social/feed/')
-            
+        
+@login_required(login_url='/users/signin/')    
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    like = PostLikes.objects.filter(post=post, user_profile=request.user.profile).first()
+    
+    if like:
+        like.delete()
+    else:
+        PostLikes.objects.create(
+            post=post,
+            user_profile=request.user.profile
+        )
+    
+    return redirect('/social/feed/')
+
+@login_required(login_url='/users/signin/')
+def like_comment(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    like = CommentLikes.objects.filter(comment=comment, user_profile=request.user.profile).first()
+    
+    if like:
+        like.delete()
+    else:
+        CommentLikes.objects.create(
+            comment=comment,
+            user_profile=request.user.profile
+        )
+    
+    return redirect('/social/feed/')
+
+@login_required(login_url='/users/signin/')
+def save_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    save = PostSaved.objects.filter(post=post, user_profile=request.user.profile).first()
+    
+    if save:
+        save.delete()
+    else:
+        PostSaved.objects.create(
+            post=post,
+            user_profile=request.user.profile
+        )
+    
+    return redirect('/social/feed/')
