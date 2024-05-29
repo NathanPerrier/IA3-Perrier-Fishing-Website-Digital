@@ -4,6 +4,8 @@
 
 {% block extrastyle %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" />
+    <!--<link href="{% static 'assets\quill.css' %}" rel="stylesheet" />-->
 {% endblock extrastyle %}
 
 
@@ -174,8 +176,15 @@
                                     <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
                                 {% endif %}
                             </div>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{post.content}}</p>
-                            
+                            <div class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postText-{{post.id}}"></div>
+                            <script>
+                                var quill{{post.id}} = new Quill('#postText-{{post.id}}', {
+                                    theme: 'bubble',
+                                    readOnly: true  // Add this if you want the editor to be read-only
+                                });
+                                var delta = {{ post.content|safe}};
+                                quill{{post.id}}.setContents(delta);
+                            </script>
                             <div class="flex items my-2">
                                 <div class="flex items-center">
                                     <button class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -710,4 +719,8 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 {% endblock %}

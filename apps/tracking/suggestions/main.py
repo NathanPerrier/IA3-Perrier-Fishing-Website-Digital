@@ -53,35 +53,10 @@ class Suggestions:
             .order_by('-like_count', '-save_count')[:5]
         )
 
-        return top_posts
+        return top_posts.order_by('-created_at')
 
     def suggest_other_profiles(self):
         """ Suggest other profiles based on the user's activity. """
         return self.top_profiles[:5]
     
     
-    def suggest_based_on_time_of_day(self):
-        """
-        Suggest posts based on the time of day. 
-        For example, if the user often likes posts in the morning, suggest posts published in the morning.
-        """
-        # Get the hour of the day when the user often likes posts
-        popular_hour = (
-            PostLikes.objects.filter(user_profile=self.user.profile)
-            .annotate(hour=ExtractHour('created_at'))
-            .values('hour')
-            .annotate(like_count=Count('id'))
-            .order_by('-like_count')
-            .first()
-        )
-
-        if popular_hour is not None:
-            # Suggest posts published in the same hour of the day
-            suggested_posts = (
-                Post.objects.annotate(hour=ExtractHour('created_at'))
-                .filter(hour=popular_hour['hour'])
-            )
-            return suggested_posts
-
-        return Post.objects.none()
-       

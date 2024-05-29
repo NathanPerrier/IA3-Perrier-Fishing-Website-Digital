@@ -25,21 +25,31 @@ def feed(request):
 @login_required(login_url='/users/signin')
 def create_post(request):
     if request.method == 'POST':
-        
-        file_urls = get_image_urls(request)
-        content = json.loads(request.POST['content'])
-        
         try:
-            species = WildlifeSpecies.objects.get(common_name=request.POST['species'])
-        except:
-            species = None
+            file_urls = get_image_urls(request)
+            content = request.POST['content']
             
-        print(species)
+            species = WildlifeSpecies.objects.filter(common_name=request.POST['species']).first()
+            
+            if not species and request.POST['species']:
+                species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
+            
+            Post.objects.create(
+                user_profile=request.user.profile,
+                content=content,
+                species=species
+            )
+            
+            for url in file_urls:
+                PostImages.objects.create(
+                    post=Post.objects.last(),
+                    image=url
+                )
+
+            return redirect('/') 
         
-        if not species and request.POST['species']:
-            species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
-        
-        print(content)
-        print(file_urls)
+        except Exception as e:
+            messages.error(request, 'There was an error creating your post. Please try again later.')
+            print(e)
 
     return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})

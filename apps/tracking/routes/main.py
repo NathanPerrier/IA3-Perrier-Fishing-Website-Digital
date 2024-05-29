@@ -14,7 +14,7 @@ class TrackURLChangeMiddleware:
         current_url = request.get_full_path()
     
         if previous_url != current_url:
-            request.session.pop('file_urls', None)
+            if current_url == '/': request.session.pop('file_urls', None)
             
             previous_time = request.session.get('previous_time')
             if previous_time:
