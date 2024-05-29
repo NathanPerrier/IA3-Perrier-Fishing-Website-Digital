@@ -27,7 +27,7 @@
                 </div>
              
                 {% if request.user == user %}
-                    <a href="/users/profile/edit" class="px-4 py-2 bg-blue-600 border text-white rounded-lg">Edit Profile</a>
+                    <a href="/users/profile/edit" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center focus:ring-gray-500 focus:border-gray-400 inline-flex items-center bg-gray-200 border text-gray-800 border-gray-800 dark:bg-gray-600 dark:border-gray-800 dark:text-white rounded-lg">Edit Profile</a>
                 {% else %}
                     {% if is_following %}
                         <a href="/users/profile/{{user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center focus:ring-gray-500 inline-flex items-center bg-gray-100 border text-gray-800 border-gray-800 dark:bg-gray-600 dark:border-gray-800 dark:text-white rounded-lg">Unfollow</a>
