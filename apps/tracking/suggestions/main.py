@@ -14,7 +14,7 @@ class Suggestions:
             Routes.objects.filter(user=user, current_url__icontains='/profile/')
             .values('current_url')
             .annotate(visit_count=Count('current_url'))
-            .order_by('-visit_count')
+            .order_by('-visit_count', '-time_spent')
         )
         
         self.top_profile_usernames = [

@@ -8,3 +8,8 @@ def get_item(list, index):
         return list[index].common_name if index < len(list) else None
     except KeyError:
         return list[index].common_name if index < len(list) else None
+    
+
+@register.filter
+def replace_spaces(value):
+    return value.replace(' ', '_')

@@ -2,6 +2,7 @@
 {% load static %}
 {% load profile_tags %}
 {% load humanize %}
+{% load list_filters %}
 
 {% block extrastyle %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
@@ -14,14 +15,31 @@
 <div class=" w-screen pt-20">
     <div class="bg-white dark:bg-gray-900 shadow p-6 pt-10">
         <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start">
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col justify-center items-center">
                 {% if profile.avatar %}
                     <img class="w-32 h-32 rounded-lg object-cover" src="{{ profile.avatar.url }}" alt="Profile Picture">
                 {% else %}
                     <img class="w-32 h-32 rounded-lg object-cover" src="{% static "dist/img/default-user.png" %}" alt="Profile Picture">
                 {% endif %}
-                <h2 class="mt-4 text-2xl font-semibold text-gray-800 dark:text-gray-200">@{{user.username}}</h2>
+                <h2 class="mt-4 text-2xl font-semibold text-gray-800 dark:text-gray-200 flex">@{{user.username}}</h2>
                 <p class="mt-2 text-gray-600 dark:text-gray-400">{{user.email}}</p>
+                <div class="flex max-auto mt-4 w-52 flex-row items-center justify-center space-x-2">
+                    {% if request.user|is_club_member %}
+                        <span class="text-sm text-white bg-green-800 px-2 py-1 rounded-full">Club Member</span>
+                    {% endif %}
+                    {% if request.user|is_staff %}
+                        <span class="text-sm text-white bg-blue-800 px-2 py-1 rounded-full">Staff</span>
+                    {% endif %}
+                    {% if request.user|is_admin %}
+                        <span class="text-sm text-white bg-red-800 px-2 py-1 rounded-full">Admin</span>
+                    {% endif %}
+                    {% if request.user|is_parent %}
+                        <span class="text-sm text-white bg-yellow-800 px-2 py-1 rounded-full">Parent</span>
+                    {% endif %}
+                    {% if request.user|is_student %}
+                        <span class="text-sm text-white bg-indigo-800 px-2 py-1 rounded-full">Student</span>
+                    {% endif %}
+                </div>
             </div>
             <div class="flex mt-6 lg:mt-0 space-x-4">
                 <button id="readFollowingButton" data-modal-target="readFollowingModal" data-modal-toggle="readFollowingModal">
@@ -334,7 +352,7 @@
                                                     <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
                                                 </div>
                                                 <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -580,6 +598,20 @@
                                         var delta = {{ post.content|safe}};
                                         quill{{post.id}}.setContents(delta);
                                     </script>
+                                    {% if post.species %}
+                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                            <div class="p-2 flex items">
+                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                                <div class="ms-3">
+                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
+                                                </div>
+                                                <div class="ms-auto right-0">
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="flex items my-2">
                                         <div class="flex items-center">
                                             <a href="/social/feed/{{post.id}}/like/" class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -603,20 +635,6 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    {% if post.species %}
-                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                                            <div class="p-2 flex items">
-                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                                <div class="ms-3">
-                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
-                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
-                                                </div>
-                                                <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
                                     {% if post.comments %}
                                         <div class="">
                                             <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
@@ -951,7 +969,7 @@
                                                     <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
                                                 </div>
                                                 <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1197,6 +1215,20 @@
                                         var delta = {{ post.content|safe}};
                                         quill{{post.id}}.setContents(delta);
                                     </script>
+                                    {% if post.species %}
+                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                            <div class="p-2 flex items">
+                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                                <div class="ms-3">
+                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
+                                                </div>
+                                                <div class="ms-auto right-0">
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="flex items my-2">
                                         <div class="flex items-center">
                                             <a href="/social/feed/{{post.id}}/like/" class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -1220,20 +1252,6 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    {% if post.species %}
-                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                                            <div class="p-2 flex items">
-                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                                <div class="ms-3">
-                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
-                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
-                                                </div>
-                                                <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
                                     {% if post.comments %}
                                         <div class="">
                                             <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
@@ -1568,7 +1586,7 @@
                                                     <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
                                                 </div>
                                                 <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1814,6 +1832,20 @@
                                         var delta = {{ post.content|safe}};
                                         quill{{post.id}}.setContents(delta);
                                     </script>
+                                    {% if post.species %}
+                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                            <div class="p-2 flex items">
+                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                                <div class="ms-3">
+                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
+                                                </div>
+                                                <div class="ms-auto right-0">
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="flex items my-2">
                                         <div class="flex items-center">
                                             <a href="/social/feed/{{post.id}}/like/" class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -1837,20 +1869,6 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    {% if post.species %}
-                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                                            <div class="p-2 flex items">
-                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                                <div class="ms-3">
-                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
-                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
-                                                </div>
-                                                <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
                                     {% if post.comments %}
                                         <div class="">
                                             <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
@@ -2185,7 +2203,7 @@
                                                     <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
                                                 </div>
                                                 <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -2431,6 +2449,20 @@
                                         var delta = {{ post.content|safe}};
                                         quill{{post.id}}.setContents(delta);
                                     </script>
+                                    {% if post.species %}
+                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                            <div class="p-2 flex items">
+                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                                <div class="ms-3">
+                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
+                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
+                                                </div>
+                                                <div class="ms-auto right-0">
+                                                    <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="flex items my-2">
                                         <div class="flex items-center">
                                             <a href="/social/feed/{{post.id}}/like/" class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -2454,20 +2486,7 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    {% if post.species %}
-                                        <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                                            <div class="p-2 flex items">
-                                                <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                                <div class="ms-3">
-                                                    <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
-                                                    <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
-                                                </div>
-                                                <div class="ms-auto right-0">
-                                                    <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
+                                    
                                     {% if post.comments %}
                                         <div class="">
                                             <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
@@ -2798,7 +2817,7 @@
                                                         <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
                                                     </div>
                                                     <div class="ms-auto right-0">
-                                                        <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                        <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3044,6 +3063,20 @@
                                             var delta = {{ post.content|safe}};
                                             quill{{post.id}}.setContents(delta);
                                         </script>
+                                        {% if post.species %}
+                                            <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
+                                                <div class="p-2 flex items">
+                                                    <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                                    <div class="ms-3">
+                                                        <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
+                                                        <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
+                                                    </div>
+                                                    <div class="ms-auto right-0">
+                                                        <a href="https://biodiversity.org.au/afd/taxa/{{post.species.name|replace_spaces}}" target="_blank" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                         <div class="flex items my-2">
                                             <div class="flex items-center">
                                                 <a href="/social/feed/{{post.id}}/like/" class="flex items-center justify-center w-6 h-6 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
@@ -3067,20 +3100,7 @@
                                                 {% endif %}
                                             </a>
                                         </div>
-                                        {% if post.species %}
-                                            <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
-                                                <div class="p-2 flex items">
-                                                    <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
-                                                    <div class="ms-3">
-                                                        <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
-                                                        <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
-                                                    </div>
-                                                    <div class="ms-auto right-0">
-                                                        <a href="/species/{{post.species.id}}" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">View</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
+                                        
                                         {% if post.comments %}
                                             <div class="">
                                                 <a onclick="document.getElementById('comments-{{post.id}}').classList.remove('hidden')" class="text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">View all {{ post.comments|length }} comments</a>
@@ -3294,26 +3314,34 @@
                         {% endif %}
                     </div>
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-4" id="suggested-followers" role="tabpanel" aria-labelledby="suggested-followers-tab">
-                        {% for profile in suggested_followers %}
-                            <div class="flex items">
-                                <a href="/users/profile/{{profile.user.username}}">
-                                    {% if profile.avatar %}
-                                        <img class="w-10 h-10 rounded-full" src="{{ profile.avatar.url }}" alt="User" />
-                                    {% else %}
-                                        <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
-                                    {% endif %}
-                                </a>
-                                <div class="ms-3">
-                                    <a href="/users/profile/{{profile.user.username}}" class="font-semibold text-gray-900 dark:text-white">{{profile.user.username}}</a>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Suggested for you</p>
-                                </div>
-                                {% if request.user.profile|is_following:profile  %}
-                                    <a href="/users/profile/{{profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-4 text-center inline-flex items-center  border border-gray-600  text-gray-600 dark:text-white rounded-lg ms-auto right-0">Unfollow</a>
-                                {% else %}
-                                    <a href="/users/profile/{{profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
-                                {% endif %}
+                        {% if suggested_followers|length == 0 %}
+                            <div class="text-center">   
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Suggested Followers</h3>
+                                <p class="mt-6 mb-8 text-gray-600 dark:text-gray-400">For us to recommend follwers, you have to explore the site:</p>
+                                <a hred="#" class="mb-8 mt-4 px-4 py-2 bg-blue-600 border text-white rounded-lg">Explore More</a>
                             </div>
-                        {% endfor %}
+                        {% else %}
+                            {% for profile in suggested_followers %}
+                                <div class="flex items">
+                                    <a href="/users/profile/{{profile.user.username}}">
+                                        {% if profile.avatar %}
+                                            <img class="w-10 h-10 rounded-full" src="{{ profile.avatar.url }}" alt="User" />
+                                        {% else %}
+                                            <img class="w-10 h-10 rounded-full" src="{% static "dist/img/default-user.png" %}" alt="User" />
+                                        {% endif %}
+                                    </a>
+                                    <div class="ms-3">
+                                        <a href="/users/profile/{{profile.user.username}}" class="font-semibold text-gray-900 dark:text-white">{{profile.user.username}}</a>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Suggested for you</p>
+                                    </div>
+                                    {% if request.user.profile|is_following:profile  %}
+                                        <a href="/users/profile/{{profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-4 text-center inline-flex items-center  border border-gray-600  text-gray-600 dark:text-white rounded-lg ms-auto right-0">Unfollow</a>
+                                    {% else %}
+                                        <a href="/users/profile/{{profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

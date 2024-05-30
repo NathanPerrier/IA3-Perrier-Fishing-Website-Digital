@@ -25,11 +25,6 @@ def index(request):
   context = {}
   return render(request, "pages/index.html", context)
 
-def pricing(request):
-
-  context = {}
-  return render(request, "pages/pricing.html", context)
-
 def contact(request):
   if request.method == 'POST':
     form = ContactForm(request.POST)
