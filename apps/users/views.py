@@ -13,7 +13,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from apps.users.utils import user_filter
+from apps.users.utils import *
 
 
 def index(request):
@@ -71,7 +71,10 @@ def profile_page(request, username=None):
     context = {
         'user': user,
         'profile': profile,
-        'posts':  Post.objects.filter(user_profile=profile),  
+        'profile_posts':  get_profile_posts(request, profile),  
+        'saved_posts': get_saved_posts(request, profile),  
+        'followers_posts': get_followers_posts(request, profile),
+        'following_posts': get_following_posts(request, profile), 
         'followers' : Followers.objects.filter(following=profile).all(),
         'following' : Followers.objects.filter(follower=profile).all(),
         'is_following': is_following,
