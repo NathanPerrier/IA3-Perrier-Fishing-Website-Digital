@@ -16,14 +16,119 @@
                 <p class="mt-2 text-gray-600 dark:text-gray-400">{{user.email}}</p>
             </div>
             <div class="flex mt-6 lg:mt-0 space-x-4">
-           
-                <div class="flex flex-col items-center">
-                    <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{following|length}}</span>
-                    <span class="text-sm text-gray-600 dark:text-gray-400">Following</span>
+                <button id="readFollowingButton" data-modal-target="readFollowingModal" data-modal-toggle="readFollowingModal">
+                    <div class="flex flex-col items-center">
+                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{following|length}}</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Following</span>
+                    </div>
+                </button>
+                <div id="readFollowingModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 w-full">
+                            <!-- Modal header -->
+                            <div class="flex justify-between mb-4 rounded-t sm:mb-5">
+                                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                    <h3 class="font-semibold ">
+                                        Following
+                                    </h3>
+                                    <p class="text-xs">
+                                        {{following|length}} Following
+                                    </p>
+                                </div>
+                                <div>
+                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="readFollowingModal">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <dl class="w-100">
+                                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">User Profiles</dt>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400 w-full">
+                                    <div class="flex flex-wrap w-full space-y-4 overflow-y-auto" style="max-height: 400px;">
+                                        {% for user in following %}
+                                            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3 mx-auto">
+                                                <div class="flex flex-col items-center pb-10">
+                                                    <img class="w-20 h-20 mb-3 rounded-full shadow-lg" src="{% if user.following.avatar %}{{ user.following.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
+                                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.following }}</h5>
+                                                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.following.first_name }}</span>
+                                                    <div class="flex space-x-2 mt-4 md:mt-6">
+                                                        <a href="/users/profile/{{user.following}}/unfollow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Unfollow</a>
+                                                        <a href="/users/profile/{{ user.following }}/" class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% if following|length == 0 %}
+                                            <div class="w-full text-center text-gray-500 dark:text-gray-400 py-8">
+                                                <h3>No following profiles</h3>
+                                                <p class="mt-2 mb-4">To find people to follow, head to the social feed:</p>
+                                                <a href="/social/feed" class="rounded-lg px-3 py-2 text-white bg-primary-700 hover:bg-primary-400 font-bold">Social Feed</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </dd>
+                            </dl>  
+                        </div>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center mx-8">
-                    <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{followers|length}}</span>
-                    <span class="text-sm text-gray-600 dark:text-gray-400">Followers</span>
+                <button id="readFollowerButton" data-modal-target="readFollowerModal" data-modal-toggle="readFollowerModal">
+                    <div class="flex flex-col items-center mx-8">
+                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">{{followers|length}}</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Followers</span>
+                    </div>
+                </button>
+                <div id="readFollowerModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 w-full">
+                            <!-- Modal header -->
+                            <div class="flex justify-between mb-4 rounded-t sm:mb-5">
+                                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                    <h3 class="font-semibold ">
+                                        Followers
+                                    </h3>
+                                    <p class="text-xs">
+                                        {{followers|length}} Followers
+                                    </p>
+                                </div>
+                                <div>
+                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="readFollowerModal">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <dl class="w-100">
+                                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">User Profiles</dt>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400 w-full">
+                                    <div class="flex flex-wrap w-full space-y-4 overflow-y-auto" style="max-height: 400px;">
+                                        {% for user in followers %}
+                                            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3 mx-auto">
+                                                <div class="flex flex-col items-center pb-10">
+                                                    <img class="w-20 h-20 mb-3 rounded-full shadow-lg" src="{% if user.following.avatar %}{{ user.following.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
+                                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.following }}</h5>
+                                                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.following.first_name }}</span>
+                                                    <div class="flex space-x-2 mt-4 md:mt-6">
+                                                        <a href="/users/profile/{{user.following}}/unfollow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Unfollow</a>
+                                                        <a href="/users/profile/{{ user.following }}/" class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% if followers|length == 0 %}
+                                            <div class="w-full text-center text-gray-500 dark:text-gray-400 py-8">
+                                                <h3>No follower profiles</h3>
+                                                <p class="mt-2 mb-4">Engage in our community and connect with our user!</p>
+                                                <a href="/social/feed" class="rounded-lg px-3 py-2 text-white bg-primary-700 hover:bg-primary-400 font-bold">Social Feed</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </dd>
+                            </dl>  
+                        </div>
+                    </div>
                 </div>
              
                 {% if request.user == user %}
@@ -47,6 +152,9 @@
             <p class="mt-4 text-gray-600 dark:text-gray-400">{{profile.bio}}</p>
         </div>
         {% endif %}
+
+        <!-- horizontal line -->
+        <div class="mt-8 border-b border-gray-200 dark:border-gray-700"></div>
         
         <div class="mt-8 p-5 rounded-lg bg-gray-50 dark:bg-gray-800 mb-8">
             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Posts</h3>
@@ -72,42 +180,6 @@
                 </div>
             {% endif %}
         </div>
-
-        {% if followers|length > 0 %}
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Followers</h3>
-                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {% for follower in followers %}
-                        <div class="flex flex-col items-center">
-                            {% if follower.follower.avatar %} <!-- follower.follower? -->
-                                <img class="w-16 h-16 rounded-full object-cover" src="{{ follower.follower.avatar.url }}" alt="Follower">
-                            {% else %}
-                                <img class="w-16 h-16 rounded-full object-cover" src="{% static "dist/img/default-user.png" %}" alt="Follower">
-                            {% endif %}
-                            <p class="mt-2 text-gray-600 dark:text-gray-400">@{{follower.follower}}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-
-        {% if following|length > 0 %}
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Following</h3>
-                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {% for follow in following %}
-                        <div class="flex flex-col items-center">
-                            {% if follow.following.avatar %}
-                                <img class="w-16 h-16 rounded-full object-cover" src="{{ follow.following.avatar.url }}" alt="Follower">
-                            {% else %}
-                                <img class="w-16 h-16 rounded-full object-cover" src="{% static "dist/img/default-user.png" %}" alt="Follower">
-                            {% endif %}
-                            <p class="mt-2 text-gray-600 dark:text-gray-400">@{{follow.following}}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
     </div>
 </div>
 
