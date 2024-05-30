@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from apps.common.models import Product
 from django.contrib.auth.models import User
 from ..wildlifeAPI.models import *
 

@@ -57,11 +57,8 @@ INSTALLED_APPS = [
     "user_visit",
 
     "home",
-    "apps.common",
     "apps.users",
-    "apps.api",
-    "apps.charts", 
-    "apps.tables",
+    "apps.api", 
     "apps.tasks",
     "apps.wildlifeAPI",
     "apps.social",

@@ -12,4 +12,8 @@ urlpatterns = [
     path('feed/<int:post_id>/like/', views.like_post, name='social_like_post'),
     path('feed/<int:post_id>/comment/<int:comment_id>/like/', views.like_comment, name='social_like_comment'),
     path('feed/<int:post_id>/save/', views.save_post, name='social_save_post'),
+    
+    path("", views.datatables, name="social_datatables"),
+    path('delete-post/<int:id>/', views.delete_post, name="delete_post"),
+    path('update-post/<int:id>/', views.update_post, name="update_post"),
 ]

@@ -1,5 +1,4 @@
 from apps.api.serializers import *
-from apps.common.models import Product
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import permissions

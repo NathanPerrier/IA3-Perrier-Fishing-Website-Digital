@@ -7,10 +7,10 @@ def get_image_urls(request):
     
     return file_urls    
 
-def post_filter(request):
+def species_filter(request):
     filter_string = {}
     filter_mappings = {
-        'search': 'user_profile__user__username__icontains'
+        'search': 'common_name__icontains'
     }
     for key in request.GET:
         if request.GET.get(key) and key != 'page':

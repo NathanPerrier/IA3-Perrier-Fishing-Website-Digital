@@ -2,10 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView, PasswordResetConfirmView
 from django.views.generic import CreateView
-from apps.common.models import Product #! rm
 from apps.social.models import Post
 from apps.users.models import Profile, Followers
-from apps.users.forms import SigninForm, SignupForm, UserPasswordChangeForm, UserSetPasswordForm, UserPasswordResetForm, ProfileForm
+from apps.users.forms import *
 from django.contrib.auth import logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -14,16 +13,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from apps.users.utils import *
+from .wrapper import admin_required
 
 
-def index(request):
-
-    prodName = ''
-    
-    if len( Product.objects.all() ):
-        prodName = Product.objects.all()[0].name
-        
-    return HttpResponse("INDEX Users" + ' ' + prodName)
 
 
 
@@ -153,18 +145,18 @@ def change_password(request):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-
+@admin_required
 def user_list(request):
     filters = user_filter(request)
     user_list = User.objects.filter(**filters)
-    form = SignupForm()
+    form = UserForm()
 
     page = request.GET.get('page', 1)
     paginator = Paginator(user_list, 5)
     users = paginator.page(page)
 
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             return post_request_handling(request, form)
 
@@ -175,19 +167,19 @@ def user_list(request):
     return render(request, 'apps/users.html', context)
 
 
-@login_required(login_url='/users/signin/')
+@admin_required
 def post_request_handling(request, form):
     form.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
-@login_required(login_url='/users/signin/')
+@admin_required
 def delete_user(request, id):
     user = User.objects.get(id=id)
     user.delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='/users/signin/')
+@admin_required
 def update_user(request, id):
     user = User.objects.get(id=id)
     if request.method == 'POST':

@@ -36,33 +36,21 @@
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                     clip-rule="evenodd"></path>
                 </svg>
-                <a href="#"
-                  class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">E-commerce</a>
-              </div>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Products</span>
+                <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Social</span>
               </div>
             </li>
           </ol>
         </nav>
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All products</h1>
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Posts</h1>
       </div>
       <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
         <div class="flex items-center mb-4 sm:mb-0">
           <form class="sm:pr-3" method="GET">
-            <label for="products-search" class="sr-only">Search</label>
+            <label for="posts-search" class="sr-only">Search</label>
             <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-              <input type="text" name="search" id="products-search"
+              <input type="text" name="search" id="posts-search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Search for products">
+                placeholder="Search for posts by username">
             </div>
           </form>
           <div class="flex items-center w-full sm:justify-end">
@@ -104,10 +92,10 @@
         </div>
         <button id="createProductButton"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-primary-800"
-          type="button" data-drawer-target="drawer-create-product-default"
-          data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default"
+          type="button" data-drawer-target="drawer-create-post-default"
+          data-drawer-show="drawer-create-post-default" aria-controls="drawer-create-post-default"
           data-drawer-placement="right">
-          Add new product
+          Add new post
         </button>
       </div>
     </div>
@@ -127,16 +115,16 @@
                   </div>
                 </th>
                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                  Product Name
-                </th>
-                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                  Description
-                </th>
-                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                   ID
                 </th>
                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                  Price
+                  Content
+                </th>
+                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                  User
+                </th>
+                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                  Species
                 </th>
                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                   Actions
@@ -145,7 +133,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-              {% for product in products %}
+              {% for post in posts %}
               <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                 <td class="w-4 p-4">
                   <div class="flex items-center">
@@ -155,20 +143,20 @@
                   </div>
                 </td>
                 <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                  <div class="text-base font-semibold text-gray-900 dark:text-white">{{ product.name }}</div>
+                  <div class="text-base font-semibold text-gray-900 dark:text-white">{{ post.id }}</div>
                 </td>
                 <td
                   class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                  {{ product.info }}
+                  {{ post.content }}
                 </td>
                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  #{{ product.id }}</td>
+                  {{ post.user_profile }}</td>
                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  ${{ product.price }}</td>
+                  {{ post.species.common_name }}</td>
 
                 <td class="p-4 space-x-2 whitespace-nowrap">
-                  <button type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default{{product.id}}"
-                    data-drawer-show="drawer-update-product-default{{product.id}}" aria-controls="drawer-update-product-default{{product.id}}"
+                  <button type="button" id="updateProductButton" data-drawer-target="drawer-update-post-default{{post.id}}"
+                    data-drawer-show="drawer-update-post-default{{post.id}}" aria-controls="drawer-update-post-default{{post.id}}"
                     data-drawer-placement="right"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
@@ -181,8 +169,8 @@
                     </svg>
                     Update
                   </button>
-                  <button type="button" id="deleteProductButton" data-drawer-target="drawer-delete-product-default{{product.id}}"
-                    data-drawer-show="drawer-delete-product-default{{product.id}}" aria-controls="drawer-delete-product-default{{product.id}}"
+                  <button type="button" id="deleteProductButton" data-drawer-target="drawer-delete-post-default{{post.id}}"
+                    data-drawer-show="drawer-delete-post-default{{post.id}}" aria-controls="drawer-delete-post-default{{post.id}}"
                     data-drawer-placement="right"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
@@ -196,15 +184,15 @@
                 </td>
               </tr>
 
-              <!-- Delete Product Drawer -->
-              <div id="drawer-delete-product-default{{product.id}}"
+              <!-- Delete post Drawer -->
+              <div id="drawer-delete-post-default{{post.id}}"
                 class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
                 tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
                 <h5 id="drawer-label"
                   class="inline-flex items-center text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Delete
                   item</h5>
-                <button type="button" data-drawer-dismiss="drawer-delete-product-default{{product.id}}"
-                  aria-controls="drawer-delete-product-default{{product.id}}"
+                <button type="button" data-drawer-dismiss="drawer-delete-post-default{{post.id}}"
+                  aria-controls="drawer-delete-post-default{{post.id}}"
                   class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -219,28 +207,28 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <h3 class="mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                <a href="{% url "delete_product" product.id %}"
+                <h3 class="mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this post?</h3>
+                <a href="{% url "delete_post" post.id %}"
                   class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-900">
                   Yes, I'm sure
                 </a>
                 <a href="#"
                   class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                  data-modal-toggle="delete-product-modal">
+                  data-modal-toggle="delete-post-modal">
                   No, cancel
                 </a>
               </div>
 
 
-              <!-- Edit Product Drawer -->
-              <div id="drawer-update-product-default{{product.id}}"
+              <!-- Edit post Drawer -->
+              <div id="drawer-update-post-default{{post.id}}"
                 class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
                 tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
                 <h5 id="drawer-label"
                   class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
-                  Update Product</h5>
-                <button type="button" data-drawer-dismiss="drawer-update-product-default{{product.id}}"
-                  aria-controls="drawer-update-product-default{{product.id}}"
+                  Update post</h5>
+                <button type="button" data-drawer-dismiss="drawer-update-post-default{{post.id}}"
+                  aria-controls="drawer-update-post-default{{post.id}}"
                   class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -250,28 +238,22 @@
                   </svg>
                   <span class="sr-only">Close menu</span>
                 </button>
-                <form method="post" action="{% url "update_product" product.id %}">
+                <form method="post" action="{% url "update_post" post.id %}">
                   {% csrf_token %}
 
                   <div class="space-y-4">
                     <div>
-                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                      <input type="text" name="name" id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value="{{ product.name }}" placeholder="Type product name" required="">
-                    </div>
-                    <div>
-                      <label for="info"
+                      <label for="content"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Info</label>
-                      <textarea id="info" rows="4" name="info"
+                      <textarea id="content" rows="4" name="info"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Enter event info here">{{ product.info }}</textarea>
+                        placeholder="Enter event Content here">{{ post.content }}</textarea>
                     </div>
                     <div>
-                      <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                      <input type="number" name="price" id="price"
+                      <label for="species" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Species</label>
+                      <input type="number" name="species" id="species"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value="{{ product.price }}" placeholder="$149" required="">
+                        value="{{ post.species }}" placeholder="Northern Whiting" required="">
                     </div>
                   </div>
                   <div class="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
@@ -280,7 +262,7 @@
                       Update
                     </button>
                     <a 
-                      href="{% url "delete_product" product.id %}"
+                      href="{% url "delete_post" post.id %}"
                       class="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                       <svg aria-hidden="true" class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -306,8 +288,8 @@
   <div
     class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 flex justify-between dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center mb-4 sm:mb-0">
-      {% if products.has_previous %}
-      <a href="?page={{ products.previous_page_number }}"
+      {% if posts.has_previous %}
+      <a href="?page={{ posts.previous_page_number }}"
         class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -317,8 +299,8 @@
       </a>
       {% endif %}
 
-      {% if products.has_next %}
-      <a href="?page={{ products.next_page_number }}"
+      {% if posts.has_next %}
+      <a href="?page={{ posts.next_page_number }}"
         class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -328,12 +310,12 @@
       </a>
       {% endif %}
       <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span
-          class="font-semibold text-gray-900 dark:text-white">{{ products.start_index }}-{{ products.end_index }}</span> of <span
-          class="font-semibold text-gray-900 dark:text-white">{{ products.paginator.count }}</span></span>
+          class="font-semibold text-gray-900 dark:text-white">{{ posts.start_index }}-{{ posts.end_index }}</span> of <span
+          class="font-semibold text-gray-900 dark:text-white">{{ posts.paginator.count }}</span></span>
     </div>
     <div class="flex items-center space-x-3">
-      {% if products.has_previous %}
-      <a href="?page={{ products.previous_page_number }}"
+      {% if posts.has_previous %}
+      <a href="?page={{ posts.previous_page_number }}"
         class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
         <svg class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -343,8 +325,8 @@
         Previous
       </a>
       {% endif %}
-      {% if products.has_next %}
-      <a href="?page={{ products.next_page_number }}"
+      {% if posts.has_next %}
+      <a href="?page={{ posts.next_page_number }}"
         class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
         Next
         <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -358,15 +340,15 @@
   </div>
 
 
-  <!-- Add Product Drawer -->
-  <div id="drawer-create-product-default"
+  <!-- Add post Drawer -->
+  <div id="drawer-create-post-default"
     class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
     tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
     <h5 id="drawer-label"
       class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New
-      Product</h5>
-    <button type="button" data-drawer-dismiss="drawer-create-product-default"
-      aria-controls="drawer-create-product-default"
+      post</h5>
+    <button type="button" data-drawer-dismiss="drawer-create-post-default"
+      aria-controls="drawer-create-post-default"
       class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -390,10 +372,10 @@
         <div class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute">
           <button type="submit"
             class="text-white w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
-            Add product
+            Add post
           </button>
-          <button type="button" data-drawer-dismiss="drawer-create-product-default"
-            aria-controls="drawer-create-product-default"
+          <button type="button" data-drawer-dismiss="drawer-create-post-default"
+            aria-controls="drawer-create-post-default"
             class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
             <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
@@ -410,52 +392,3 @@
 
 
 {% endblock content %}
-
-{% comment %} {% block extra_js %}
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.tailwindcss.min.js"></script>
-<script src="https://cdn.tailwindcss.com/3.3.3"></script>
-
-<script>
-
-  fetch('/api/product/')
-    .then(response => response.json())
-    .then(data => {
-      $('#products-body').DataTable({
-        data: data,
-        columns: [
-          { title: 'ID', data: 'id' },
-          { title: 'Name', data: 'name' },
-          { title: 'Info', data: 'info' },
-          { title: 'Price', data: 'price' },
-          {
-            title: 'Action',
-            data: null,
-            render: function (data, type, row) {
-              return (
-                `<button 
-                class="edit-button" 
-                id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right"
-                type="button" 
-                data-id="' + row.id + '"
-              >
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                  <path d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
-                  <path d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z"/>
-                </svg>
-              </button>` +
-                `<button class="delete-button ml-2" data-id="' + row.id + '">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                  <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
-                </svg>
-              </button>`);
-            }
-          },
-        ]
-      });
-
-    })
-
-</script>
-{% endblock extra_js %} {% endcomment %}

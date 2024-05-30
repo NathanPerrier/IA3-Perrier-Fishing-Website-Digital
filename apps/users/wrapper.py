@@ -1,14 +1,5 @@
-from django.http import Http404
 from django.contrib.auth.decorators import login_required
-
-def exception_handler(func):
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except Exception as e:
-            raise e
-    return wrapper
-
+from django.http import Http404
 
 def admin_required(view_func):
     """Requires user membership in at least one of the groups passed in."""

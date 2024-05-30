@@ -8,8 +8,10 @@ from apps.users.models import Profile, Followers
 
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
-from .utils import get_image_urls
-from .wrapper import group_required
+from .utils import get_image_urls, post_filter
+from .wrapper import group_required, admin_required
+from .forms import PostAdminForm
+
 
 def feed(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -184,3 +186,50 @@ def save_post(request, post_id):
         )
     
     return redirect('/social/feed/')
+
+@admin_required
+def datatables(request):
+  filters = post_filter(request)
+  product_list = Post.objects.filter(**filters)
+  form = PostAdminForm()
+
+  page = request.GET.get('page', 1)
+  paginator = Paginator(product_list, 5)
+  posts = paginator.page(page)
+
+  if request.method == 'POST':
+      form = PostAdminForm(request.POST)
+      if form.is_valid():
+          return post_request_handling(request, form)
+
+  context = {
+    'segment'  : 'social',
+    'parent'   : 'apps',
+    'form'     : form,
+    'posts' : posts
+  }
+  
+  return render(request, 'apps/social.html', context)
+
+
+@admin_required
+def post_request_handling(request, form):
+    form.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@admin_required
+def delete_post(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@admin_required
+def update_post(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        post.name = request.POST.get('name')
+        post.price = int(request.POST.get('price'))
+        post.info = request.POST.get('info')
+        post.save()
+    return redirect(request.META.get('HTTP_REFERER'))

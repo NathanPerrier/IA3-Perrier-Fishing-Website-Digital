@@ -274,7 +274,7 @@
       series: [{
         name: 'Product',
         color: '#1A56DB',
-        data: data.map(product => ({ x: product.fields.name, y: product.fields.price }))
+        data: data.map(product => ({ x: product.fields.username, y: product.fields.email }))
       }],
       chart: {
         type: 'bar',
@@ -355,8 +355,8 @@
     }
 
     return {
-      series: data.map(product => product.fields.price),
-      labels: data.map(product => product.fields.name),
+      series: data.map(product => product.fields.email),
+      labels: data.map(product => product.fields.username),
       colors: ['#16BDCA', '#FDBA8C', '#1A56DB'],
       chart: {
         type: 'donut',

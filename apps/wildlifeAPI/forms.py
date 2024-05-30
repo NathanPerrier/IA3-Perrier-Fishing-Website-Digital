@@ -1,26 +1,17 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
-from django.contrib.auth.models import User
+from .models import WildlifeSpecies
 from django.utils.translation import gettext_lazy as _
 from apps.social.models import *
 
-class CreatePostForm(forms.ModelForm):
+class SpeciesAdminForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['content']
-    
-    content = forms.CharField(widget=forms.Textarea(attrs={'class':'hidden'}), label="Content")
-    # images = forms.FileField(label="Image", widget=forms.FileInput(attrs={'multiple': True, 'class': 'hidden'}))
-        
-        
-class PostAdminForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = '__all__'
+        model = WildlifeSpecies
+        exclude = ('class_name', 'family_name', 'kingdom_name', 'created_at', 'updated_at')
     
 
     def __init__(self, *args, **kwargs):
-        super(PostAdminForm, self).__init__(*args, **kwargs)
+        super(SpeciesAdminForm, self).__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
             self.fields[field_name].widget.attrs['placeholder'] = field.label
