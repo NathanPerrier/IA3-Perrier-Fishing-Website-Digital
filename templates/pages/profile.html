@@ -201,11 +201,11 @@
             <div class="mt-8 border-b border-gray-200 dark:border-gray-700"></div>
         {% endif %}
         
-        <div class="mt-8 p-5 rounded-lg bg-gray-50 dark:bg-gray-800 mb-8">
+        <div class="mt-8 p-5 rounded-lg bg-gray-200 dark:bg-gray-700 mb-8">
             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Posts</h3>
             
 
-            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <div class="mb-4 border-b ">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-post-tab" data-tabs-target="#profile-post" type="button" role="tab" aria-controls="profile-post" aria-selected="false">{% if request.user == user %}Your Posts{% else %}{{user.username|title}}'s Posts{%endif%}</button>
@@ -230,7 +230,7 @@
                 </ul>
             </div>
             <div class="max-w-screen-xl mx-auto lg:px-8" id="default-tab-content">
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-6" id="profile-post" role="tabpanel" aria-labelledby="profile-post-tab">
+                <div class="hidden p-4 rounded-lg  space-y-6" id="profile-post" role="tabpanel" aria-labelledby="profile-post-tab">
                     {% if profile_posts|length == 0 %}
                         <div class="text-center">   
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
@@ -388,7 +388,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -492,7 +492,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -666,7 +666,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -771,7 +771,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -847,7 +847,7 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-6" id="saved-post" role="tabpanel" aria-labelledby="saved-post-tab">
+                <div class="hidden p-4 rounded-lg  space-y-6" id="saved-post" role="tabpanel" aria-labelledby="saved-post-tab">
                     {% if saved_posts|length == 0 %}
                         <div class="text-center">   
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
@@ -1005,7 +1005,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1109,7 +1109,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1283,7 +1283,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1388,7 +1388,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1464,7 +1464,7 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-6" id="followers-post" role="tabpanel" aria-labelledby="followers-post-tab">
+                <div class="hidden p-4 rounded-lg  space-y-6" id="followers-post" role="tabpanel" aria-labelledby="followers-post-tab">
                     {% if followers_posts|length == 0 %}
                         <div class="text-center">   
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
@@ -1622,7 +1622,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1726,7 +1726,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -1900,7 +1900,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2005,7 +2005,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2081,7 +2081,7 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-6" id="following-post" role="tabpanel" aria-labelledby="following-post-tab">
+                <div class="hidden p-4 rounded-lg  space-y-6" id="following-post" role="tabpanel" aria-labelledby="following-post-tab">
                     {% if following_posts|length == 0 %}
                         <div class="text-center">   
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
@@ -2239,7 +2239,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2343,7 +2343,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2518,7 +2518,7 @@
                                             </button>
                                         </div>
                                         {% for comment in post.comments %}
-                                            <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                            <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                 <footer class="flex justify-between items-center mb-2">
                                                     <div class="flex items-center">
                                                         <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2623,7 +2623,7 @@
                                                     </div>
                                                 {% for nested_comment in comment.comments %}
                                                     
-                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                         <footer class="flex justify-between items-center mb-2">
                                                             <div class="flex items-center">
                                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2700,7 +2700,7 @@
                     {% endif %}
                 </div>
                 {% if request.user == user %}
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-6" id="suggested-post" role="tabpanel" aria-labelledby="suggested-post-tab">
+                    <div class="hidden p-4 rounded-lg  space-y-6" id="suggested-post" role="tabpanel" aria-labelledby="suggested-post-tab">
                         {% if suggested_posts|length == 0 %}
                             <div class="text-center">   
                                 <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Posts</h3>
@@ -2853,7 +2853,7 @@
                                                 </button>
                                             </div>
                                             {% for comment in post.comments %}
-                                                <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                                <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                     <footer class="flex justify-between items-center mb-2">
                                                         <div class="flex items-center">
                                                             <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -2957,7 +2957,7 @@
                                                         </div>
                                                     {% for nested_comment in comment.comments %}
                                                         
-                                                        <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                        <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                             <footer class="flex justify-between items-center mb-2">
                                                                 <div class="flex items-center">
                                                                     <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -3132,7 +3132,7 @@
                                                 </button>
                                             </div>
                                             {% for comment in post.comments %}
-                                                <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
+                                                <article class="p-6 text-base bg-gray-200 rounded-lg dark:bg-gray-700" id="comments-{{post.id}}-comment-{{comment.id}}"> <!-- comments-{comment.post.id}-comment-{comment.id}-->
                                                     <footer class="flex justify-between items-center mb-2">
                                                         <div class="flex items-center">
                                                             <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -3237,7 +3237,7 @@
                                                         </div>
                                                     {% for nested_comment in comment.comments %}
                                                         
-                                                        <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
+                                                        <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-gray-200 rounded-lg dark:bg-gray-700"> <!-- comments-{comment.post.id}-comment-{comment.id}-nested-{comment_nested.id} -->
                                                             <footer class="flex justify-between items-center mb-2">
                                                                 <div class="flex items-center">
                                                                     <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
@@ -3313,7 +3313,7 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 space-y-4" id="suggested-followers" role="tabpanel" aria-labelledby="suggested-followers-tab">
+                    <div class="hidden p-4 rounded-lg  space-y-4" id="suggested-followers" role="tabpanel" aria-labelledby="suggested-followers-tab">
                         {% if suggested_followers|length == 0 %}
                             <div class="text-center">   
                                 <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">No Suggested Followers</h3>
