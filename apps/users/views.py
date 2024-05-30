@@ -63,13 +63,18 @@ def profile_page(request, username=None):
 
     profile = get_object_or_404(Profile, user=user)
     
+    is_following = False
+    
+    if request.user.is_authenticated:
+        is_following = Followers.objects.filter(follower=request.user.profile, following=profile).exists()
+
     context = {
         'user': user,
         'profile': profile,
         'posts':  Post.objects.filter(user_profile=profile),  
         'followers' : Followers.objects.filter(following=profile).all(),
         'following' : Followers.objects.filter(follower=profile).all(),
-        'is_following': Followers.objects.filter(follower=request.user.profile, following=profile).exists()
+        'is_following': is_following,
     }
     return render(request, 'pages/profile.html', context)
 
@@ -77,14 +82,16 @@ def profile_page(request, username=None):
 def follow_user(request, username):
     user = get_object_or_404(User, username=username)
     profile = get_object_or_404(Profile, user=user)
-    Followers.objects.update_or_create(follower=request.user.profile, following=profile)
+    follower = Followers(follower=request.user.profile, following=profile)
+    follower.follow()
     return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/users/signin/')
 def unfollow_user(request, username):
     user = get_object_or_404(User, username=username)
     profile = get_object_or_404(Profile, user=user)
-    Followers.objects.filter(follower=request.user.profile, following=profile).delete()
+    follower = Followers(follower=request.user.profile, following=profile)
+    follower.unfollow()
     return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/users/signin/')

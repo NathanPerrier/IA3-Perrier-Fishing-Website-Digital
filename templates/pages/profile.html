@@ -1,5 +1,6 @@
 {% extends "layouts/base-alt.html" %}
 {% load static %}
+{% load profile_tags %}
 
 {% block content %}
 
@@ -50,11 +51,23 @@
                                         {% for user in following %}
                                             <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3 mx-auto">
                                                 <div class="flex flex-col items-center pb-10">
-                                                    <img class="w-20 h-20 mb-3 rounded-full shadow-lg" src="{% if user.following.avatar %}{{ user.following.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
+                                                    <img style="max-height:100px" class="w-18 h-18 mb-3 rounded-full shadow-lg" src="{% if user.following.avatar %}{{ user.following.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
                                                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.following }}</h5>
                                                     <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.following.first_name }}</span>
                                                     <div class="flex space-x-2 mt-4 md:mt-6">
-                                                        <a href="/users/profile/{{user.following}}/unfollow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Unfollow</a>
+                                                        {% if request.user.is_authenticated %}
+                                                            {% if request.user.profile != user.following %}
+                                                                <a href="/users/profile/{{user.following}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center focus:ring-gray-500 inline-flex items-center bg-gray-100 border text-gray-800 border-gray-800 dark:bg-gray-600 dark:border-gray-800 dark:text-white rounded-lg">Unfollow</a>
+                                                            {% else %}
+                                                                {% if request.user.profile != user.follower %}
+                                                                    {% if request.user.profile|is_following:user.following %}
+                                                                        <a href="/users/profile/{{user.following}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center focus:ring-gray-500 inline-flex items-center bg-gray-100 border text-gray-800 border-gray-800 dark:bg-gray-600 dark:border-gray-800 dark:text-white rounded-lg">Unfollow</a>
+                                                                    {% else %}
+                                                                        <a href="/users/profile/{{user.following}}/follow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Follow</a>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
                                                         <a href="/users/profile/{{ user.following }}/" class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Profile</a>
                                                     </div>
                                                 </div>
@@ -107,12 +120,20 @@
                                         {% for user in followers %}
                                             <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-3 mx-auto">
                                                 <div class="flex flex-col items-center pb-10">
-                                                    <img class="w-20 h-20 mb-3 rounded-full shadow-lg" src="{% if user.following.avatar %}{{ user.following.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
-                                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.following }}</h5>
-                                                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.following.first_name }}</span>
+                                                    <img style="max-height:100px" class="w-18 h-18 mb-3 rounded-full shadow-lg" src="{% if user.follower.avatar %}{{ user.follower.avatar.url }}{% else %}{% static 'dist/img/default-user.png' %}{% endif %}" alt="{{user.following}}"/>
+                                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ user.follower }}</h5>
+                                                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ user.follower.first_name }}</span>
                                                     <div class="flex space-x-2 mt-4 md:mt-6">
-                                                        <a href="/users/profile/{{user.following}}/unfollow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Unfollow</a>
-                                                        <a href="/users/profile/{{ user.following }}/" class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Profile</a>
+                                                        {% if request.user.is_authenticated %}
+                                                            {% if request.user.profile != user.follower %}
+                                                                {% if request.user.profile|is_following:user.follower %}
+                                                                    <a href="/users/profile/{{user.follower}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center focus:ring-gray-500 inline-flex items-center bg-gray-100 border text-gray-800 border-gray-800 dark:bg-gray-600 dark:border-gray-800 dark:text-white rounded-lg">Unfollow</a>
+                                                                {% else %}
+                                                                    <a href="/users/profile/{{user.follower}}/follow" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Follow</a>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        <a href="/users/profile/{{ user.follower }}/" class="py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Profile</a>
                                                     </div>
                                                 </div>
                                             </div>

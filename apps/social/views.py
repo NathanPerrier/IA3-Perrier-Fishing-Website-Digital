@@ -22,15 +22,16 @@ def feed(request):
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
         post.comments = Comment.objects.filter(post=post)
-        post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
-        post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
+        if request.user.is_authenticated:
+            post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
+            post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
         for comment in post.comments:
             comment.likes = CommentLikes.objects.filter(comment=comment)
             comment.comments = Comment.objects.filter(relates_to=comment)
-            comment.liked = CommentLikes.objects.filter(comment=comment, user_profile=request.user.profile).exists()
+            if request.user.is_authenticated: comment.liked = CommentLikes.objects.filter(comment=comment, user_profile=request.user.profile).exists()
             for sub_comment in comment.comments:
                 sub_comment.likes = CommentLikes.objects.filter(comment=sub_comment)
-                sub_comment.liked = CommentLikes.objects.filter(comment=sub_comment, user_profile=request.user.profile).exists()
+                if request.user.is_authenticated: sub_comment.liked = CommentLikes.objects.filter(comment=sub_comment, user_profile=request.user.profile).exists()
 
     fish = WildlifeSpecies.objects.all()
 

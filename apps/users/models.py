@@ -23,10 +23,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
-        
-    def is_following(self, user_profile):
-        return Followers.objects.filter(follower=self, following=user_profile).exists()
-    
 class Followers(models.Model):
     """ followers and following """
     follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='user_from_profile')
@@ -38,9 +34,18 @@ class Followers(models.Model):
     def get_following_by_profile(self, user_profile):
         return self.objects.filter(follower=user_profile)
     
-    def follow(self, user_profile):
-        return self.objects.update_or_create(follower=self, following=user_profile)
+    def is_following(self, user_profile):
+        return self.__class__.objects.filter(follower=self.follower, following=user_profile).exists()
     
-    def unfollow(self, user_profile):
-        return self.objects.filter(follower=self, following=user_profile).delete()
-
+    def follow(self):
+        if self.is_following(self.following):
+            return None
+    
+        if self.following == self.follower:
+            print('You cannot follow yourself')
+            return None
+    
+        return self.__class__.objects.update_or_create(follower=self.follower, following=self.following)
+    
+    def unfollow(self):
+        return self.__class__.objects.filter(follower=self.follower, following=self.following).delete()
