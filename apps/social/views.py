@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
-from apps.users.models import Profile
+from apps.users.models import Profile, Followers
 
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
@@ -23,6 +23,7 @@ def feed(request):
         post.images = PostImages.objects.filter(post=post)
         post.comments = Comment.objects.filter(post=post)
         if request.user.is_authenticated:
+            post.is_following = Followers.objects.filter(follower=request.user.profile, following=post.user_profile).exists()
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
         for comment in post.comments:

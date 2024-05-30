@@ -75,6 +75,8 @@ def profile_page(request, username=None):
         'saved_posts': get_saved_posts(request, profile),  
         'followers_posts': get_followers_posts(request, profile),
         'following_posts': get_following_posts(request, profile), 
+        'suggested_posts': get_suggested_posts(request, profile),
+        'suggested_followers': get_suggested_followers(request, profile),
         'followers' : Followers.objects.filter(following=profile).all(),
         'following' : Followers.objects.filter(follower=profile).all(),
         'is_following': is_following,

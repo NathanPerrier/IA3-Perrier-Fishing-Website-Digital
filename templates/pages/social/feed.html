@@ -144,8 +144,8 @@
                                     {% if request.user.profile == post.user_profile %}
                                         <a href="/social/feed/{{post.id}}/edit" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border dark:text-white text-gray-800 rounded-lg ms-auto right-0">Edit</a>
                                     {% else %}
-                                        {% if is_following %}
-                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-white rounded-lg ms-auto right-0">Unfollow</a>
+                                        {% if post.is_following %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-gray-600 dark:text-white rounded-lg ms-auto right-0">Unfollow</a>
                                         {% else %}
                                             <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
                                         {% endif %}
@@ -399,8 +399,8 @@
                                     {% if request.user.profile == post.user_profile %}
                                         <a href="/social/feed/{{post.id}}/edit" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border dark:text-white text-gray-800 rounded-lg ms-auto right-0">Edit</a>
                                     {% else %}
-                                        {% if is_following %}
-                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-white rounded-lg ms-auto right-0">Unfollow</a>
+                                        {% if post.is_following %}
+                                            <a href="/users/profile/{{post.user_profile.user.username}}/unfollow" class="focus:ring-4 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center  border border-gray-600 text-gray-600 dark:text-white rounded-lg ms-auto right-0">Unfollow</a>
                                         {% else %}
                                             <a href="/users/profile/{{post.user_profile.user.username}}/follow" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ms-auto right-0">Follow</a>
                                         {% endif %}

@@ -11,14 +11,22 @@ class Suggestions:
 
         # Top Profiles
         self.top_profiles_urls = (
-            Routes.objects.filter(user=user, current_url__contains='/profile/')
+            Routes.objects.filter(user=user, current_url__icontains='/profile/')
             .values('current_url')
             .annotate(visit_count=Count('current_url'))
             .order_by('-visit_count')
         )
+        
         self.top_profile_usernames = [
-            url['current_url'].split('/')[-1] for url in self.top_profiles_urls
+            url['current_url'].split('/') for url in self.top_profiles_urls
         ]
+        
+        for i, endpoints in enumerate(self.top_profile_usernames):
+            for username in endpoints:
+                if username in Profile.objects.values_list('user__username', flat=True):
+                    if username != user.username:
+                        self.top_profile_usernames[i] = username
+                  
         self.top_profiles = Profile.objects.filter(user__username__in=self.top_profile_usernames)
 
         self.top_profile_posts = Post.objects.filter(user_profile__in=self.top_profiles)
@@ -50,7 +58,7 @@ class Suggestions:
 
         top_posts = (
             all_posts.annotate(like_count=Count('postlikes'), save_count=Count('postsaved'))
-            .order_by('-like_count', '-save_count')[:5]
+            .order_by('-like_count', '-save_count')
         )
 
         return top_posts.order_by('-created_at')
