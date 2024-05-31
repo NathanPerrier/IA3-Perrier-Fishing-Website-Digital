@@ -111,7 +111,6 @@ def edit_post(request, post_id):
                     except Exception as e:
                         messages.error(request, 'There was an error uploading your images. Please try again later.')
                         print(e)
-                messages.success(request, 'Post updated successfully.')
                 return JsonResponse({'success': True})
             
             except Exception as e:
