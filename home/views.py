@@ -28,7 +28,7 @@ def index(request):
 
 def search(request):
   filters = profile_filter(request)
-  print(filters)
+  
   profile = Profile.objects.filter(**filters).first()
   
   return redirect(f'/users/profile/{profile.user.username}')

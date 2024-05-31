@@ -9,8 +9,9 @@ from apps.users.models import Profile, Followers
 from .models import Post, PostImages, PostLikes, PostSaved, Comment, CommentLikes
 from apps.wildlifeAPI.models import *
 from .utils import get_image_urls, post_filter
-from .wrapper import group_required, admin_required
+from .wrapper import *
 from .forms import PostAdminForm
+from django.conf import settings
 
 
 def feed(request):
@@ -18,6 +19,8 @@ def feed(request):
     paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
+    
+    request.session.pop('file_urls', None)
 
     # Get additional data for each post
     for post in posts:
@@ -85,23 +88,44 @@ def edit_post(request, post_id):
     if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
         if request.method == 'POST':
             try:
+                file_urls = get_image_urls(request)
                 post.content = request.POST['content']
+                
+                species = WildlifeSpecies.objects.filter(common_name=request.POST['species']).first()
+                
+                if not species and request.POST['species']:
+                    species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
+                
+                post.species = species
+                
                 post.save()
+                
+                if file_urls:
+                    PostImages.objects.delete(post=post)
+                    try:
+                        for url in file_urls:
+                            PostImages.objects.create(
+                                post=post,
+                                image=url
+                            )
+                    except Exception as e:
+                        messages.error(request, 'There was an error uploading your images. Please try again later.')
+                        print(e)
                 messages.success(request, 'Post updated successfully.')
-                return redirect('/') 
+                return JsonResponse({'success': True})
             
             except Exception as e:
                 messages.error(request, 'There was an error updating your post. Please try again later.')
                 print(e)
     else:
         messages.error(request, 'You do not have permission to edit this post.')
-        return redirect('/')
+        return redirect('/social/feed/')
     
-    return render(request, 'pages/social/edit_post.html', {'post': post, 'species': WildlifeSpecies.objects.all()})
+    return render(request, 'pages/social/edit_post.html', {'post': post, 'species': WildlifeSpecies.objects.all(), 'media_root': settings.MEDIA_URL})
 
 
  #? should non club memebers be able to comment?
-@login_required(login_url='/users/signin/')
+@extended_group_required('member', 'leader', 'staff', 'admin')
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     
@@ -122,7 +146,7 @@ def create_comment(request, post_id):
             print(e)
     return redirect('/social/feed/')
 
-@login_required(login_url='/users/signin/')
+@extended_group_required('member', 'leader', 'staff', 'admin')
 def create_nested_comment(request, post_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     

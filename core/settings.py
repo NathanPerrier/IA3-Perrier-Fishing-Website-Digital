@@ -207,7 +207,7 @@ SITE_ID = 1
 
 AUTH_USER_MODEL = 'auth.User'
 
-CUSTOM_GROUPS = ["Admin", "Student", "Teacher", "Parent", "User", "Member", "Staff", "Leader", "Volunteer", "User", 
+CUSTOM_GROUPS = ["Admin", "Student", "Teacher", "Parent", "User", "Member", "Staff", "Leader", "Volunteer",
                  "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12"]
 
 

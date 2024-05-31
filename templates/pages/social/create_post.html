@@ -21,7 +21,7 @@
     <a href="/" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
         <img src="https://www.atc.qld.edu.au/img/atc-logo.svg" class="mr-4 w-80" alt="ATC Logo">
     </a>
-    <div class="block px-6 py-6 w-full bg-gray-200 rounded-lg dark:bg-gray-800">
+    <div class="block px-6 py-6 w-full bg-white shadow rounded-lg dark:bg-gray-800">
         <div class="flex mx-auto items-center justify-center w-full ms-8">
             <ol class="flex items-center w-full mb-4 sm:mb-5 mx-auto ms-8">
                 <li id="step-2-line" class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700">
@@ -57,7 +57,7 @@
         <form class="w-full" method="POST" id="multiStepForm" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="step-1" class="step-content">
-                <h3 class="mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white">Post Image (optional)</h3>
+                <h3 class="mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white">Upload Post Images (optional)</h3>
                 <div class="mb-4 w-full">
                     <div class="flex items-center justify-center w-full">
                         <label for="dropzone-file" class="w-full">
@@ -126,7 +126,7 @@
                       <button class="ql-clean"></button>
                     </span>
                 </div>
-                <div id="editor" class="text-gray-800 h-full dark:text-white bg-gray-200 dark:bg-gray-600"></div>
+                <div id="editor" class="text-gray-800 h-full dark:text-white bg-gray-100 dark:bg-gray-700"></div>
             </div>
             <div id="step-3" class="step-content hidden">
                 <h3 class="mb-4 text-lg font-medium leading-none text-gray-900 dark:text-white">Post Species (optional)</h3>
@@ -339,25 +339,25 @@
                 }                     
                 htmlInfo += `   
                     <div class="grid grid-cols-4 gap-2 p-2 h-full item-center">
-                        <div class="flex flex-col rounded-lg p-3 bg-white dark:bg-gray-800">
+                        <div class="flex flex-col rounded-lg p-3 bg-gray-200 dark:bg-gray-800">
                             <div class="my-auto">
                                 <p class="text-xs p-3 py-1 bg-primary-600 mb-2 rounded-full text-white text-center">Family</p>
                                 <p class="text-xs text-blue-500 dark:text-blue-400 text-center bold">${data[0].family_name}</p>
                             </div>
                         </div>
-                        <div class="flex flex-col rounded-lg p-3 bg-white dark:bg-gray-800">
+                        <div class="flex flex-col rounded-lg p-3 bg-gray-200 dark:bg-gray-800">
                             <div class="my-auto">
                                 <p class="text-xs p-3 py-1 bg-primary-600 mb-2 rounded-full text-white text-center">Environment</p>
                                 <p class="text-xs text-green-500 dark:text-green-400 text-center bold">${dataInfo2.environment}</p>
                             </div>
                         </div>
-                        <div class="flex flex-col rounded-lg p-3 bg-white dark:bg-gray-800">
+                        <div class="flex flex-col rounded-lg p-3 bg-gray-200 dark:bg-gray-800">
                             <div class="my-auto">
                                 <p class="text-xs p-3 py-1 bg-primary-600 mb-2 rounded-full text-white text-center">Wetland Status</p>
                                 <p class="text-xs text-green-500 dark:text-green-400 text-center bold">${dataInfo2.wetland_status}</p>
                             </div>
                         </div>
-                        <div class="flex flex-col rounded-lg p-3 bg-white dark:bg-gray-800">
+                        <div class="flex flex-col rounded-lg p-3 bg-gray-200 dark:bg-gray-800">
                             <div class="my-auto">
                                 <p class="text-xs p-3 py-1 bg-primary-600 mb-2 rounded-full text-white text-center">Pest Status</p>
                                 <p class="text-xs text-green-500 dark:text-green-400 text-center bold">${dataInfo2.pest_status}</p>

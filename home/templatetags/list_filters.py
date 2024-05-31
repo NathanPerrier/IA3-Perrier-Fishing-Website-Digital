@@ -13,3 +13,11 @@ def get_item(list, index):
 @register.filter
 def replace_spaces(value):
     return value.replace(' ', '_')
+
+
+@register.filter
+def clean_file(value):
+    """
+    This function removes the 'C:\\' prefix from the given file path.
+    """
+    return value.replace('C:\\', '')
