@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.http import JsonResponse
@@ -10,6 +10,8 @@ from django.core.files.storage import FileSystemStorage
 
 from .forms import ContactForm
 from .models import *
+from .utils import profile_filter
+from apps.users.models import Profile
 
 @login_required(login_url="/users/signin")
 def dashboard(request):
@@ -21,9 +23,15 @@ def dashboard(request):
   return render(request, "pages/errors/404.html")
 
 def index(request):
-
   context = {}
   return render(request, "pages/index.html", context)
+
+def search(request):
+  filters = profile_filter(request)
+  print(filters)
+  profile = Profile.objects.filter(**filters).first()
+  
+  return redirect(f'/users/profile/{profile.user.username}')
 
 def contact(request):
   if request.method == 'POST':

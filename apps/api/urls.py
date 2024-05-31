@@ -9,6 +9,8 @@ router.register(r'wildlife', WildlifeViewSet, basename='wildlife')
 urlpatterns = [
     path('', include(router.urls)),
     
+    path('users/search/', UserViewSet.as_view({'get': 'search'}), name="user_api_search"),
+    
     path('wildlife/kingdoms', WildlifeKingdomsViewSet.as_view({'get': 'list'}), name='wildlife-kingdoms'),
     path('wildlife/kingdoms/<int:pk>/', WildlifeKingdomsViewSet.as_view({'get': 'retrieve'}), name='wildlife-kingdoms-retrieve'),
     path('wildlife/kingdoms/search/', WildlifeKingdomsViewSet.as_view({'get': 'search'}), name='wildlife-kingdoms-search'),

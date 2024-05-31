@@ -7,13 +7,18 @@ from ..wildlifeAPI.models import *
     
 class UserPermission(permissions.BasePermission):
     def has_permission(self, request, _):
+        if request.method == 'GET':
+            return True
         return request.user and request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff)
 
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+class UserViewSet(viewsets.ViewSet):
     permission_classes = (UserPermission, )
-    lookup_field = 'id'
+    
+    def search(self, request):
+        query = request.query_params.get('q', '')
+        users = User.objects.filter(username__icontains=query)
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
     
 
 class WildlifePernission(permissions.BasePermission):

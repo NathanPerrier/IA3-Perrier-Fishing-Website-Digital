@@ -8,6 +8,48 @@
                 <img src="https://www.atc.qld.edu.au/img/atc-logo.svg" class="py-2" alt="ATC Logo">
             </a>
             <div class="flex items-center lg:order-2">
+                <button id="searchModalButton" data-modal-target="searchModalModal" data-modal-toggle="searchModalModal" class="inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <i class="w-5 h-4 fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div id="searchModalModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 w-full">
+                            <!-- Modal header -->
+                            <div class="flex justify-between mb-4 rounded-t sm:mb-5">
+                                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                    <h3 class="font-semibold ">
+                                        Profile Search
+                                    </h3>
+                                </div>
+                                <div>
+                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="searchModalModal">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <dl class="w-100 py-4">
+                                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Search Profiles By Username</dt>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400 w-full">
+                                    <div class="flex flex-wrap w-full space-y-4 overflow-y-auto" style="max-height: 400px;">
+                                        <form action="/search" class="sm:pr-3 w-full" method="GET">
+                                            <label for="posts-search" class="sr-only">Search</label>
+                                            <div class="relative">
+                                            <input type="text" oninput="showResults(this.value)" list="profileList" name="search" id="posts-search"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 my-2"
+                                                placeholder="Search for profiles by username">
+                                            <datalist id="profileList">
+                                            </datalist>
+                                            <button type="submit" class="mt-3 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Search</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </dd>
+                            </dl>  
+                        </div>
+                    </div>
+                </div>
                 <button id="theme-toggle" data-tooltip-target="tooltip-toggle" type="button"
                     class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-3">
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -102,7 +144,7 @@
                     <a href="/users/signin/" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a>
                     <a href="/users/signup/" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Get started</a>
                 {% endif %}
-
+                    
                 <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
@@ -128,3 +170,25 @@
         </div>
     </nav>
 </header>
+
+<script>
+    async function showResults(query) {
+        
+        if (query.length < 3) {
+            document.getElementById('speciesList').innerHTML = '';
+            return;
+        }
+    
+        const response = await fetch(`http://127.0.0.1:8000/api/users/search/?q=${query}`);
+        console.log()
+        const data = await response.json();
+
+        console.log(data);
+        let html = '';
+
+        for (let user of data) {
+            html += `<option value="${user.username}">`;
+        }
+        document.getElementById('profileList').innerHTML = html;
+    }
+</script>
