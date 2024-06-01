@@ -32,6 +32,9 @@ class MicrosoftAccount(models.Model):
 
     def __str__(self):
         return self.microsoft_id
+    
+
+            
 
 
 class XboxLiveAccount(models.Model):

@@ -126,12 +126,11 @@ class MicrosoftAuthenticationBackend(ModelBackend):
 
         if microsoft_user is not None:
             user = self._verify_microsoft_user(microsoft_user, data)
-
         return user
 
     def _get_microsoft_user(self, data):
         microsoft_user = None
-
+        print(data)
         try:
             microsoft_user = MicrosoftAccount.objects.get(microsoft_id=data["sub"])
         except MicrosoftAccount.DoesNotExist:
@@ -165,7 +164,12 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                 if user.first_name == "" and user.last_name == "":
                     user.first_name = first_name
                     user.last_name = last_name
-                    user.save()
+                    
+                if 'organization' in data and not user.organization:
+                    print(data['organization'])
+                print(data)
+
+                user.save()
             except User.DoesNotExist:
                 user = User(
                     username=data["preferred_username"][:150],
@@ -173,6 +177,10 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                     last_name=last_name,
                     email=data["email"],
                 )
+                if 'organization' in data and not user.organization:
+                    print(data['organization'])
+                print(data)
+
                 user.save()
 
             existing_account = self._get_existing_microsoft_account(user)
