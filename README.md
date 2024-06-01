@@ -50,7 +50,7 @@ SECRET_KEY=<STRONG_KEY_HERE>
 # DB_PASS=
 # DB_PORT=3306
 
-SMTP configaration
+#SMTP configaration
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
