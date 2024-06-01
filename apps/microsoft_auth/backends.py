@@ -165,8 +165,6 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                     user.first_name = first_name
                     user.last_name = last_name
                     
-                print(data)
-
                 user.save()
             except User.DoesNotExist:
                 user = User(
@@ -175,8 +173,6 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                     last_name=last_name,
                     email=data["email"],
                 )
-
-                print(data)
 
                 user.save()
 

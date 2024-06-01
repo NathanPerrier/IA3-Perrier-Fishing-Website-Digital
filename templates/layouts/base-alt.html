@@ -8,17 +8,19 @@
     {% block extrastyle %}{% endblock extrastyle %}
 </head>
 
-<body>
+<body>    
+    <div id="content">
+        {% block messages %}{% endblock messages %}
 
-    {% block messages %}{% endblock messages %}
+        {% block navigation %}
+        {% include 'includes/navigation-alt.html' %}
+        {% endblock navigation %}
 
-    {% block navigation %}
-    {% include 'includes/navigation-alt.html' %}
-    {% endblock navigation %}
+        {% block content %}{% endblock content %}
+  
 
-    {% block content %}{% endblock content %}
-
-    {% include 'includes/footer-alt.html' %}
+        {% include 'includes/footer-alt.html' %}
+    </div>
 
     {% block extra_js %}{% endblock extra_js %}
     <script src="{% static 'dist/main.bundle.js' %}"></script>
