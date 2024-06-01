@@ -165,8 +165,6 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                     user.first_name = first_name
                     user.last_name = last_name
                     
-                if 'organization' in data and not user.organization:
-                    print(data['organization'])
                 print(data)
 
                 user.save()
@@ -177,8 +175,7 @@ class MicrosoftAuthenticationBackend(ModelBackend):
                     last_name=last_name,
                     email=data["email"],
                 )
-                if 'organization' in data and not user.organization:
-                    print(data['organization'])
+
                 print(data)
 
                 user.save()
