@@ -100,10 +100,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-> 👉 Update the database with **wildlife data**
+> 👉 Update the database with **wildlife data** (may take 10-15 minutes)
 
 ```bash
-python manage.py update_wildlife
+python manage.py update_wildlife --fish-only --debug
 ```
 
 > 👉 Run **celery** worker
@@ -112,7 +112,7 @@ python manage.py update_wildlife
 celery -A core worker --loglevel=info -E
 ```
 
-> 👉 `Create Superuser`
+> 👉 Create `Superuser`
 
 ```bash
 python manage.py createsuperuser # create the admin
@@ -120,7 +120,7 @@ python manage.py createsuperuser # create the admin
 
 > 👉 Options to **run** the website
 
->> Normal **runserver** (http)
+`Normal **runserver** (http)`
 
 ```bash
 python manage.py runserver       
@@ -128,15 +128,12 @@ python manage.py runserver
 
 OR
 
+`SSL Sever (http)`
+
 ```bash
 python manage.py runsslserver localhost:8000
 ```
 
-> 👉  Run website on IPV6
-
-```bash
-python manage.py runsslserver -6 [::]:7443
-```
 
 <br />
 
