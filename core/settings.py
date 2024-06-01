@@ -56,8 +56,6 @@ INSTALLED_APPS = [
     
     "social_django",
     "user_visit",
-    
-    "sslserver", # SSL Server
 
     "home",
     "apps.users",

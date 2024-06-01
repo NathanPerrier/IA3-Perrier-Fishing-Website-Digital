@@ -28,7 +28,9 @@ django-microsoft-auth
 social-auth-app-django
 
 # SSL Certificates
-django-sslserver==0.22
+# django-extensions 
+# Werkzeug 
+# pyOpenSSL
 
 # tracking
 django-user-visit==2.0

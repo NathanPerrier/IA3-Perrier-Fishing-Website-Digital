@@ -118,7 +118,7 @@ celery -A core worker --loglevel=info -E
 python manage.py createsuperuser # create the admin
 ```
 
-> 👉 Options to **run** the website
+> 👉 **run** the website
 
 `Normal **runserver** (http)`
 
@@ -126,13 +126,6 @@ python manage.py createsuperuser # create the admin
 python manage.py runserver       
 ```
 
-OR
-
-`SSL Sever (http)`
-
-```bash
-python manage.py runsslserver localhost:8000
-```
 
 
 <br />
