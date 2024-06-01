@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 
-
 from .forms import ContactForm
 from .models import *
 from .utils import profile_filter

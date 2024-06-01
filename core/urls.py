@@ -30,6 +30,7 @@ urlpatterns = [
     path('species/', include('apps.wildlifeAPI.urls')),
     path("tasks/", include("apps.tasks.urls")),
     path("social/", include("apps.social.urls")),
+    path('microsoft/', include('apps.microsoft_auth.urls', namespace='microsoft_auth')),
     path("club/", include("apps.club.urls")),
     path('api/docs/redoc/' , SpectacularRedocView.as_view(url_name='schema'), name='redoc'), 
     path('api/docs/schema', SpectacularAPIView.as_view(), name='schema'),

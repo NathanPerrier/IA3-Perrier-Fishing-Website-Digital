@@ -6,6 +6,7 @@ from django.db.models.signals import post_save, post_migrate, post_init
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
 from django.conf import settings
+from apps.microsoft_auth.models import MicrosoftAccount 
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
@@ -14,6 +15,17 @@ def create_profile(sender, instance, created, **kwargs):
         if instance.is_superuser:
             profile.role = "admin"
             profile.save()
+            
+        # Check if user authenticated with Microsoft OAuth
+        microsoft_account = MicrosoftAccount.objects.filter(user=instance)
+        if microsoft_account.exists():
+            # Access tenant_id
+            tenant_id = microsoft_account.first().tenant_id
+            print(tenant_id)
+            print(microsoft_account.first())
+            if tenant_id:
+                # Do something with the tenant_id (organization) information
+                pass
             
         send_mail(
             'Welcome to Ambrose Treacy College!',

@@ -9,7 +9,7 @@ urlpatterns = [
     path("terms-and-conditions/", views.terms_and_conditions, name="terms-and-conditions"),
     path("privacy-policy/", views.privacy_policy, name="privacy-policy"),
     path("file-upload", views.upload_file, name="file-upload"),
-    path("search", views.search, name="search")
+    path("search", views.search, name="search"),
 ]
 
 # core/urls.py

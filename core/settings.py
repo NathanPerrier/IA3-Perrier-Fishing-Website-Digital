@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.sites",
     
     "social_django",
     "user_visit",
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     "apps.wildlifeAPI",
     "apps.social",
     "apps.tracking",
+    'apps.microsoft_auth',
     
     # 'allauth',
     # 'allauth.account',
@@ -84,7 +86,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+    'apps.microsoft_auth.backends.MicrosoftAuthenticationBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
 )
 
@@ -121,6 +123,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'social_django.context_processors.backends', 
+                'apps.microsoft_auth.context_processors.microsoft',
             ],
         },
     },
@@ -138,9 +141,21 @@ SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_OAUTH2_CLIENT_SECRET')
 SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/github/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_OAUTH2_APP_ID')  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_OAUTH2_APP_SECRET')  # App Secret
-SOCIAL_AUTH_FACEBOOK_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/facebook/'
+MICROSOFT_AUTH_CLIENT_ID = f'{os.environ.get('MICROSOFT_OAUTH2_APP_ID')}'
+MICROSOFT_AUTH_CLIENT_SECRET = f'{os.environ.get('MICROSOFT_OAUTH2_CLIENT_SECRET')}'
+MICROSOFT_AUTH_TENANT_ID = os.environ.get('MICROSOFT_OAUTH2_TENANT_ID')
+
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = MICROSOFT_AUTH_CLIENT_SECRET
+MICROSOFT_AUTH_AUTO_REPLACE_ACCOUNTS = True
+MICROSOFT_AUTH_REDIRECT_URI = 'http://localhost:8000/microsoft/from-auth-redirect/'
+
+# Microsoft authentication
+# include Microsoft Accounts, Office 365 Enterpirse and Azure AD accounts
+MICROSOFT_AUTH_LOGIN_TYPE = 'ma'
+
+# Xbox Live authentication
+# MICROSOFT_AUTH_LOGIN_TYPE = 'xbl'  
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
