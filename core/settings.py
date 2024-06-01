@@ -31,11 +31,11 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = True  #str2bool(os.environ.get('DEBUG'))
+DEBUG =     True  #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5085', 'http://127.0.0.1:8000', 'http://127.0.0.1:5085', 'https://rocket-django.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5085', 'http://127.0.0.1:8000', 'http://127.0.0.1:5085']
 
 # Used by DEBUG-Toolbar 
 INTERNAL_IPS = [
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     
     "social_django",
     "user_visit",
+    
+    "sslserver", # SSL Server
 
     "home",
     "apps.users",
@@ -135,11 +137,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Social Auth
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.environ.get('GOOGLE_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/google-oauth2/' #auth/google/callback'
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/google-oauth2/' #auth/google/callback'
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_OAUTH2_CLIENT_SECRET')
-SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/github/'
+SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/github/'
 
 MICROSOFT_AUTH_CLIENT_ID = f'{os.environ.get('MICROSOFT_OAUTH2_APP_ID')}'
 MICROSOFT_AUTH_CLIENT_SECRET = f'{os.environ.get('MICROSOFT_OAUTH2_CLIENT_SECRET')}'

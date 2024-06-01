@@ -62,6 +62,10 @@ GOOGLE_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
 
 GITHUB_OAUTH2_CLIENT_ID=<CLIENT_ID>
 GITHUB_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
+
+MICROSOFT_OAUTH2_APP_ID=<CLIENT_ID>
+MICROSOFT_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
+MICROSOFT_OAUTH2_TENANT_ID=<TENANT_ID>
 ```
 
 > 👉 Unrestrict **current user** scope   
@@ -108,11 +112,30 @@ python manage.py update_wildlife
 celery -A core worker --loglevel=info -E
 ```
 
-> 👉 `Create Superuser` & Start the **server**
+> 👉 `Create Superuser`
 
 ```bash
 python manage.py createsuperuser # create the admin
-python manage.py runserver       # start the project
+```
+
+> 👉 Options to **run** the website
+
+>> Normal **runserver** (http)
+
+```bash
+python manage.py runserver       
+```
+
+OR
+
+```bash
+python manage.py runsslserver localhost:8000
+```
+
+> 👉  Run website on IPV6
+
+```bash
+python manage.py runsslserver -6 [::]:7443
 ```
 
 <br />

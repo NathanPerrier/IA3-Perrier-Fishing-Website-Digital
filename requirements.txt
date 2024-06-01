@@ -27,6 +27,8 @@ gunicorn==21.2.0
 django-microsoft-auth
 social-auth-app-django
 
+# SSL Certificates
+django-sslserver==0.22
 
 # tracking
 django-user-visit==2.0
