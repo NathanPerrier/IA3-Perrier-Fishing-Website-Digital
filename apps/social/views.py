@@ -81,7 +81,7 @@ def create_post(request):
     return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})
 
 
-@group_required('member', 'leader', 'staff', 'admin')
+
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
@@ -122,8 +122,18 @@ def edit_post(request, post_id):
     
     return render(request, 'pages/social/edit_post.html', {'post': post, 'species': WildlifeSpecies.objects.all(), 'media_root': settings.MEDIA_URL})
 
+def delete_user_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
+        post.delete()
+        messages.success(request, 'Post deleted successfully.')
+    else:
+        messages.error(request, 'You do not have permission to delete this post.')
+    
+    return redirect('/social/feed/')
 
- #? should non club memebers be able to comment?
+
 @extended_group_required('member', 'leader', 'staff', 'admin')
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)

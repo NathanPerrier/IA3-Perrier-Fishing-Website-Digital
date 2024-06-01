@@ -314,13 +314,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="flex items-center mb-3">
                                         <a href="/users/profile/{{post.user_profile.user.username}}">
@@ -637,13 +643,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     {% if post.comments %}
                                         <div class="">
@@ -941,13 +953,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="flex items-center mb-3">
                                         <a href="/users/profile/{{post.user_profile.user.username}}">
@@ -1264,13 +1282,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     {% if post.comments %}
                                         <div class="">
@@ -1568,13 +1592,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="flex items-center mb-3">
                                         <a href="/users/profile/{{post.user_profile.user.username}}">
@@ -1891,13 +1921,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     {% if post.comments %}
                                         <div class="">
@@ -2195,13 +2231,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="flex items-center mb-3">
                                         <a href="/users/profile/{{post.user_profile.user.username}}">
@@ -2518,13 +2560,19 @@
                                         <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                             <i class="fa-regular fa-comment"></i>
                                         </button>
-                                        <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                            {% if post.saved %}
-                                                <i class="fa fa-bookmark"></i>
-                                            {% else %}
-                                                <i class="fa-regular fa-bookmark"></i>
+                                        <div class="ms-auto right-0 flex items-center">
+                                            {% if request.user.is_superuser or request.user.is_staff %}
+                                                <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                             {% endif %}
-                                        </a>
+                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                {% if post.saved %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% else %}
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                {% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                     
                                     {% if post.comments %}
@@ -2819,13 +2867,19 @@
                                             <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                                 <i class="fa-regular fa-comment"></i>
                                             </button>
-                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                                {% if post.saved %}
-                                                    <i class="fa fa-bookmark"></i>
-                                                {% else %}
-                                                    <i class="fa-regular fa-bookmark"></i>
+                                            <div class="ms-auto right-0 flex items-center">
+                                                {% if request.user.is_superuser or request.user.is_staff %}
+                                                    <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                    <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                                 {% endif %}
-                                            </a>
+                                                <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                    {% if post.saved %}
+                                                        <i class="fa fa-bookmark"></i>
+                                                    {% else %}
+                                                        <i class="fa-regular fa-bookmark"></i>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="flex items-center mb-3">
                                             <a href="/users/profile/{{post.user_profile.user.username}}">
@@ -3142,13 +3196,19 @@
                                             <button onclick="document.getElementById('comments-form-{{post.id}}').classList.remove('hidden')"  class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-2">
                                                 <i class="fa-regular fa-comment"></i>
                                             </button>
-                                            <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none ms-auto right-0">
-                                                {% if post.saved %}
-                                                    <i class="fa fa-bookmark"></i>
-                                                {% else %}
-                                                    <i class="fa-regular fa-bookmark"></i>
+                                            <div class="ms-auto right-0 flex items-center">
+                                                {% if request.user.is_superuser or request.user.is_staff %}
+                                                    <a href="/admin/social/post/{{post.id}}/change/" class="flex items-center hover:underline justify-center text-gray-500 focus:outline-none me-3">Manage</a>
+                                                    <span class="font-bold mb-2 text-gray-500 me-1">.</span>
                                                 {% endif %}
-                                            </a>
+                                                <a href="/social/feed/{{post.id}}/save/" class="flex items-center justify-center w-8 h-8 text-gray-500 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                                    {% if post.saved %}
+                                                        <i class="fa fa-bookmark"></i>
+                                                    {% else %}
+                                                        <i class="fa-regular fa-bookmark"></i>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
                                         </div>
                                         
                                         {% if post.comments %}
