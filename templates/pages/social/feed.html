@@ -58,7 +58,7 @@
 
 
 <section id="feed" class="bg-gray-200 dark:bg-gray-700 pt-20 p-3 py-8 w-screen">
-    <div class="grid grid-cols gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-3 px-2 lg:px-8 w-screen">
+    <div id="feed-col" class="grid grid-cols gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-3 px-2 lg:px-8 w-screen">
         <div class="col-span-2">
             <div class="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-1 lg:grid-cols-1 lg:px-12 w-screen">
                 {% for post in posts %}
@@ -818,6 +818,7 @@
         element.classList += 'animate__animated animate__hinge animate__slower';
         element.addEventListener('animationend', () => {
             element.remove();
+            document.getElementById('feed-col').classList.remove('lg:grid-cols-3');
         });
     }
 </script>

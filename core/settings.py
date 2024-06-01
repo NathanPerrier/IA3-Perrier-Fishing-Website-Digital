@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     "social_django",
     "user_visit",
 
+    'django_recaptcha',
+    'corsheaders',
+
     "home",
     "apps.users",
     "apps.api", 
@@ -98,7 +101,8 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "allauth.account.middleware.AccountMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # Debug Toolbar
@@ -157,6 +161,15 @@ MICROSOFT_AUTH_LOGIN_TYPE = 'ma'
 # MICROSOFT_AUTH_LOGIN_TYPE = 'xbl'  
 
 
+#ReCaptcha
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_SECRET_KEY')
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+RECAPTCHA_PROXY = {'http': 'http://127.0.0.1:8000', 'https': 'https://127.0.0.1:8000'}
+# RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -205,6 +218,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -218,7 +237,6 @@ USE_I18N = True
 USE_TZ = True
 
 SITE_ID = 1
-
 
 AUTH_USER_MODEL = 'auth.User'
 
@@ -286,7 +304,6 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_TIMEOUT = 90
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {

@@ -28,7 +28,7 @@
             {% endif %}
             <!--href="{% url 'social:begin' 'google-oauth2' %}?next='{{ request.path }}'"-->
 
-            <form class="mt-8 space-y-6 w-full" method="post">
+            <form class="mt-8 space-y-6 w-full"  id="signInForm" method="post" onsubmit="event.preventDefault(); checkCaptcha();">
                 {% csrf_token %}
             
                 {% for field in form %}
@@ -37,6 +37,7 @@
                         {{ field }}
                     </div>
                 {% endfor %}
+                <div id="captcha"></div>
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
                         <input id="remember" aria-describedby="remember" name="remember" type="checkbox" 
@@ -78,6 +79,46 @@
             </form>
         </div>
     </div>
-
+    <button data-sitekey="6Ld5XO4pAAAAAHvjhcaazgfMRg2d8bys5EOMVGH5"  class="g-recaptcha"></button>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+async defer>
+</script>
+<script>
+    let varified = false;
+    var verifyCallback = function(response) {
+        varified = true;
+    };
+
+    var widgetId1;
+    var onloadCallback = function() {
+        var widgetId1 = grecaptcha.render('captcha', {
+            'sitekey' : '6LcGY-4pAAAAADaoZisGG_M9HBGyL0jJFTt7nonU',
+            'theme' : matchTheme(),
+            'callback' : verifyCallback,
+        });
+    }
+
+    function checkCaptcha() {
+        if (!varified) {
+            // reCAPTCHA not completed, show alert
+            alert("Please complete the reCAPTCHA");
+        } else {
+            // reCAPTCHA completed, submit form
+            document.getElementById("signInForm").submit();
+        }
+    }
+
+    function matchTheme() {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            return 'dark';
+        } else {
+            return 'light';
+        }
+    }
+</script>
+{% endblock %}

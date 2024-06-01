@@ -3,7 +3,7 @@
 <div id="bottom-banner" tabindex="-1" class="fixed bottom-0 shadow start-0 z-50 flex justify-between w-full p-4 border-t border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
     <div class="flex items-center">
         <div class="mx-2">
-            <p class="text-sm text-gray-600 dark:text-gray-300"><button tyoe="button" id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"  class="font-bold text-primary-700 hover:underline animate-bounce">Join the fishing club</button> today and gain <span> access to exclusive features!</span></p>
+            <p class="text-sm text-gray-600 dark:text-gray-300"><button tyoe="button" id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"  class="font-bold text-primary-600 hover:underline animate-bounce">Join the fishing club</button> today and gain <span> access to exclusive features!</span></p>
         </div>
     </div>
     <div class="flex items-center">
@@ -24,7 +24,7 @@
             <!-- Modal header -->
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Add Product
+                    Join the fishing club!
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -32,40 +32,41 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="#">
+            <form id="joinForm" action="/club/join/">
+                <div id="messages" class="w-full"></div>
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                    </div>
-                    <div>
-                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                        <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required="">
-                    </div>
-                    <div>
-                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
-                    </div>
-                    <div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                        <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select category</option>
-                            <option value="TV">TV/Monitors</option>
-                            <option value="PC">PC</option>
-                            <option value="GA">Gaming/Console</option>
-                            <option value="PH">Phones</option>
-                        </select>
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>                    
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reason for Joining:</label>
+                        <textarea id="name" name="name" rows="4" class="w-full px-3 py-2 text-sm border bg-primary-800 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:border-primary-300" placeholder="On weekends i enjoy fishing..." required="true"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-gray-500  hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                    Add new product
+                <button class="g-recaptcha  w-full px-5 py-3 text-base font-medium text-center border dark:border-0 text-gray-800 transition-all duration-2000 ease-in-out hover:text-white dark:text-white bg-primary-800 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-500 dark:focus:ring-primary-800"
+                    data-sitekey="6Ld5XO4pAAAAAHvjhcaazgfMRg2d8bys5EOMVGH5" 
+                    data-callback='onSubmit' 
+                    data-action='submit'>Submit
                 </button>
             </form>
         </div>
     </div>
 </div>
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit(token) {       
+        let form = document.getElementById("joinForm")
+        if (form.checkValidity()) {
+            form.submit();
+        } else {
+            let messages = document.getElementById("messages")
+            messages.innerHTML = `
+                <div class="flex items-center p-4 mb-3 text-sm rounded-lg dark:bg-gray-800 text-red-800 border border-red-300 bg-red-50 dark:text-red-400 dark:border-red-800" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>Please Enter A Valid Input</div>
+                </div>
+            `;
+    }
+    }
+</script>

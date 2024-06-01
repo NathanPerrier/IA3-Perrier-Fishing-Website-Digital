@@ -25,7 +25,7 @@
                 <p class="mt-2 text-gray-600 dark:text-gray-400">{{user.email}}</p>
                 <div class="flex max-auto mt-4 w-52 flex-row items-center justify-center space-x-2">
                     {% if request.user|is_club_member %}
-                        <span class="text-sm text-white bg-green-800 px-2 py-1 rounded-full">Club Member</span>
+                        <span class="text-sm text-white bg-green-800 px-2 py-1 rounded-full">Member</span>
                     {% endif %}
                     {% if request.user|is_staff %}
                         <span class="text-sm text-white bg-blue-800 px-2 py-1 rounded-full">Staff</span>
