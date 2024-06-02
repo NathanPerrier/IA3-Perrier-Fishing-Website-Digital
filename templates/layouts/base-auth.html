@@ -1,4 +1,7 @@
 {% load static %}
+{% load reCaptcha %}
+{% get_v3_site_key as v3_site_key %}
+{% get_site_key as site_key %}
 
 <!doctype html>
 <html lang="en" class="dark">
@@ -52,6 +55,9 @@
 
     {% block extra_js %}{% endblock extra_js %}
 
+    <button data-sitekey="{{ v3_site_key }}"  class="g-recaptcha"></button>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="https://kit.fontawesome.com/02870e7611.js" crossorigin="anonymous"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{% static 'dist/main.bundle.js' %}"></script>

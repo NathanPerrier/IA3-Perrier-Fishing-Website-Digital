@@ -1,4 +1,5 @@
-
+{% load reCaptcha %}
+{% get_v3_site_key as site_key %}
 
 <div id="bottom-banner" tabindex="-1" class="fixed bottom-0 shadow start-0 z-50 flex justify-between w-full p-4 border-t border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
     <div class="flex items-center">
@@ -41,7 +42,7 @@
                     </div>
                 </div>
                 <button class="g-recaptcha  w-full px-5 py-3 text-base font-medium text-center border dark:border-0 text-gray-800 transition-all duration-2000 ease-in-out hover:text-white dark:text-white bg-primary-800 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-500 dark:focus:ring-primary-800"
-                    data-sitekey="6Ld5XO4pAAAAAHvjhcaazgfMRg2d8bys5EOMVGH5" 
+                    data-sitekey="{{ site_key }}" 
                     data-callback='onSubmit' 
                     data-action='submit'>Submit
                 </button>
@@ -49,7 +50,6 @@
         </div>
     </div>
 </div>
-
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     function onSubmit(token) {       
