@@ -7,7 +7,7 @@ register = template.Library()
 @register.simple_tag
 def get_api_token():
     try:
-        token = Token.objects.get(user__username="ambrosetreacycollege")
+        token = Token.objects.all().first()
         return token.key
     except Token.DoesNotExist:
         return None

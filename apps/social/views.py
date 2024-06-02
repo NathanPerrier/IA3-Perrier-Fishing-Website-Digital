@@ -88,6 +88,7 @@ def edit_post(request, post_id):
     if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
         if request.method == 'POST':
             try:
+                print(request.POST)
                 file_urls = get_image_urls(request)
                 post.content = request.POST['content']
                 
@@ -99,6 +100,7 @@ def edit_post(request, post_id):
                 post.species = species
                 
                 post.save()
+                print(post.content)
                 
                 if file_urls:
                     PostImages.objects.delete(post=post)
@@ -127,10 +129,9 @@ def delete_user_post(request, post_id):
     
     if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
         post.delete()
-        messages.success(request, 'Post deleted successfully.')
     else:
         messages.error(request, 'You do not have permission to delete this post.')
-    
+
     return redirect('/social/feed/')
 
 

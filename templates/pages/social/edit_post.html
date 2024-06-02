@@ -143,8 +143,8 @@
                 <div>
                     <button type="button" id="go_back" onclick="window.history.back()" class="text-white bg-gray-600 dark:bg-gray-500 dark:hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5">Go Back</button> 
                     <button type="button" id="deleteButton" data-modal-target="deleteModal" data-modal-toggle="deleteModal"  class="text-white bg-red-600 dark:bg-red-700 dark:hover:bg-red-700 focus:ring-2 focus:ring-red-500 font-medium rounded-lg text-sm px-5 py-2.5 ms-2">Delete</button> 
+                    <button type="button" id="prevBtn" class="hidden text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5">Previous</button>
                 </div>
-                <button type="button" id="prevBtn" class="hidden text-white bg-red-500 dark:bg-red-600 dark:hover:bg-red-400 focus:ring-2 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5">Previous</button>
                 <button type="button" id="nextBtn" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Next Step: Add Content
                 </button>
@@ -251,6 +251,7 @@
                 if (currentStep > 1) {
                     prevBtn.classList.remove("hidden");
                     goBack.classList.add("hidden");
+                    deleteBtn.classList.add("hidden");
                 }
             } else {
                 step3.classList = 'flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0';
