@@ -100,6 +100,18 @@ class WildlifeSpecies(models.Model):
     
     def __str__(self):
         return self.name
+   
+class WildlifeSpeciesSightings(models.Model):
+    user_profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE, related_name='sightings')
+    species = models.ForeignKey(WildlifeSpecies, on_delete=models.CASCADE, related_name='sightings')
+    species_name = models.CharField(max_length=255)
+    related_post = models.ForeignKey('social.Post', on_delete=models.CASCADE, related_name='sightings', null=True, blank=True)
+    date = models.DateField(auto_now_add=True, blank=True, null=True)
+    meta_data = models.JSONField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.species.name
+    
     
 class WildlifeSpeciesConservationStatus(models.Model):
     species = models.OneToOneField(WildlifeSpecies, on_delete=models.CASCADE, related_name='conservation_status')

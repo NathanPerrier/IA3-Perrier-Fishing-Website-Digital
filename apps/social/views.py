@@ -61,6 +61,15 @@ def create_post(request):
                 species=species
             )
             
+                            
+            if species:
+                WildlifeSpeciesSightings.objects.create(
+                    user_profile=request.user.profile,
+                    related_post=post,
+                    species=species.add(),
+                    species_name=species.name,
+                )
+            
             if file_urls:
                 try:
                     for url in file_urls:
