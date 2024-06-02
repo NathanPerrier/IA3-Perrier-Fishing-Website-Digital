@@ -1,5 +1,7 @@
 {% load static %}
 {% load profile_tags %}
+{% load api_tokens %}
+{% get_api_token as user_token %}
 
 <header>
     <nav class="fixed shadow w-screen z-100 bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800" style="width:100vw;z-index:999">
@@ -8,7 +10,7 @@
                 <img src="https://www.atc.qld.edu.au/img/atc-logo.svg" class="py-2" alt="ATC Logo">
             </a>
             <div class="flex items-center lg:order-2">
-                <button id="searchModalButton" data-modal-target="searchModalModal" data-modal-toggle="searchModalModal" class="sm:inline-flex hidden items-center p-2 mr-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                <button id="searchModalButton" data-modal-target="searchModalModal" data-modal-toggle="searchModalModal" class="sm:inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <i class="w-5 h-4 fa-solid fa-magnifying-glass"></i>
                 </button>
                 <div id="searchModalModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
@@ -181,7 +183,12 @@
             return;
         }
     
-        const response = await fetch(`http://127.0.0.1:8000/api/users/search/?q=${query}`);
+        const token = '{{ user_token }}'; // replace with your actual token
+        const response = await fetch(`http://127.0.0.1:8000/api/users/search/?q=${query}`, {
+            headers: {
+                'Authorization': `Token ${token}`
+            }
+        });
         console.log()
         const data = await response.json();
 

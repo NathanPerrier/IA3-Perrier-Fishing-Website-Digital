@@ -1,11 +1,36 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from ..wildlifeAPI.models import *
+from apps.users.models import *
+from apps.wildlifeAPI.models import *
+from apps.social.models import *
 
+class FollowersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Followers
+        fields = '__all__'
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    following = FollowersSerializer(Profile, many=True, read_only=True)
+    
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        
 class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+
     class Meta:
         model = User
+        exclude = ['password']
+        
+class SocialPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = Post
         fields = '__all__'
+        
+
         
 class WildlifeKingdomsSerializer(serializers.ModelSerializer):
     class Meta:
