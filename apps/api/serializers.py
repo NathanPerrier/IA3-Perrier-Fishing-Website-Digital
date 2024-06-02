@@ -25,10 +25,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         exclude = ['password']
         
-class SocialPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        models = Post
-        fields = '__all__'
+        
+# class SocialPostSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         models = Post
+#         fields = '__all__'
         
 
         
