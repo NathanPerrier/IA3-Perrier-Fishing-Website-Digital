@@ -32,7 +32,11 @@ def image_exists(value):
     This function checks if the given image exists.
     """
     try:
+<<<<<<< HEAD
         return os.path.isfile(os.path.join(f"{settings.MEDIA_ROOT}{(value.replace('/media', '').replace('/', os.sep))}"))
+=======
+        return os.path.isfile(os.path.join(f'{settings.MEDIA_ROOT}{value.replace('/media', '').replace('/', os.sep)}'))
+>>>>>>> 2fca10f22bc8a8ee398fccc951466d5ace02bd80
     except (TypeError, OSError) as e:
         print(f"An error occurred: {e}")
         return False
