@@ -141,12 +141,7 @@ def delete_user_post(request, post_id):
     else:
         messages.error(request, 'You do not have permission to delete this post.')
 
-<<<<<<< HEAD
     return redirect(request.META.get('HTTP_REFERER'))
-=======
-    return redirect('/social/feed/')
->>>>>>> 2fca10f22bc8a8ee398fccc951466d5ace02bd80
-
 
 @extended_group_required('member', 'leader', 'staff', 'admin')
 def create_comment(request, post_id):

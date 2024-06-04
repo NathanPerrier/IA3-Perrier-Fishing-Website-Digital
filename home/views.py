@@ -9,14 +9,22 @@ from django.core.files.storage import FileSystemStorage
 
 from .forms import ContactForm
 from .models import *
-from .utils import profile_filter
+from .utils import *
 from apps.users.models import Profile
+from user_visit.models import UserVisit
+from apps.social.models import *
 
 @login_required(login_url="/users/signin")
 def dashboard(request):
   if request.user.is_superuser:
     context = {
       'segment': 'dashboard',
+      'posts': Post.objects.all(),
+      'profiles': Profile.objects.all(),
+      'top_posts': get_top_posts(),
+      'top_profiles': get_top_profiles(),
+      'posts_by_week': sort_posts_by_week(),
+      'user_visits': UserVisit.objects.all()
     }
     return render(request, "dashboard/index.html", context)
   return render(request, "pages/errors/404.html")
