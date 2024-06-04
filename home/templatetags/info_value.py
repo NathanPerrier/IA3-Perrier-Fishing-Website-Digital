@@ -10,3 +10,5 @@ def info_value(path):
         return file_info.first().info
     else:
         return ""
+    
+

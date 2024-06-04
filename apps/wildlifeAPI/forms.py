@@ -7,8 +7,7 @@ from apps.social.models import *
 class SpeciesAdminForm(forms.ModelForm):
     class Meta:
         model = WildlifeSpecies
-        exclude = ('class_name', 'family_name', 'kingdom_name', 'created_at', 'updated_at')
-    
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super(SpeciesAdminForm, self).__init__(*args, **kwargs)

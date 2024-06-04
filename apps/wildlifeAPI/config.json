@@ -214,7 +214,7 @@
             ]
         }
     ],
-    "Varaibles": [
+    "Variables": [
         {
             "Name": "f",
             "Description": "Format - Setting the 'f' varaible will determine the format of the response.  There are 4 possible options; json, xml, kml and csv.  Json is the default if 'f' is not set.  If the output is spatial, GeoJson will be return for 'f=json' and KML will be returned for 'f=xml' or 'f=kml'."

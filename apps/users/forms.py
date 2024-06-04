@@ -3,8 +3,16 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from apps.users.models import Profile
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Invisible, ReCaptchaV2Checkbox, ReCaptchaV3
+from django.conf import settings
 
 class SigninForm(AuthenticationForm):
+    # captcha = ReCaptchaField(
+    #     widget=ReCaptchaV2Checkbox(),
+    #     public_key=settings.RECAPTCHA_PUBLIC_KEY,
+    #     private_key=settings.RECAPTCHA_PRIVATE_KEY,
+    # )
     username = UsernameField(widget=forms.TextInput(attrs={
         'autofocus': True, 
         'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500',
@@ -93,3 +101,4 @@ class ProfileForm(forms.ModelForm):
             self.fields[field_name].widget.attrs['placeholder'] = field.label
             self.fields[field_name].widget.attrs['class'] = 'shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
             self.fields[field_name].widget.attrs['required'] = False
+            

@@ -7,22 +7,24 @@
             <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                 <ul class="pb-2 space-y-2">
                     <li>
-                        <form action="#" method="GET" class="lg:hidden">
-                            <label for="mobile-search" class="sr-only">Search</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <input type="text" name="email" id="mobile-search"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Search">
+                        <form class="sm:hidden block" onsubmit="event.preventDefault(); searchUsers(document.getElementById('posts-search-sm').value);">
+                            <label for="topbar-search" class="sr-only">Search</label>
+                            <div class="relative mt-1 lg:w-96">
+                              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                                </svg>
+                              </div>
+                              <input type="text" oninput="showResults(this.value)" list="profileList" name="search" id="posts-search-sm"
+                                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                  placeholder="Search for profiles by username">
+                              <datalist id="profileList">
+                              </datalist>
                             </div>
-                        </form>
+                          </form>
                     </li>
                     <li>
                         <a href="/dashboard/"
@@ -88,6 +90,10 @@
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'social' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Social</a>
                             </li>
                             <li>
+                                <a href="{% url 'auth_tokens' %}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'tokens' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">API Tokens</a>
+                            </li>
+                            <li>
                                 <a href="{% url 'species_datatables' %}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'species' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Species</a>
                             </li>
@@ -103,7 +109,7 @@
                     </li>
                     <li>
                         <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'apps' in parent %} bg-gray-100 dark:bg-gray-700 {% endif %}"
+                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'tracking' in parent %} bg-gray-100 dark:bg-gray-700 {% endif %}"
                             aria-controls="dropdown-dashboard-tracking" data-collapse-toggle="dropdown-dashboard-tracking">
                             <!-- eye svg-->
                             <i class="text-gray-500 dark:text-white fas fa-eye"></i>
@@ -118,20 +124,20 @@
                         </button>
                         <ul id="dropdown-dashboard-tracking" class="py-2 space-y-2 block">
                             <li>
-                                <a href="{% url 'social_datatables' %}"
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'social' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Routes</a>
+                                <a href="{% url 'routes_tracking' %}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'routes' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Routes</a>
                             </li>
                             <li>
-                                <a href="{% url 'species_datatables' %}"
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'species' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">User Visits</a>
+                                <a href="{% url 'user_visit_tracking' %}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'user_visit' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">User Visits</a>
                             </li>
                             <li>
-                                <a href="{% url 'species_datatables' %}"
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'species' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Login Log</a>
+                                <a href="{% url 'login_log_tracking' %}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'login_log' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Login Log</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    {% comment %} <li>
                         <a href="#"
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
                             <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white"
@@ -152,9 +158,10 @@
                             </svg>
                             <span class="ml-3" sidebar-toggle-item>File Manager</span>
                         </a>
-                    </li>                    
+                    </li>                     {% endcomment %}
                 </ul>
-                <div class="pt-2 space-y-2">
+                <div></div> <!-- hr -->
+                {% comment %} <div class="pt-2 space-y-2">
                     <a href="/" target="_blank"
                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                       
@@ -169,7 +176,7 @@
                           
                         <span class="ml-3" sidebar-toggle-item>Homepage</span>
                     </a>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
         <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-white lg:flex dark:bg-gray-800"

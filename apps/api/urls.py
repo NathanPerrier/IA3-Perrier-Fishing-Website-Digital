@@ -15,7 +15,6 @@ urlpatterns = [
     path('wildlife/kingdoms/<int:pk>/', WildlifeKingdomsViewSet.as_view({'get': 'retrieve'}), name='wildlife-kingdoms-retrieve'),
     path('wildlife/kingdoms/search/', WildlifeKingdomsViewSet.as_view({'get': 'search'}), name='wildlife-kingdoms-search'),
     
-    
     path('wildlife/classes', WildlifeClassesViewSet.as_view({'get': 'list'}), name='wildlife-classes'),
     path('wildlife/classes/<int:pk>/', WildlifeClassesViewSet.as_view({'get': 'retrieve'}), name='wildlife-classes-retrieve'),
     path('wildlife/classes/search/', WildlifeClassesViewSet.as_view({'get': 'search'}), name='wildlife-classes-search'),

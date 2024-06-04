@@ -61,6 +61,15 @@ def create_post(request):
                 species=species
             )
             
+                            
+            if species:
+                WildlifeSpeciesSightings.objects.create(
+                    user_profile=request.user.profile,
+                    related_post=post,
+                    species=species.add(),
+                    species_name=species.name,
+                )
+            
             if file_urls:
                 try:
                     for url in file_urls:
@@ -81,13 +90,14 @@ def create_post(request):
     return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})
 
 
-@group_required('member', 'leader', 'staff', 'admin')
+
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
     if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
         if request.method == 'POST':
             try:
+                print(request.POST)
                 file_urls = get_image_urls(request)
                 post.content = request.POST['content']
                 
@@ -99,6 +109,7 @@ def edit_post(request, post_id):
                 post.species = species
                 
                 post.save()
+                print(post.content)
                 
                 if file_urls:
                     PostImages.objects.delete(post=post)
@@ -122,8 +133,17 @@ def edit_post(request, post_id):
     
     return render(request, 'pages/social/edit_post.html', {'post': post, 'species': WildlifeSpecies.objects.all(), 'media_root': settings.MEDIA_URL})
 
+def delete_user_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
+        post.delete()
+    else:
+        messages.error(request, 'You do not have permission to delete this post.')
 
- #? should non club memebers be able to comment?
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
 @extended_group_required('member', 'leader', 'staff', 'admin')
 def create_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -143,7 +163,7 @@ def create_comment(request, post_id):
         except Exception as e:
             messages.error(request, 'There was an error creating your comment. Please try again later.')
             print(e)
-    return redirect('/social/feed/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @extended_group_required('member', 'leader', 'staff', 'admin')
 def create_nested_comment(request, post_id, comment_id):
@@ -163,7 +183,7 @@ def create_nested_comment(request, post_id, comment_id):
         except Exception as e:
             messages.error(request, 'There was an error creating your comment. Please try again later.')
             print(e)
-    return redirect('/social/feed/')
+    return redirect(request.META.get('HTTP_REFERER'))
         
 @login_required(login_url='/users/signin/')    
 def like_post(request, post_id):
@@ -178,7 +198,7 @@ def like_post(request, post_id):
             user_profile=request.user.profile
         )
     
-    return redirect('/social/feed/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/users/signin/')
 def like_comment(request, post_id, comment_id):
@@ -193,7 +213,7 @@ def like_comment(request, post_id, comment_id):
             user_profile=request.user.profile
         )
     
-    return redirect('/social/feed/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/users/signin/')
 def save_post(request, post_id):
@@ -208,31 +228,33 @@ def save_post(request, post_id):
             user_profile=request.user.profile
         )
     
-    return redirect('/social/feed/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @admin_required
 def datatables(request):
-  filters = post_filter(request)
-  product_list = Post.objects.filter(**filters)
-  form = PostAdminForm()
 
-  page = request.GET.get('page', 1)
-  paginator = Paginator(product_list, 5)
-  posts = paginator.page(page)
+    filters = post_filter(request)
+    product_list = Post.objects.filter(**filters)
+    form = PostAdminForm()
 
-  if request.method == 'POST':
-      form = PostAdminForm(request.POST)
-      if form.is_valid():
-          return post_request_handling(request, form)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(product_list, 5)
+    posts = paginator.page(page)
 
-  context = {
-    'segment'  : 'social',
-    'parent'   : 'apps',
-    'form'     : form,
-    'posts' : posts
-  }
-  
-  return render(request, 'apps/social.html', context)
+    if request.method == 'POST':
+        form = PostAdminForm(request.POST)
+        if form.is_valid():
+            return post_request_handling(request, form)
+
+    context = {
+        'segment'  : 'social',
+        'parent'   : 'apps',
+        'form'     : form,
+        'posts' : posts
+    }
+    
+    return render(request, 'apps/social.html', context)
+
 
 
 @admin_required
@@ -246,13 +268,11 @@ def delete_post(request, id):
     post.delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
-
 @admin_required
 def update_post(request, id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
-        post.name = request.POST.get('name')
-        post.price = int(request.POST.get('price'))
-        post.info = request.POST.get('info')
+        post.content = request.POST.get('content')
+        post.species = WildlifeSpecies.objects.filter(common_name=request.POST.get('species')).first()
         post.save()
     return redirect(request.META.get('HTTP_REFERER'))

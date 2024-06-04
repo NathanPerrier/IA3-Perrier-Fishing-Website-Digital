@@ -50,7 +50,7 @@ SECRET_KEY=<STRONG_KEY_HERE>
 # DB_PASS=
 # DB_PORT=3306
 
-SMTP configaration
+#SMTP configaration
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
@@ -62,6 +62,15 @@ GOOGLE_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
 
 GITHUB_OAUTH2_CLIENT_ID=<CLIENT_ID>
 GITHUB_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
+
+MICROSOFT_OAUTH2_APP_ID=<CLIENT_ID>
+MICROSOFT_OAUTH2_CLIENT_SECRET=<CLIENT_SECRET>
+MICROSOFT_OAUTH2_TENANT_ID=<TENANT_ID>
+
+#ReCaptcha
+RECAPTCHA_SITE_KEY=<PUBLIC_KEY>
+RECAPTCHA_V3_SITE_KEY=<PUBLIC_KEY>
+RECAPTCHA_SECRET_KEY=<PRIVATE_KEY>
 ```
 
 > 👉 Unrestrict **current user** scope   
@@ -96,10 +105,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-> 👉 Update the database with **wildlife data**
+> 👉 Update the database with **wildlife data** (may take 10-15 minutes)
 
 ```bash
-python manage.py update_wildlife
+python manage.py update_wildlife --fish-only --debug
 ```
 
 > 👉 Run **celery** worker
@@ -108,12 +117,21 @@ python manage.py update_wildlife
 celery -A core worker --loglevel=info -E
 ```
 
-> 👉 `Create Superuser` & Start the **server**
+> 👉 Create `Superuser`
 
 ```bash
 python manage.py createsuperuser # create the admin
-python manage.py runserver       # start the project
 ```
+
+> 👉 **run** the website
+
+`Normal **runserver** (http)`
+
+```bash
+python manage.py runserver       
+```
+
+
 
 <br />
 

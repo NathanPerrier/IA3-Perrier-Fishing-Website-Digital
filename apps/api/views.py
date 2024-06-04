@@ -1,19 +1,38 @@
 from apps.api.serializers import *
 from django.contrib.auth.models import User
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework import permissions
 from rest_framework.response import Response
-from ..wildlifeAPI.models import *
+from rest_framework.decorators import action, api_view, authentication_classes
+from apps.wildlifeAPI.models import *
+from rest_framework.permissions import IsAuthenticated
+
+
     
+from rest_framework.authentication import TokenAuthentication
+
 class UserPermission(permissions.BasePermission):
+    """
+    Permission check for authenticated users with a valid token.
+    """
+    authentication_classes = [TokenAuthentication]
+
     def has_permission(self, request, _):
         if request.method == 'GET':
             return True
-        return request.user and request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff)
 
-class UserViewSet(viewsets.ViewSet):
-    permission_classes = (UserPermission, )
+        is_authenticated = request.user and request.user.is_authenticated
+        has_permission = request.user.is_superuser or request.user.is_staff
+
+        return (is_authenticated and has_permission)
     
+class UserViewSet(viewsets.ViewSet):
+    permission_classes = [UserPermission, IsAuthenticated]
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+
+    
+    @action(detail=False, methods=['get'])
     def search(self, request):
         query = request.query_params.get('q', '')
         users = User.objects.filter(username__icontains=query)
@@ -21,7 +40,7 @@ class UserViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
 
-class WildlifePernission(permissions.BasePermission):
+class WildlifePermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'GET':
             return True
@@ -29,8 +48,9 @@ class WildlifePernission(permissions.BasePermission):
     
     
 class WildlifeViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
-    
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeKingdomsSerializer
+
     def list(self, request):
         """
         List all wildlife data.
@@ -52,8 +72,10 @@ class WildlifeViewSet(viewsets.ViewSet):
             'species': species_serializer.data,
         })
         
+    
 class WildlifeKingdomsViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeKingdomsSerializer
     """
     A simple ViewSet for viewing and retrieving wildlife kingdoms.
     """
@@ -86,7 +108,8 @@ class WildlifeKingdomsViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 class WildlifeClassesViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeClassesSerializer
     """
     A simple ViewSet for viewing and retrieving wildlife classes.
     """
@@ -119,7 +142,8 @@ class WildlifeClassesViewSet(viewsets.ViewSet):
         return Response(serializer.data)
  
 class WildlifeFamiliesViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeFamiliesSerializer
     """
     A simple ViewSet for viewing and retrieving wildlife families.
     """
@@ -152,7 +176,8 @@ class WildlifeFamiliesViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
 class WildlifeSpeciesViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeSpeciesSerializer
     """
     A simple ViewSet for viewing and retrieving wildlife species.
     """
@@ -185,7 +210,8 @@ class WildlifeSpeciesViewSet(viewsets.ViewSet):
         return Response(serializer.data)
     
 class WildlifeSpeciesInfoViewSet(viewsets.ViewSet):
-    permission_classes = (WildlifePernission, )
+    permission_classes = (WildlifePermission, )
+    serializer_class = WildlifeSpeciesInfoSerializer
     """
     A simple ViewSet for viewing and retrieving wildlife species.
     """

@@ -45,6 +45,7 @@ def signout_view(request):
     logout(request)
     return redirect(reverse('signin'))
 
+
 def profile_page(request, username=None):
     if username:
         user = get_object_or_404(User, username=username)
@@ -198,3 +199,4 @@ def user_change_password(request, id):
         user.set_password(request.POST.get('password'))
         user.save()
     return redirect(request.META.get('HTTP_REFERER'))
+

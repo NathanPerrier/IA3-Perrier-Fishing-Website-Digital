@@ -31,11 +31,11 @@ if not SECRET_KEY:
     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
 # Enable/Disable DEBUG Mode
-DEBUG = True  #str2bool(os.environ.get('DEBUG'))
+DEBUG =     True  #str2bool(os.environ.get('DEBUG'))
 
 # Hosts Settings
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5085', 'http://127.0.0.1:8000', 'http://127.0.0.1:5085', 'https://rocket-django.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:5085', 'http://127.0.0.1:8000', 'http://127.0.0.1:5085']
 
 # Used by DEBUG-Toolbar 
 INTERNAL_IPS = [
@@ -52,9 +52,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.sites",
     
     "social_django",
     "user_visit",
+
+    'django_recaptcha',
+    'corsheaders',
 
     "home",
     "apps.users",
@@ -63,6 +67,7 @@ INSTALLED_APPS = [
     "apps.wildlifeAPI",
     "apps.social",
     "apps.tracking",
+    'apps.microsoft_auth',
     
     # 'allauth',
     # 'allauth.account',
@@ -84,7 +89,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+    'apps.microsoft_auth.backends.MicrosoftAuthenticationBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
 )
 
@@ -96,7 +101,8 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "allauth.account.middleware.AccountMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # Debug Toolbar
@@ -121,6 +127,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'social_django.context_processors.backends', 
+                'apps.microsoft_auth.context_processors.microsoft',
             ],
         },
     },
@@ -132,15 +139,36 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Social Auth
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.environ.get('GOOGLE_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/google-oauth2/' #auth/google/callback'
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/google-oauth2/' #auth/google/callback'
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('GITHUB_OAUTH2_CLIENT_ID')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('GITHUB_OAUTH2_CLIENT_SECRET')
-SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/social/complete/github/'
+SOCIAL_AUTH_GITHUB_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/github/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_OAUTH2_APP_ID')  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FACEBOOK_OAUTH2_APP_SECRET')  # App Secret
-SOCIAL_AUTH_FACEBOOK_OAUTH2_REDIRECT_URI = 'http://localhost:8000/social/complete/facebook/'
+MICROSOFT_AUTH_CLIENT_ID = os.environ.get('MICROSOFT_OAUTH2_APP_ID')
+MICROSOFT_AUTH_CLIENT_SECRET = os.environ.get('MICROSOFT_OAUTH2_CLIENT_SECRET')
+MICROSOFT_AUTH_TENANT_ID = os.environ.get('MICROSOFT_OAUTH2_TENANT_ID')
+
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = MICROSOFT_AUTH_CLIENT_SECRET
+MICROSOFT_AUTH_AUTO_REPLACE_ACCOUNTS = True
+MICROSOFT_AUTH_REDIRECT_URI = 'http://localhost:8000/microsoft/from-auth-redirect/'
+
+# Microsoft authentication
+# include Microsoft Accounts, Office 365 Enterpirse and Azure AD accounts
+MICROSOFT_AUTH_LOGIN_TYPE = 'ma'
+
+# Xbox Live authentication
+# MICROSOFT_AUTH_LOGIN_TYPE = 'xbl'  
+
+
+#ReCaptcha
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_SECRET_KEY')
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+RECAPTCHA_PROXY = {'http': 'http://127.0.0.1:8000', 'https': 'https://127.0.0.1:8000'}
+# RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -190,6 +218,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -203,7 +237,6 @@ USE_I18N = True
 USE_TZ = True
 
 SITE_ID = 1
-
 
 AUTH_USER_MODEL = 'auth.User'
 
@@ -271,7 +304,6 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_TIMEOUT = 90
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {

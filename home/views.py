@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 
-
 from .forms import ContactForm
 from .models import *
 from .utils import profile_filter
@@ -21,6 +20,7 @@ def dashboard(request):
     }
     return render(request, "dashboard/index.html", context)
   return render(request, "pages/errors/404.html")
+
 
 def index(request):
   context = {}
