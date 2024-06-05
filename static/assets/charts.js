@@ -57,13 +57,13 @@ const getMainChartOptions = () => {
 		},
 		series: [
 			{
-				name: 'Revenue',
-				data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
+				name: 'Posts',
+				data: '{{posts_by_day }}',
 				color: '#1A56DB'
 			},
 			{
-				name: 'Revenue (previous period)',
-				data: [6556, 6725, 6424, 6356, 6586, 6756, 6616],
+				name: 'Profiles',
+				data: '{{users_by_day }}',
 				color: '#FDBA8C'
 			}
 		],
