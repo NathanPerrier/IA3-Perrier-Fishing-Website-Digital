@@ -2,7 +2,7 @@ from django import template
 from django.conf import settings
 import urllib.parse
 import os
-
+import requests
 
 register = template.Library()
 
@@ -18,6 +18,9 @@ def get_item(list, index):
 def replace_spaces(value):
     return value.replace(' ', '_')
 
+@register.filter
+def replace_spaces_with_dashes(value):
+    return value.replace(' ', '-')
 
 @register.filter
 def clean_file(value):
@@ -37,3 +40,16 @@ def image_exists(value):
     except (TypeError, OSError) as e:
         print(f"An error occurred: {e}")
         return False
+    
+@register.filter
+def fish_image_exists(value):
+    """
+    This function checks if the given image exists.
+    """
+    try:
+        return requests.get(f"https://www.nativefish.asn.au/~nativefishasn/userfiles/images/{value}.jpg").status_code == 200
+    
+    except (TypeError, OSError) as e:
+        print(f"An error occurred: {e}")
+        return False
+    

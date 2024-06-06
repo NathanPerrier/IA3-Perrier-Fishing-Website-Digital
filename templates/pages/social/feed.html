@@ -186,7 +186,11 @@
                                 {% if post.species %}
                                     <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
                                         <div class="p-2 flex items">
-                                            <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish={{post.species.common_name}}" alt="Fish Species" />
+                                            {% if post.species.name|replace_spaces_with_dashes|fish_image_exists %}
+                                                <img class="w-20 h-12 rounded" src="https://www.nativefish.asn.au/~nativefishasn/userfiles/images/{{post.species.name|replace_spaces_with_dashes}}.jpg" alt="Fish Species" />
+                                            {% else %}
+                                                <img class="w-20 h-12 rounded" src="{% static "dist/img/default-fish.png" %}" alt="Fish Species" />
+                                            {% endif %}
                                             <div class="ms-3">
                                                 <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
                                                 <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
@@ -441,7 +445,11 @@
                                 {% if post.species %}
                                     <div class="rounded-lg bg-gray-200 dark:bg-gray-700">
                                         <div class="p-2 flex items">
-                                            <img class="w-20 h-12 rounded" src="https://source.unsplash.com/featured/?fish=whiting" alt="Fish Species" />
+                                            {% if post.species.name|replace_spaces_with_dashes|fish_image_exists %}
+                                                <img class="w-20 h-12 rounded" src="https://www.nativefish.asn.au/~nativefishasn/userfiles/images/{{post.species.name|replace_spaces_with_dashes}}.jpg" alt="Fish Species" />
+                                            {% else %}
+                                                <img class="w-20 h-12 rounded" src="{% static "dist/img/default-fish.png" %}" alt="Fish Species" />
+                                            {% endif %}
                                             <div class="ms-3">
                                                 <p class="font-semibold text-gray-900 dark:text-white bold">{{ post.species.common_name }}</p>
                                                 <small class="text-sm text-gray-500 dark:text-gray-400">{{ post.species.name }}</small>
