@@ -90,6 +90,10 @@
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'social' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Social</a>
                             </li>
                             <li>
+                                <a href="{% url 'members_table' %}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'members' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">Club Memebers</a>
+                            </li>
+                            <li>
                                 <a href="{% url 'auth_tokens' %}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 {% if 'tokens' in segment %} bg-gray-100 dark:bg-gray-700 {% endif %}">API Tokens</a>
                             </li>
