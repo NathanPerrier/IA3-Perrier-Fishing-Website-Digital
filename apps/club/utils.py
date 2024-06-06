@@ -5,6 +5,8 @@ def member_filter(request):
     }
     for key in request.GET:
         if request.GET.get(key) and key != 'page':
-            filter_string[filter_mappings[key]] = request.GET.get(key)
-
+            try:
+                filter_string[filter_mappings[key]] = request.GET.get(key)
+            except KeyError: pass
+            
     return filter_string

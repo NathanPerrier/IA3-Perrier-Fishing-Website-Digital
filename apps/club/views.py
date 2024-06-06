@@ -51,7 +51,8 @@ def mambers_table(request):
 
 @admin_required
 def post_request_handling(request, form):
-    form.save()
+    member = Group.objects.get(name='Member')
+    member.user_set.add(*form.cleaned_data['users'])
     return redirect(request.META.get('HTTP_REFERER'))
 
 @admin_required
