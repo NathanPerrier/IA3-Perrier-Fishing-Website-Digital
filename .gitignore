@@ -6,8 +6,10 @@
 /docs/_build/
 /node_modules/
 build/
-./media/
-media/
+./media/avatar/*
+media/avatar/*
+./media/post/*
+media/post/*
 staticfiles/
 ./staticfiles/
 env
