@@ -54,7 +54,10 @@ def create_post(request):
             
             if not species and request.POST['species']:
                 species = WildlifeSpecies.objects.filter(common_name__icontains=request.POST['species']).first()
-            
+                # if not species:
+                #     messages.error(request, 'The species you entered does not exist in our database. Please try again.')
+                #     return redirect(request.META.get('HTTP_REFERER'))
+                
             post = Post.objects.create(
                 user_profile=request.user.profile,
                 content=content,
@@ -87,7 +90,7 @@ def create_post(request):
             messages.error(request, 'There was an error creating your post. Please try again later.')
             print(e)
 
-    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})
+    return render(request, 'pages/social/create_post.html', {'species': WildlifeSpecies.objects.all()})   
 
 
 
@@ -97,7 +100,6 @@ def edit_post(request, post_id):
     if post.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
         if request.method == 'POST':
             try:
-                print(request.POST)
                 file_urls = get_image_urls(request)
                 post.content = request.POST['content']
                 
