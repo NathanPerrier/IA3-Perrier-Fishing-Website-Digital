@@ -9,5 +9,5 @@ def get_api_token():
     try:
         token = Token.objects.all().first()
         return token.key
-    except Token.DoesNotExist:
+    except:
         return None
