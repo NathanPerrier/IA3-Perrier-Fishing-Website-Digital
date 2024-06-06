@@ -66,7 +66,7 @@ def create_post(request):
                 WildlifeSpeciesSightings.objects.create(
                     user_profile=request.user.profile,
                     related_post=post,
-                    species=species.add(),
+                    species=species,
                     species_name=species.name,
                 )
             
