@@ -7,9 +7,9 @@
 /node_modules/
 build/
 ./media/avatar/*
-media/avatars/*
+media/avatar/*
 ./media/post/*
-media/posts/*
+media/post/*
 staticfiles/
 ./staticfiles/
 env
