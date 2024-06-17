@@ -251,35 +251,31 @@
                                                     </p>
                                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{comment.created_at|naturaltime}}</p>
                                                 </div>
-                                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                    type="button">
-                                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                                    </svg>
-                                                    <span class="sr-only">Comment settings</span>
-                                                </button>
-                                                <!-- Dropdown menu -->
-                                                <div id="dropdownComment1"
-                                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                        aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                        {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                        </li>
-                                                        {% endif %}
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
+                                                    <button id="dropdownComment{{comment.id}}Button" data-dropdown-toggle="dropdownComment{{comment.id}}"
+                                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                        type="button">
+                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                        </svg>
+                                                        <span class="sr-only">Comment settings</span>
+                                                    </button>
+                                                    <!-- Dropdown menu -->
+                                                    <div id="dropdownComment{{comment.id}}"
+                                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-600">
+                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                            aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                            <li>
+                                                                <button onclick="editComment({{post.id}}, {{comment.id}})" id="editCommentModalButton" data-modal-target="editCommentModal" data-modal-toggle="editCommentModal" type="button"
+                                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Edit</button>
+                                                            </li>
+                                                            <li>
+                                                                <button onclick="deleteComment({{post.id}}, {{comment.id}})" type="button" id="deleteCommentButton" data-modal-target="deleteCommentModal" data-modal-toggle="deleteCommentModal"
+                                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
                                             </footer>
                                             <p class="text-gray-500 dark:text-gray-400">{{comment.content}}</p>
                                             <div class="flex items-center mt-4 space-x-4">
@@ -356,35 +352,31 @@
                                                             <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
                                                                     title="February 12th, 2022">{{nested_comment.created_at|naturaltime}}</time></p>
                                                         </div>
-                                                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
-                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                            type="button">
-                                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                                            </svg>
-                                                            <span class="sr-only">Comment settings</span>
-                                                        </button>
-                                                        <!-- Dropdown menu -->
-                                                        <div id="dropdownComment2"
-                                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                                {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                                </li>
-                                                                {% endif %}
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
+                                                            <button id="dropdownComment{{nested_comment.id}}Button" data-dropdown-toggle="dropdownComment{{nested_comment.id}}"
+                                                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                                type="button">
+                                                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                                </svg>
+                                                                <span class="sr-only">Comment settings</span>
+                                                            </button>
+                                                            <!-- Dropdown menu -->
+                                                            <div id="dropdownComment{{nested_comment.id}}"
+                                                                class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                                    aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                                    <li>
+                                                                        <button onclick="editComment({{post.id}}, {{nested_comment.id}})" id="editCommentModalButton" data-modal-target="editCommentModal" data-modal-toggle="editCommentModal" type="button"
+                                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Edit</button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button onclick="deleteComment({{post.id}}, {{nested_comment.id}})" type="button" id="deleteCommentButton" data-modal-target="deleteCommentModal" data-modal-toggle="deleteCommentModal"
+                                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
                                                     </footer>
                                                     <p class="text-gray-500 dark:text-gray-400">{{ nested_comment.content}}</p>
                                                     <div class="flex items-center mt-4 space-x-4">
@@ -540,35 +532,31 @@
                                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                                             title="February 8th, 2022">{{comment.created_at|naturaltime}}</time></p>
                                                 </div>
-                                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                    type="button">
-                                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                                    </svg>
-                                                    <span class="sr-only">Comment settings</span>
-                                                </button>
-                                                <!-- Dropdown menu -->
-                                                <div id="dropdownComment1"
-                                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                        aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                        {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                        </li>
-                                                        {% endif %}
-                                                        <li>
-                                                            <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                {% if request.user.profile == comment.user_profile or request.user.is_superuser %}
+                                                    <button id="dropdownComment{{comment.id}}Button" data-dropdown-toggle="dropdownComment{{comment.id}}"
+                                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                        type="button">
+                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                        </svg>
+                                                        <span class="sr-only">Comment settings</span>
+                                                    </button>
+                                                    <!-- Dropdown menu -->
+                                                    <div id="dropdownComment{{comment.id}}"
+                                                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                            aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                            <li>
+                                                                <button onclick="editComment({{post.id}}, {{comment.id}})" id="editCommentModalButton" data-modal-target="editCommentModal" data-modal-toggle="editCommentModal" type="button"
+                                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Edit</button>
+                                                            </li>
+                                                            <li>
+                                                                <button onclick="deleteComment({{post.id}}, {{comment.id}})" type="button" id="deleteCommentButton" data-modal-target="deleteCommentModal" data-modal-toggle="deleteCommentModal"
+                                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
                                             </footer>
                                             <p class="text-gray-500 dark:text-gray-400">{{comment.content}}</p>
                                             <div class="flex items-center mt-4 space-x-4">
@@ -645,35 +633,31 @@
                                                             <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
                                                                     title="February 12th, 2022">{{nested_comment.created_at|naturaltime}}</time></p>
                                                         </div>
-                                                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
-                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                            type="button">
-                                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                                                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                                                            </svg>
-                                                            <span class="sr-only">Comment settings</span>
-                                                        </button>
-                                                        <!-- Dropdown menu -->
-                                                        <div id="dropdownComment2"
-                                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                                aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                                {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                                                </li>
-                                                                {% endif %}
-                                                                <li>
-                                                                    <a href="#"
-                                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        {% if request.user.profile == nested_comment.user_profile or request.user.is_superuser %}
+                                                            <button id="dropdownComment{{nested_comment.id}}Button" data-dropdown-toggle="dropdownComment{{nested_comment.id}}"
+                                                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                                type="button">
+                                                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                                </svg>
+                                                                <span class="sr-only">Comment settings</span>
+                                                            </button>
+                                                            <!-- Dropdown menu -->
+                                                            <div id="dropdownComment{{nested_comment.id}}"
+                                                                class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                                    aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                                    <li>
+                                                                        <button onclick="editComment({{post.id}}, {{nested_comment.id}})" id="editCommentModalButton" data-modal-target="editCommentModal" data-modal-toggle="editCommentModal" type="button"
+                                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Edit</button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button onclick="deleteComment({{post.id}}, {{nested_comment.id}})" type="button" id="deleteCommentButton" data-modal-target="deleteCommentModal" data-modal-toggle="deleteCommentModal"
+                                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
                                                     </footer>
                                                     <p class="text-gray-500 dark:text-gray-400">{{ nested_comment.content}}</p>
                                                     <div class="flex items-center mt-4 space-x-4">
@@ -824,6 +808,64 @@
     </div>
 </section>
 
+<!-- Main modal -->
+<div id="editCommentModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Edit Comment
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editCommentModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form id="editCommentModalForm" method="POST" action="#">
+                {% csrf_token %}
+                <div class="grid gap-4 mb-4 sm:grid-cols-1">
+                    <div class="sm:col-span-2">
+                        <label for="editCommentArea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Comment</label>
+                        <textarea id="editCommentArea" name="content" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write your new comment here..."></textarea>                    
+                    </div>
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Confirm Changes
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="deleteCommentModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteCommentModal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete your comment?</p>
+            <form id="deleteCommentModalForm" method="POST" action="#" class="flex justify-center items-center space-x-4">
+                {% csrf_token %}
+                <button data-modal-toggle="deleteCommentModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    No, cancel
+                </button>
+                <button id="deleteCommentButton" type="submit" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                    Yes, I'm sure
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -835,6 +877,15 @@
             element.remove();
             document.getElementById('feed-col').classList.remove('lg:grid-cols-3');
         });
+    }
+
+    function editComment(post_id, id) {
+        document.getElementById('editCommentModalForm').action = `/social/feed/${post_id}/comment/${id}/edit/`;
+        //set textarea value to comment
+    }
+
+    function deleteComment(post_id, id) {
+        document.getElementById('deleteCommentModalForm').action = `/social/feed/${post_id}/comment/${id}/delete/`;
     }
 </script>
 {% endblock %}

@@ -22,7 +22,7 @@ def get_profile_posts(request, profile):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
@@ -45,7 +45,7 @@ def get_saved_posts(request, profile):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
@@ -69,7 +69,7 @@ def get_followers_posts(request, profile):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
@@ -93,7 +93,7 @@ def get_following_posts(request, profile):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
@@ -115,7 +115,7 @@ def get_suggested_posts(request, profile):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
             post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()

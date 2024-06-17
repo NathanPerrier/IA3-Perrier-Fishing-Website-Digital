@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
@@ -26,7 +27,7 @@ def feed(request):
     for post in posts:
         post.likes = PostLikes.objects.filter(post=post)
         post.images = PostImages.objects.filter(post=post)
-        post.comments = Comment.objects.filter(post=post)
+        post.comments = Comment.objects.filter(post=post).exclude(relates_to__isnull=False)
         if request.user.is_authenticated:
             post.is_following = Followers.objects.filter(follower=request.user.profile, following=post.user_profile).exists()
             post.liked = PostLikes.objects.filter(post=post, user_profile=request.user.profile).exists()
@@ -159,8 +160,6 @@ def create_comment(request, post_id):
                 post=post,
                 content=content
             )
-            messages.success(request, 'Comment created successfully.')
-            return redirect('/social/feed/')
         except Exception as e:
             messages.error(request, 'There was an error creating your comment. Please try again later.')
             print(e)
@@ -180,10 +179,37 @@ def create_nested_comment(request, post_id, comment_id):
                 relates_to=comment
             )
             messages.success(request, 'Comment created successfully.')
-            return redirect('/social/feed/')
         except Exception as e:
             messages.error(request, 'There was an error creating your comment. Please try again later.')
             print(e)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@csrf_exempt
+@login_required(login_url='/users/signin/')
+def edit_comment(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    if comment.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
+        if request.method == 'POST':
+            try:
+                comment.content = request.POST['content']
+                comment.save()
+                
+            except Exception as e:
+                messages.error(request, 'There was an error updating your comment. Please try again later.')
+                print(e)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@csrf_exempt
+@login_required(login_url='/users/signin/')
+def delete_comment(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    if comment.user_profile.user == request.user or (request.user.is_staff or request.user.is_superuser):
+        comment.delete()
+    else:
+        messages.error(request, 'You do not have permission to delete this comment.')
+
     return redirect(request.META.get('HTTP_REFERER'))
         
 @login_required(login_url='/users/signin/')    

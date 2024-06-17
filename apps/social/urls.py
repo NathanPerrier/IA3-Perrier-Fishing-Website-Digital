@@ -11,6 +11,8 @@ urlpatterns = [
         
     path('feed/<int:post_id>/comment/', views.create_comment, name='social_create_comment'),
     path('feed/<int:post_id>/comment/<int:comment_id>/comment/', views.create_nested_comment, name='social_create_comment'),
+    path('feed/<int:post_id>/comment/<int:comment_id>/edit/', views.edit_comment, name='social_edit_comment'),
+    path('feed/<int:post_id>/comment/<int:comment_id>/delete/', views.delete_comment, name='social_delete_comment'),
     path('feed/<int:post_id>/like/', views.like_post, name='social_like_post'),
     path('feed/<int:post_id>/comment/<int:comment_id>/like/', views.like_comment, name='social_like_comment'),
     path('feed/<int:post_id>/save/', views.save_post, name='social_save_post'),
