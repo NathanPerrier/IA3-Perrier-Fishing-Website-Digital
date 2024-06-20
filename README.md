@@ -234,8 +234,12 @@ At this point, the product should be LIVE.
    |    |    |-- util.py 
    |    |-- users            # Handles Authentication 
    |    |-- api              # DRF managed API
-   |    |-- charts           # Showcase Different Charts
-   |    |-- tables           # Implements DataTables
+   |    |-- auth_tokens      # Manages User API tokens
+   |    |-- club             # Implements club signup
+   |    |-- microsoft_auth   # Oauth2.0 manaement for microsoft (PYPI library)
+   |    |-- social           # all social aspects of the website (posts, likes, etc.)
+   |    |-- tracking         # tracking and suggestions
+   |    |-- wildlifeAPI      # retrieves and stores data from QLD wildlifeNet API
    |    |-- tasks            # Celery, async processing
    |
    |-- templates/            # UI templates 
