@@ -16,11 +16,12 @@
 
 <div align="center">
     <img src="./static/dist/images/IA3.gif" alt="Django Rocket - Open-source Starter styled with Tailwind and Flowbite.">
+
 </div>
 
 <br />
 
-## About [Fishing App](https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital)
+## About The Project
 
 This website brings an innovative solution to the Ambrose Treacy College fishing club. This website utilizes government APIs to allow members to easily identify what they caught. Furthermore, social features introduce a new way for club members to interact.
 
