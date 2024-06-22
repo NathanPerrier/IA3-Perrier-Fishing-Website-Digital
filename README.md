@@ -15,7 +15,7 @@
 <br />
 
 <div align="center">
-    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/51070104/272299949-6f4a8fd7-7cce-472a-9566-9519db338c7d.gif" alt="Django Rocket - Open-source Starter styled with Tailwind and Flowbite.">
+    <img src="./static/dist/images/IA3.gif" alt="Django Rocket - Open-source Starter styled with Tailwind and Flowbite.">
 </div>
 
 <br />
