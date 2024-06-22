@@ -15,7 +15,7 @@
 <br />
 
 <div align="center">
-    <img src="https://ia3-perrier-fishing-website-digital.s3.amazonaws.com/IA3%20GIF.gif" alt="IA3 digital project Demo.">
+    <img src="https://ia3-perrier-fishing-website-digital.s3.amazonaws.com/clideo_editor_0b03a06f9baa42f3a5042c6dcd9db175.gif" alt="IA3 digital project Demo.">
 </div>
 
 <br />
