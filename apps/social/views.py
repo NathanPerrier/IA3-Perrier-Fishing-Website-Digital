@@ -115,7 +115,7 @@ def edit_post(request, post_id):
                 print(post.content)
                 
                 if file_urls:
-                    PostImages.objects.delete(post=post)
+                    PostImages.objects.filter(post=post).delete()
                     try:
                         for url in file_urls:
                             PostImages.objects.create(
@@ -144,7 +144,7 @@ def delete_user_post(request, post_id):
     else:
         messages.error(request, 'You do not have permission to delete this post.')
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('/social/feed/')
 
 @extended_group_required('member', 'leader', 'staff', 'admin')
 def create_comment(request, post_id):

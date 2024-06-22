@@ -87,7 +87,7 @@ def upload_file(request):
         file_urls = request.session.get('file_urls', [])
 
         for file_name, file in request.FILES.items():
-            filename = fs.save(f'post/{file.name}', file)
+            filename = fs.save(f'posts/images/{clean_name(file.name)}', file)
             file_url = fs.url(filename).replace('media/', '', 1)
             file_urls.append(file_url)
             
@@ -99,3 +99,6 @@ def upload_file(request):
         return JsonResponse({'message': 'File uploaded successfully.'})
     else:
         return JsonResponse({'error': 'Invalid request.'}, status=400)
+      
+def clean_name(file_name):
+    return file_name.replace(' ', '_').replace('(', '').replace('ø', 'o').replace(')', '').replace('[', '').replace(']', '').replace('{', '').replace('}', '').replace(';', '').replace(':', '').replace('"', '').replace("'", '').replace(',', '').replace('!', '').replace('?', '').replace('#', '').replace('$', '').replace('%', '').replace('^', '').replace('&', '').replace('*', '').replace('-', '_').replace('+', '_').replace('=', '_').replace('/', '_').replace('\\', '_').replace('|', '_').replace('~', '_').replace('`', '_').replace('@', '_').replace('<', '_').replace('>','_')

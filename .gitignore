@@ -9,6 +9,8 @@ build/
 ./media/avatar/*
 media/avatar/*
 ./media/post/*
+./media/posts/*
+media/posts/*   
 media/post/*
 staticfiles/
 ./staticfiles/

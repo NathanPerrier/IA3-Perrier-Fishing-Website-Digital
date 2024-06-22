@@ -35,7 +35,9 @@ def image_exists(value):
     This function checks if the given image exists.
     """
     try:
-        return os.path.isfile(os.path.join(f"{settings.MEDIA_ROOT}{(value.replace('/media', '').replace('/', os.sep))}"))
+        decoded_value = urllib.parse.unquote(value)
+
+        return os.path.isfile(os.path.join(f"{settings.MEDIA_ROOT}{(decoded_value.replace('/media', '').replace('/', os.sep))}"))
 
     except (TypeError, OSError) as e:
         print(f"An error occurred: {e}")
