@@ -270,4 +270,4 @@ At this point, the product should be LIVE.
 <br />
 
 ---
-[Rocket Django](https://appseed.us/product/rocket/django/) - Open-source starter styled with `Tailwind/Flowbite` actively supported by **[AppSeed](https://appseed.us)**.
+Built on the [Rocket Django](https://appseed.us/product/rocket/django/) repository - styled with `Tailwind/Flowbite`
