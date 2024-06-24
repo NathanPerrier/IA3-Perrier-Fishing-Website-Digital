@@ -42,6 +42,8 @@ def write_to_log_file(logs, script_name):
     log_file_name = f"{script_base_name}-{current_time}.log"
     log_file_path = os.path.join(settings.CELERY_LOGS_DIR, log_file_name)
     
+    os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+    
     with open(log_file_path, 'w') as log_file:
         log_file.write(logs)
     
@@ -61,10 +63,12 @@ def execute_script(self, data: dict):
     print( '> EXEC [' + script + '] -> ('+args+')' ) 
 
     scripts, ErrInfo = get_scripts()
+    print(scripts, ErrInfo)
 
     if script and script in scripts:
         # Executing related script
         script_path = os.path.join(settings.CELERY_SCRIPTS_DIR, script)
+        print(script_path)
         process = subprocess.Popen(
             f"python {script_path} {args}", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         time.sleep(8)
@@ -79,8 +83,7 @@ def execute_script(self, data: dict):
             logs = process.stderr.read().decode()
             error = True
             status = "FAILURE"
-
-
+            
         log_file = write_to_log_file(logs, script)
-
+     
         return {"logs": logs, "input": script, "error": error, "output": "", "status": status, "log_file": log_file}

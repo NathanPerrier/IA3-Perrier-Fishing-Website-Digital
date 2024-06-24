@@ -39,6 +39,7 @@ def tasks(request):
 
     # django_celery_results_task_result
     task_results = TaskResult.objects.all()
+    print('TASK_RESULTS: ', task_results)
     context["task_results"] = task_results
 
     html_template = loader.get_template('apps/tasks.html')
@@ -52,12 +53,23 @@ def run_task(request, task_name):
     :rtype: (HttpResponseRedirect | HttpResponsePermanentRedirect)
     '''
     tasks = [execute_script]
+    print('TASK_NAME: ', task_name)
     _script = request.POST.get("script")
+    print('SCRIPT: ', _script)
     _args   = request.POST.get("args")
     for task in tasks:
+        print('TASK: ', task)
         if task.__name__ == task_name:
-            task.delay({"script": _script, "args": _args})
-    time.sleep(1)  # Waiting for task status to update in db
+            result= task.run({"script": _script, "args": _args})
+            print(f" result: {result}")
+            
+    
+    TaskResult.objects.create(
+        task_id=task,
+        task_name=result['input'],
+        status=result['status'],
+        result=result,
+    )
 
     return redirect("tasks") 
 
@@ -142,6 +154,7 @@ def task_log(request):
                     task_log = f.readlines() 
 
                 break    
+            
     
     except Exception as e:
 

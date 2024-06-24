@@ -231,8 +231,8 @@
                           {% else %} text-warning {% endif %}
                           text-center mb-0"
                         >
-                        {% if result|get_result_field:"status" %}
-                          {{result|get_result_field:"status"}}
+                        {% if result.status %}
+                          {{result.status}}
                         {% else %}
                           RUNNING
                         {% endif %}
@@ -252,13 +252,13 @@
                       </td>   
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <p class="text-sm text-center mb-0">
-                          <a data-bs-toggle="modal" data-bs-target="#view-log-{{result.id}}" href="#">View LOG</a> 
+                          <a data-bs-toggle="modal" data-bs-target="#view-log-{{result.id}}" href="{% if result|get_result_field:'log_file' %}{% url 'download_log_file' result|get_result_field:'log_file'|encoded_file_path %}{% endif %}">View LOG</a> 
                         </p>
                       </td>                                               
 
                     </tr>
-
-                    {% comment %} <div class="modal opacity-0" id="view-log-{{result.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+{% comment %} 
+                    <div class="modal" id="view-log-{{result.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
                       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
@@ -286,7 +286,7 @@
                           </div>
                         </div>
                       </div>
-                    </div> {% endcomment %}
+                    </div>  {% endcomment %}
 
                   {% endfor %}
 

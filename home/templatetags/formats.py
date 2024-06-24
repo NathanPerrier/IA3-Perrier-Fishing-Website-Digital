@@ -5,7 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 import json
 import os
-
+import ast
 from django import template
 from django.conf import settings
 
@@ -26,17 +26,12 @@ def date_format(date):
 
 register.filter("date_format", date_format)
 
-def get_result_field(result, field: str):
-    """
-    Returns a field from the content of the result attibute in result 
-    Example: `result.result['field']`
-    :param result AbortableAsyncResult: Result object to get field from
-    :param field str: Field to return from result object
-    :rtype: str
-    """
-    result = json.loads(result.result)
-    if result:
-        return result.get(field)
+def get_result_field(value, arg):
+    try:
+        result_dict = ast.literal_eval(value.result)
+        return result_dict.get(arg, '')
+    except json.JSONDecodeError:
+        return ''  
 
 register.filter("get_result_field", get_result_field)
 
