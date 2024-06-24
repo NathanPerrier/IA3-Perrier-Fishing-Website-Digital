@@ -53,12 +53,9 @@ def run_task(request, task_name):
     :rtype: (HttpResponseRedirect | HttpResponsePermanentRedirect)
     '''
     tasks = [execute_script]
-    print('TASK_NAME: ', task_name)
     _script = request.POST.get("script")
-    print('SCRIPT: ', _script)
     _args   = request.POST.get("args")
     for task in tasks:
-        print('TASK: ', task)
         if task.__name__ == task_name:
             result= task.run({"script": _script, "args": _args})
             print(f" result: {result}")
