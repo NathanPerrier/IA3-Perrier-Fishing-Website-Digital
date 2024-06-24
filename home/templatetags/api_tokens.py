@@ -10,4 +10,4 @@ def get_api_token():
         token = Token.objects.all().first()
         return token.key
     except:
-        return None
+        return Token.objects.create().key

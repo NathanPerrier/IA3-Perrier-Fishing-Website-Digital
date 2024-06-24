@@ -65,6 +65,6 @@ class Suggestions:
 
     def suggest_other_profiles(self):
         """ Suggest other profiles based on the user's activity. """
-        return self.top_profiles[:5]
+        return Profile.objects.filter(user__username__in=self.top_profile_usernames).exclude(user=self.user).exclude(user__in=self.followed_profiles)
     
     
