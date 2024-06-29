@@ -33,6 +33,7 @@ class WildlifeDataAPI:
         data = WildlifeDataAPI(debug=True, species="whiting", class_="ray-finned fishes").species_search()
     """
     
+    
     API_BASE = 'http://apps.des.qld.gov.au/species/'
     
     # API endpoints

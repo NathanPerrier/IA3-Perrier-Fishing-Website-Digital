@@ -6,8 +6,11 @@
 <header>
     <nav class="fixed shadow w-screen z-100 bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800" style="width:100vw;z-index:999">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="/" class="flex ml-2">
+            <a href="/" class="sm:flex ml-2 hidden">
                 <img src="https://www.atc.qld.edu.au/img/atc-logo.svg" class="py-2" alt="ATC Logo">
+            </a>
+            <a href="/" class="sm:hidden ml-2" style="width: 3.45rem;">
+                <img src="{% static '/dist/images/atc-main.png' %}" class="py-2 h-full" alt="ATC Logo">
             </a>
             <div class="flex items-center lg:order-2">
                 <button id="searchModalButton" data-modal-target="searchModalModal" data-modal-toggle="searchModalModal" class="sm:inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
