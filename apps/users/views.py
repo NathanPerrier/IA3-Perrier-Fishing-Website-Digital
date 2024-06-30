@@ -49,10 +49,12 @@ def signout_view(request):
 def profile_page(request, username=None):
     if username:
         user = get_object_or_404(User, username=username)
+
     else:
         if not request.user.is_authenticated: 
             return redirect(reverse('signin'))
         user = request.user 
+
 
     profile = get_object_or_404(Profile, user=user)
     

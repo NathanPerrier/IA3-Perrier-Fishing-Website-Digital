@@ -37,9 +37,14 @@ def index(request):
 def search(request):
   filters = profile_filter(request)
   
-  profile = Profile.objects.filter(**filters).first()
+  try:
+    profile = Profile.objects.filter(**filters).first()
   
-  return redirect(f'/users/profile/{profile.user.username}')
+    return redirect(f'/users/profile/{profile.user.username}')
+  
+  except:
+    messages.error(request, 'User not found.')
+    return redirect('/search')
 
 def contact(request):
   if request.method == 'POST':

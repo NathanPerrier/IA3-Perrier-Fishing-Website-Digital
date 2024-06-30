@@ -144,6 +144,7 @@ def get_suggested_followers(request, profile):
                 post.saved = PostSaved.objects.filter(post=post, user_profile=request.user.profile).exists()
         profile.followers = Followers.objects.filter(following=profile).all()
         profile.following = Followers.objects.filter(follower=profile).all()
-        profile.is_following = Followers.objects.filter(follower=request.user.profile, following=profile).exists()
+        
+        profile.is_following = Followers.objects.filter(follower=request.user.profile, following=profile).exists() if request.user.is_authenticated else False
 
     return profiles

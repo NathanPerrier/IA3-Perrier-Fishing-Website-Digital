@@ -7,7 +7,7 @@ from collections import defaultdict
 def profile_filter(request):
     filter_string = {}
     filter_mappings = {
-        'search': 'user__username__icontains'
+        'search': 'user__username'
     }
     for key in request.GET:
         if request.GET.get(key) and key != 'page':
