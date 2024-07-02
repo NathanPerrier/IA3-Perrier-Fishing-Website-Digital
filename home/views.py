@@ -43,8 +43,7 @@ def search(request):
     return redirect(f'/users/profile/{profile.user.username}')
   
   except:
-    messages.error(request, 'User not found.')
-    return redirect('/search')
+    return redirect('/users/profiles/')
 
 def contact(request):
   if request.method == 'POST':
