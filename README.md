@@ -15,7 +15,7 @@
 <br />
 
 <div align="center">
-    <img src="./static/dist/images/IA3.gif" alt="Django Rocket - Open-source Starter styled with Tailwind and Flowbite.">
+    <img src="./static/dist/images/IA3.gif" alt="IA3 Demo">
 
 </div>
 
