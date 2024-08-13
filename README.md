@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://appseed.us/product/rocket/django/">
+    <a href="https://www.atc.qld.edu.au/">
         <img src="/static/dist/images/atc-main.png" width="64" height="64" alt="ATC logo">
     </a>
     <h1>
