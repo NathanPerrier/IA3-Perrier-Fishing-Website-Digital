@@ -1,6 +1,6 @@
 <div align="center">
     <a href="https://appseed.us/product/rocket/django/">
-        <img src="/static/dist/images/atc-main.png" width="64" height="64" alt="Rocket Icon">
+        <img src="/static/dist/images/atc-main.png" width="64" height="64" alt="ATC logo">
     </a>
     <h1>
         <a href="https://github.com/NathanPerrier/IA3-Perrier-Fishing-Website-Digital">
